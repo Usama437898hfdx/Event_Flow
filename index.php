@@ -67,12 +67,12 @@ foreach ($fetch_event as $event) {
                         <div class="post-content">
                             <ul class="list-inline d-flex justify-content-between border-bottom post-meta pb-2 mb-4">
                                 <li class="list-inline-item"><i class="ti-calendar mr-2"></i><?php echo $event ['start_date'] ?></li>
-                                <li class="list-inline-item"><i class="ti-alarm-clock mr-2"></i><span class="eta">8
-                                        min</span> read</li>
+                                <li class="list-inline-item"><i class="ti-calendar mr-2"></i><?php echo $event ['end_date'] ?></li>
+                               
                             </ul>
-                            <h4 class="mb-4"><a href="blog-single.html" class="text-dark"><?php echo $event ['name'] ?></a></h4>
+                            <h4 class="mb-4"><a href="blog.php" class="text-dark"><?php echo $event ['name'] ?></a></h4>
                             <p class="mb-0 post-summary"><?php echo $event ['description'] ?></p>
-                            <a class="btn btn-transparent mb-4" href="blog-single.html">Continue...</a>
+                            <a class="btn btn-transparent mb-4" href="subevents.php?id=<?php echo $event ['event_id'] ?> ">View</a>
                         </div>
                     </article>
                 </div>
