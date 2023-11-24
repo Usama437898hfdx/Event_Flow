@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Flow</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .header {
+            background-color: #3f51b5;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #3f51b5;
+            color: #fff;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>Event Flow</h1>
+    </div>
+
+    <div class="container mt-3">
+        <form id="signupForm" action="signup_process.php" method="POST" class="needs-validation" novalidate>
+        <!DOCTYPE html>
+<html>
+<head>
+    <title>User Signup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <form id="signupForm" action="signup_process.php" method="POST" class="needs-validation" novalidate>
+            <h2>User Signup</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a username.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a password.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" class="form-control" required>
+                        <div class="invalid-feedback">Please enter an address.</div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="role">Role:</label>
+                        <select id="role" name="role" class="form-control" required>
+                            <option value="attendee">Attendee</option>
+                            <option value="organizer">Organizer</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state" class="form-control" required>
+                        <div class="invalid-feedback">Please enter the state.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City:</label>
+                        <input type="text" id="city" name="city" class="form-control" required>
+                        <div class="invalid-feedback">Please enter the city.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                        <div class="invalid-feedback">Please enter a valid phone number.</div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="form-group">
+                        <label for="avatar">Profile Picture:</label>
+                        <input type="file" id="avatar" name="avatar" class="form-control" required>
+                        <div class="invalid-feedback">Please enter your profile picture.</div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+        </form>
+    </div>
+
+    <div class="footer text-center">
+        &copy; 2023 YourEventFlow.com
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
