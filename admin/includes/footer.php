@@ -44,7 +44,12 @@
 
 
     <script src="assets/js/dashboard/dashboard-1.js"></script>
-
+    <script type="text/javascript" src="assets/plugins/Rich-Text-Editor-jQuery-RichText/src/jquery.richtext.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.content').richText();
+    });
+    </script>
 </body>
 
 </html>

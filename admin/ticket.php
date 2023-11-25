@@ -79,7 +79,7 @@ HAVING
     '<?php echo $ticket['tt_id']; ?>',
     '<?php echo $ticket['ticket_type_name']; ?>',
     '<?php echo $ticket['discount']; ?>');">Edit</button>
-                                       
+
                                             <a href="tickets.php?tt_id=<?php echo $ticket['tt_id'];?>"
                                                 class="btn btn-primary">View Tickets</a>
                                         </td>
@@ -167,7 +167,7 @@ function openEditModal(ticket_id, ticket_type_id, ticket_type_name, discount, ad
     // document.getElementById(" ticket_type_name").value =  ticket_type_name;
     document.getElementById("discount").value = discount;
     document.getElementById("addon_id").value = addon_id;
-   
+
 
     $("#EditModal").modal("show");
 }

@@ -289,6 +289,14 @@ include("includes/config.php");
                     <?php } ?>
 
                     <?php if(isset($_SESSION['Organizer'])){ ?>
+                        <li><a href="text_editor.php" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Text Editor</span>
+                        </a></li>
+
+                    <?php } ?>
+
+
+                    <?php if(isset($_SESSION['Organizer'])){ ?>
                     <li><a href="Addons.php" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Addons</span>
                         </a></li>
