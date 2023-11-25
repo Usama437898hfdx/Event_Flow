@@ -140,8 +140,6 @@ if (isset($_POST["signup"])) {
 
 
 
-
-
 //Create new Sub Event
 if (isset($_POST['create_new'])) {
     $parent_id= $_POST['parent_id'];
@@ -195,11 +193,7 @@ if (isset($_POST['create_new'])) {
 
     }
 }
-
-
-
-
-//Delete event
+//Delete Sub event
 if (isset($_POST["deleteEvent"])) {
     $id = $_POST["id"];
 
@@ -212,25 +206,7 @@ if (isset($_POST["deleteEvent"])) {
 
     }
 }
-if (isset($_POST["deleteMainEvent"])) {
-    $id = $_POST["id"];
-
-    $delete_event = mysqli_query($con, "UPDATE `events` SET `is_deleted`= 1  WHERE `event_id` = '$id'");
-    if ($delete_event) {
-        $delete_event = mysqli_query($con, "UPDATE `events` SET `is_deleted`= 1  WHERE `parent_id` = '$id'");
-
-        header("location: ../main_events.php");
-        exit;
-
-
-    }
-}
-
-
-
-
-
-//Edit event
+//Edit Sub event
 if (isset($_POST["editEvent"])) {
     $id = $_POST['event_id'];
     $name = $_POST['eventname'];
@@ -269,8 +245,35 @@ if (isset($_POST["editEvent"])) {
     }
 }
 
+// Create Blogs 
+if (isset($_POST["create_blog"])) {
+   echo  print_r($blog_id); exit();
+$blog_id = $_POST['blog_id'];
+$id = $_POST['event_id'];
+$text = $_POST['text'];
+
+$insert = mysqli_query($con, "INSERT INTO `blog`(`blog_id`, `event_id`, `text`) VALUES ('$blog_id', '$id','$text')");
 
 
+}
+
+
+
+
+//Delete Main event
+if (isset($_POST["deleteMainEvent"])) {
+    $id = $_POST["id"];
+
+    $delete_event = mysqli_query($con, "UPDATE `events` SET `is_deleted`= 1  WHERE `event_id` = '$id'");
+    if ($delete_event) {
+        $delete_event = mysqli_query($con, "UPDATE `events` SET `is_deleted`= 1  WHERE `parent_id` = '$id'");
+
+        header("location: ../main_events.php");
+        exit;
+
+
+    }
+}
 
 //Edit Main event
 if (isset($_POST["editMainEvent"])) {
@@ -304,6 +307,53 @@ if (isset($_POST["editMainEvent"])) {
     }
 }
 
+
+
+// Create Ticket
+if (isset($_POST['create_ticket'])) {
+    $event_id = $_POST['event_id'];
+    $ticket_type_id = $_POST['ticket_type_id'];
+    $discount = $_POST['discount'];
+
+    // Fetch event capacity
+    $fetch_event = mysqli_query($con, "SELECT `capacity` FROM `events` WHERE `event_id` = '$event_id'");
+    $events = mysqli_fetch_assoc($fetch_event);
+    $capacity = $events['capacity'];
+
+    // Get the number of tickets already created
+    $fetch_created_tickets = mysqli_query($con, "SELECT COUNT(*) as total_tickets FROM ticket WHERE `event_id` = '$event_id'");
+    $created_tickets = mysqli_fetch_assoc($fetch_created_tickets);
+    $remaining_capacity = $capacity - $created_tickets['total_tickets'];
+
+    $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 0;
+
+    if ($quantity > 0 && $quantity <= $remaining_capacity) {
+        for ($i = 0; $i < $quantity; $i++) {
+            // Insert ticket
+            $insert_ticket_query = "INSERT INTO ticket (event_id, ticket_type_id, discount) 
+                                    VALUES ('$event_id', '$ticket_type_id', '$discount')";
+            $result_ticket = mysqli_query($con, $insert_ticket_query);
+
+            if ($result_ticket) {
+                $ticket_id = mysqli_insert_id($con);
+
+                // Insert selected addons for each ticket
+                if (isset($_POST['addons']) && is_array($_POST['addons'])) {
+                    foreach ($_POST['addons'] as $addon_id) {
+                        $insert_addon_query = "INSERT INTO ticket_addons (ticket_id, addon_id) VALUES ('$ticket_id', '$addon_id')";
+                        mysqli_query($con, $insert_addon_query);
+                    }
+                }
+            }
+        }
+
+        header("Location: ../ticket.php");
+        exit();
+    } else {
+        echo "Error: Invalid quantity or capacity exceeded!";
+        exit();
+    }
+}
 
 
 //delete ticket
@@ -476,56 +526,6 @@ if (isset($_POST["deleteAddon"])) {
         exit();
     }
 }
-if (isset($_POST['create_ticket'])) {
-    $event_id = $_POST['event_id'];
-    $ticket_type_id = $_POST['ticket_type_id'];
-    $discount = $_POST['discount'];
-
-    // Fetch event capacity
-    $fetch_event = mysqli_query($con, "SELECT `capacity` FROM `events` WHERE `event_id` = '$event_id'");
-    $events = mysqli_fetch_assoc($fetch_event);
-    $capacity = $events['capacity'];
-
-    // Get the number of tickets already created
-    $fetch_created_tickets = mysqli_query($con, "SELECT COUNT(*) as total_tickets FROM ticket WHERE `event_id` = '$event_id'");
-    $created_tickets = mysqli_fetch_assoc($fetch_created_tickets);
-    $remaining_capacity = $capacity - $created_tickets['total_tickets'];
-
-    $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : 0;
-
-    if ($quantity > 0 && $quantity <= $remaining_capacity) {
-        for ($i = 0; $i < $quantity; $i++) {
-            // Insert ticket
-            $insert_ticket_query = "INSERT INTO ticket (event_id, ticket_type_id, discount) 
-                                    VALUES ('$event_id', '$ticket_type_id', '$discount')";
-            $result_ticket = mysqli_query($con, $insert_ticket_query);
-
-            if ($result_ticket) {
-                $ticket_id = mysqli_insert_id($con);
-
-                // Insert selected addons for each ticket
-                if (isset($_POST['addons']) && is_array($_POST['addons'])) {
-                    foreach ($_POST['addons'] as $addon_id) {
-                        $insert_addon_query = "INSERT INTO ticket_addons (ticket_id, addon_id) VALUES ('$ticket_id', '$addon_id')";
-                        mysqli_query($con, $insert_addon_query);
-                    }
-                }
-            }
-        }
-
-        header("Location: ../ticket.php");
-        exit();
-    } else {
-        echo "Error: Invalid quantity or capacity exceeded!";
-        exit();
-    }
-}
-
-
-
-
-
-
 
 
 ?>

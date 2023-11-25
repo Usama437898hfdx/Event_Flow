@@ -17,7 +17,7 @@ include("includes/header.php");
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Sub events</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Blogs</a></li>
             </ol>
         </div>
     </div>
@@ -29,12 +29,8 @@ include("includes/header.php");
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h1 class="card-title">Sub Events</h1>
+                            <h1 class="card-title">Blogs</h1>
 
-                            <?php if(isset($_SESSION['Organizer'])){ ?>
-                            <a href="create_event.php" style="margin-bottom:12px !important;"
-                                class="btn btn-primary">Create new</a>
-                            <?php } ?>
 
                         </div>
                         <!-- Display Created Tickets -->
@@ -43,81 +39,44 @@ include("includes/header.php");
                             <table class="table table-striped table-bordered zero-configuration">
                                 <thead>
                                     <tr>
-                                        <th>Main Event</th>
-                                        <th>Name</th>
-                                        <th>Start_date</th>
-                                        <th>End_date</th>
+                                        <th>Sub Event name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
+                                   
                             
-                            $condition = isset($_GET['main_id']) ? " AND mainEvent.event_id = '{$_GET['main_id']}'" : "";
-                            $condition_user = isset($_SESSION['Organizer']) ? " AND e.organizer_id = $id" : "";
-                            
-                            $fetch_event = mysqli_query($con, "SELECT e.*, mainEvent.name as parent_name
-                                FROM events e
-                                LEFT JOIN events mainEvent ON e.parent_id = mainEvent.event_id
-                                WHERE e.parent_id IS NOT NULL 
-                                AND mainEvent.is_deleted = 0 $condition $condition_user");
-                                    foreach ($fetch_event as $event) {
+                          
+                            <?php
+                                  
 
-                                        ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $event['parent_name']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $event['name']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $event['start_date']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $event['end_date']; ?>
-                                        </td>
-                                        <td>
+                            $fetch_blog = mysqli_query($con, "SELECT * FROM `blog`  WHERE is_deleted = 0 AND `blog_id` = $id ;");
 
-                                            <?php if(isset($_SESSION['Organizer'])){ ?>
-                                            <a href="create_ticket.php?eid=<?php echo $event['event_id']; ?>"
-                                                class="btn btn-primary">Generate Ticket</a>
-                                            <a href="create_blog.php?eid=<?php echo $event['event_id']; ?>"
-                                                class="btn btn-primary">Create Blog</a>
+                            foreach ($fetch_blog as $blog) {
 
-                                            <?php } ?>
+                                ?>
+                                <tr>
 
 
-                                            <button class="btn btn-primary text-white" onclick="openViewModal('<?php echo $event['event_id']; ?>',
-                                                    '<?php echo $event['name']; ?>',
-                                                    '<?php echo $event['description']; ?>',
-                                                    '<?php echo $event['start_date']; ?>',
-                                                    '<?php echo $event['end_date']; ?>',
-                                                    '<?php echo $event['start_time']; ?>',
-                                                    '<?php echo $event['end_time']; ?>',
-                                                    '<?php echo $event['location']; ?>',
-                                                    '<?php echo $event['capacity']; ?>',
-                                                    '<?php echo $event['image']; ?>'
+                                        <td>
+
+                                            <button class="btn btn-primary text-white" onclick="openViewModal('<?php echo $blog['blog_id']; ?>',
+                                                    '<?php echo $blog['name']; ?>',
+                                                    '<?php echo $blog['description']; ?>',
+                                                   
 
                                                 );">View</button>
 
                                             <button class="btn btn-primary text-white" onclick="openEditModal(
-                                                    '<?php echo $event['event_id']; ?>',
-                                                    '<?php echo $event['name']; ?>',
-                                                    '<?php echo $event['description']; ?>',
-                                                    '<?php echo $event['start_date']; ?>',
-                                                    '<?php echo $event['end_date']; ?>',
-                                                    '<?php echo $event['start_time']; ?>',
-                                                    '<?php echo $event['end_time']; ?>',
-                                                    '<?php echo $event['location']; ?>',
-                                                    '<?php echo $event['capacity']; ?>',
-                                                    '<?php echo $event['image']; ?>'
+                                                    '<?php echo $blog['blog_id']; ?>',
+                                                    '<?php echo $blog['name']; ?>',
+                                                   
                                                     
 
                                                     );">Edit</button>
 
                                             <button class="btn btn-danger"
-                                                onclick="openDeleteModal('<?php echo $event['event_id']; ?>');">Delete</button>
+                                                onclick="openDeleteModal('<?php echo $blog['blog_id']; ?>');">Delete</button>
 
 
                                         </td>
@@ -142,7 +101,7 @@ include("includes/header.php");
         <form id="editForm" action="includes/db.php" method="POST" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Event</h5>
+                    <h5 class="modal-title">Edit Blog</h5>
                     <button type="submit" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="modal-body">
@@ -161,82 +120,7 @@ include("includes/header.php");
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="start_date">start_date:</label>
-                                <input class="form-control" type="date" name="start_date" id="edit_start_date" required>
-                                <input class="form-control" type="hidden" name="event_id" id="edit_event_id" required>
-                            </div>
-                        </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="end_date">end_date:</label>
-                                <input class="form-control" type="date" name="end_date" id="edit_end_date" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="start_time">start_time:</label>
-                                <input class="form-control" type="time" name="start_time" id="edit_start_time" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="end_time">end_time:</label>
-                                <input class="form-control" type="time" name="end_time" id="edit_end_time" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="location">location:</label>
-                                <input class="form-control" type="text" name="location" id="edit_location" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="capacity">capacity:</label>
-                                <input class="form-control" type="number" name="capacity" id="edit_capacity" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="image">Status:</label>
-                                <select class="form-control" id="status" name="status" required>
-                                    <option value="Choose">Choose</option>
-                                    <option value="Upcoming">Upcoming</option>
-                                    <option value="Ongoing">Ongoing</option>
-                                    <option value="Completed">Completed</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="old_image">Old Image:</label>
-                                <input type="hidden" id="old_image" name="old_image"
-                                    value="<?php echo $event['image']; ?>">
-                                <img src="" id="edit_old_image" alt="Old Image" width="100">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="new_image">New Image:</label>
-                                <input class="form-control" type="file" id="new_image" name="new_image">
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

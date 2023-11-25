@@ -11,7 +11,7 @@
 
     <title>Event Flow</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="30x30" href="images/u.png">
+    <link rel="icon" type="image/png" sizes="30x30" href="assets\images\u.png">
     <!-- Pignose Calender -->
     <link href="assets/plugins/pg-calendar/css/pignose.calendar.min.css" rel="stylesheet">
     <!-- Chartist -->
@@ -284,16 +284,16 @@ include("includes/config.php");
                         </a></li>
 
                     <li><a href="events.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Events</span>
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Sub Events</span>
                         </a></li>
                     <?php } ?>
 
                     <?php if(isset($_SESSION['Organizer'])){ ?>
-                        <li><a href="text_editor.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Text Editor</span>
+                        <li><a href="Blogs.php" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Blogs</span>
                         </a></li>
 
-                    <?php } ?>
+                    <?php } ?> 
 
 
                     <?php if(isset($_SESSION['Organizer'])){ ?>

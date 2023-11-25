@@ -31,34 +31,36 @@ include("includes/header.php"); ?>
                                         <select class="form-control" id="ticketType" name="ticket_type_id" required>
                                             <?php $fetch_ticket_types = mysqli_query($con, "SELECT * FROM ticket_type WHERE `event_id` = '" . $_GET['eid'] . "'");
                                             foreach ($fetch_ticket_types as $ticket_type) { ?>
-                                                <option value="<?php echo $ticket_type['ticket_type_id']; ?>">
-                                                    <?php echo $ticket_type['name']; ?>
-                                                </option>
+                                            <option value="<?php echo $ticket_type['ticket_type_id']; ?>">
+                                                <?php echo $ticket_type['name']; ?>
+                                            </option>
                                             <?php } ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-    <div class="form-group">
-        <label for="ticketType">Add On:</label>
-        <select name="addons[]" class="selectpicker form-control" multiple data-live-search="true">
-            <?php $fetch_addon = mysqli_query($con, "SELECT * FROM addon WHERE is_deleted = 0 AND is_active = 1 AND `organizer_id` = $id");
+                                    <div class="form-group">
+                                        <label for="ticketType">Add On:</label>
+                                        <select name="addons[]" class="selectpicker form-control" multiple
+                                            data-live-search="true">
+                                            <?php $fetch_addon = mysqli_query($con, "SELECT * FROM addon WHERE is_deleted = 0 AND is_active = 1 AND `organizer_id` = $id");
             foreach ($fetch_addon as $addons) { ?>
-                <option value="<?php echo $addons['Addon_id']; ?>">
-                    <?php echo $addons['name']; ?>
-                </option>
-            <?php } ?>
-        </select>
-    </div>
-</div>
+                                            <option value="<?php echo $addons['Addon_id']; ?>">
+                                                <?php echo $addons['name']; ?>
+                                            </option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
+                                </div>
 
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="ticketName">Discount:</label>
-            <input type="number" class="form-control" id="discount" name="discount" required>
-        </div>
-    </div>
-    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ticketName">Discount:</label>
+                                        <input type="number" class="form-control" id="discount" name="discount"
+                                            required>
+                                    </div>
+                                </div>
+
 
                                 <div class="col-md-6">
                                     <div class="form-group">
