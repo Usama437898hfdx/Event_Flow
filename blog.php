@@ -1,14 +1,30 @@
 <?php include("header.php"); 
 
-if(isset( $_GET["id"])) {
-  $id = $_GET["id"];
 
+$detail = mysqli_query($conn,"SELECT
+t.ticket_id,
+t.event_id,
+tt.name AS ticket_name,
+tt.price AS ticket_price,
+e.name AS event_name,
+e.description AS event_description,
+e.start_date,
+e.end_date,
+e.start_time,
+e.end_time,
+e.location,
+e.capacity,
+e.image
+FROM
+ticket t
+JOIN
+events e ON t.event_id = e.event_id
+JOIN
+ticket_type tt ON t.ticket_type_id = tt.ticket_type_id
+WHERE
+e.parent_id = e.parent_id;");
 
-  $parent = mysqli_query($con,"SELECT * FROM events WHERE `event_id` = $id");
-
-  $parent = mysqli_fetch_assoc($parent);
-}
-
+$detail = mysqli_fetch_assoc($detail);
 ?>
 
 
@@ -16,10 +32,10 @@ if(isset( $_GET["id"])) {
 <section class="section bg-secondary">
     <div class="container">
         <div class="card">
-        <div class="card-body p-2">
-            <img src="assets/images/author.jpg" class="img-fluid w-100" >
+            <div class="card-body p-2">
+                <img src="<?php echo $detail['image']?>" class="img-fluid w-100">
+            </div>
         </div>
-    </div>
     </div>
 </section>
 <!-- /page-title -->
@@ -28,7 +44,16 @@ if(isset( $_GET["id"])) {
 
 <p class="space"></p>
 
-
+<form>
+    <p>
+        <center> My Froala Editor: The Best WYSIWYG HTML Editor </center>
+    </p>
+    <div id="froala"></div>
+    <script type="text/javascript" src="node_modules/froala-editor/js/froala_editor.pkgd.min.js"></script>
+    <script>
+    var editor = new FroalaEditor('#froala');
+    </script>
+</form>
 <!-- blog single -->
 <section>
     <div class="container">
@@ -51,9 +76,10 @@ if(isset( $_GET["id"])) {
                         Tickets
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <div class="col-sm-4 mb-5">
+                        <div class="col-sm-4 mb-5">
                             <article class="text-center">
-                                <h4 class="title-border">Name<a class="text-dark" href="blog.php"><?php echo $parent['name']; ?></a></h4>
+                                <h4 class="title-border">Name<a class="text-dark"
+                                        href="blog.php"><?php echo $parent['name']; ?></a></h4>
                                 <p><?php echo $parent['description']; ?></p>
                             </article>
                         </div>
