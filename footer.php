@@ -40,10 +40,38 @@
     </div>
   </div>
   <div class="text-center pb-3">
-    <p class="mb-0">Copyright ©<script>var CurrentYear = new Date().getFullYear()
-    document.write(CurrentYear)</script> a theme by  <a href="https://eventflow.com/">EVENT FLOW</a></p>
+    <p class="mb-0">Copyright ©
+      <script>var CurrentYear = new Date().getFullYear()
+        document.write(CurrentYear)</script> a theme by <a href="https://eventflow.com/">EVENT FLOW</a>
+    </p>
   </div>
 </footer>
+<script>
+  function decreaseQuantity(event_id, availableQuantity) {
+    var quantityInput = document.getElementById("quantity-" + event_id);
+    var errorMessage = document.getElementById("error-message-" + event_id);
+
+    if (quantityInput.value > 1) {
+      quantityInput.value = parseInt(quantityInput.value) - 1;
+      if (parseInt(quantityInput.value) <= availableQuantity) {
+        errorMessage.style.display = 'none'; // Hide error message if available
+      }
+    }
+  }
+
+  function increaseQuantity(event_id, availableQuantity) {
+    var quantityInput = document.getElementById("quantity-" + event_id);
+    var errorMessage = document.getElementById("error-message-" + event_id);
+
+    if (parseInt(quantityInput.value) < availableQuantity) {
+      quantityInput.value = parseInt(quantityInput.value) + 1;
+      errorMessage.style.display = 'none'; // Hide error message if shown
+    } else {
+      errorMessage.style.display = 'block'; // Show error message
+    }
+  }
+</script>
+
 
 <!-- jQuery -->
 <script src="assets/plugins/jQuery/jquery.min.js"></script>
@@ -66,8 +94,5 @@
 <script src="assets/js/script.js"></script>
 
 </body>
+
 </html>
-
-
-
-

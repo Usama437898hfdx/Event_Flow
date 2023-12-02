@@ -527,5 +527,21 @@ if (isset($_POST["deleteAddon"])) {
     }
 }
 
+// Add registration question
+if (isset($_POST["add_questions"])) {
+
+    $questionsArray = $_POST["Question"];
+    $event_id = $_POST["event_id"];
+    
+    foreach ($questionsArray as $Question) {
+        $Question = mysqli_real_escape_string($con, $Question);
+        $insertRegistration =  mysqli_query($con,"INSERT INTO `registrationquestions` (`Question`,`event_id`) VALUES ('$Question','$event_id')");
+       
+    }
+
+    header("location: ../Registration_Question.php");
+    exit();
+}
+
 
 ?>

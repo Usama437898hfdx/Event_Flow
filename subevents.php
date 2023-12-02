@@ -39,9 +39,9 @@
                                      alt="post-thumb" style="width: 100%; height: 200px; object-fit: cover;">
                                 <p class="text-uppercase mb-2">NAME</p>
                                 <h4 class="title-border"><a class="text-dark"
-                                                            href="blog.php"><?php echo $event['name']; ?></a></h4>
+                                                            href="event_detail.php"><?php echo $event['name']; ?></a></h4>
                                 <p><?php echo $event['description']; ?></p>
-                                <a href="blog.php" class="btn btn-transparent">View Detail</a>
+                              <a href="event_detail.php?id=<?php echo $event['event_id'];  ?>" class="btn btn-transparent">View Detail</a>
                             </article>
                         </div>
                     <?php                  

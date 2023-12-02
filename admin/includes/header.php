@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="assets/plugins/chartist/css/chartist.min.css">
     <link rel="stylesheet" href="assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
     <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"    />
+
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -299,6 +301,9 @@ include("includes/config.php");
                     <?php if(isset($_SESSION['Organizer'])){ ?>
                     <li><a href="Addons.php" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Addons</span>
+                        </a></li>
+                    <li><a href="question_form.php" aria-expanded="false">
+                            <i class="icon-badge menu-icon"></i><span class="nav-text">Question Form</span>
                         </a></li>
                     <li><a href="ticket_types.php" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets Types</span>

@@ -1,12 +1,5 @@
 <!DOCTYPE html>
-
-<!--
- // WEBSITE: https://themefisher.com
- // TWITTER: https://twitter.com/themefisher
- // FACEBOOK: https://www.facebook.com/themefisher
- // GITHUB: https://github.com/themefisher/
--->
-<?php include("admin/includes/config.php"); ?>
+<?php include("admin/includes/config.php");?>
 <html lang="en">
 
 <head>
@@ -27,17 +20,48 @@
   <link rel="stylesheet" href="assets/plugins/slick/slick.css">
   <!-- themefy-icon -->
   <link rel="stylesheet" href="assets/plugins/themify-icons/themify-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"    />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
 
   <!-- Main Stylesheet -->
   <link href="assets/css/style.css" rel="stylesheet">
+  
+  <style>
+                                .quantity-container {
+                                    display: flex;
+                                    align-items: center;
+                                }
 
+                                .quantity-input {
+                                    width: 50px;
+                                    text-align: center;
+                                    padding: 8px;
+                                    border: 1px solid #ccc;
+                                    border-radius: 4px;
+                                    margin-right: 5px;
+                                    margin-left: 5px;
+                                }
+
+                                .quantity-button {
+                                    background-color: #4CAF50;
+                                    color: white;
+                                    border: none;
+                                    padding: 8px 12px;
+                                    cursor: pointer;
+                                    border-radius: 4px;
+                                }
+
+                                .quantity-button:hover {
+                                    background-color: #45a049;
+                                }
+                            </style>
   <!--Favicon-->
 
 </head>
 
 <body>
   <!-- preloader -->
-  <div class="preloader">
+  <!-- <div class="preloader">
     <div class="loader">
       <span class="dot"></span>
       <div class="dots">
@@ -46,7 +70,7 @@
         <span></span>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- /preloader -->
 
 <header class="navigation">
@@ -70,6 +94,9 @@
         </li>
         <li class="nav-item">
           <a class="nav-link text-uppercase text-dark" href="admin/login.php">Sign in</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="cart.php">Cart</a>
         </li>
       </ul>
       <form class="form-inline position-relative ml-lg-4">
