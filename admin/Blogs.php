@@ -133,8 +133,8 @@ include("includes/header.php");
 <script>
 
 
-function openDeleteModal(id) {
-    document.getElementById("blog_id").value = id;
+function openDeleteModal(blog_id) {
+    document.getElementById("blog_id").value = blog_id;
     $("#DeleteBlogModal").modal("show");
 }
 
