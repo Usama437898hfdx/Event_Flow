@@ -50,18 +50,30 @@ include("includes/header.php");
                             <?php
                                   
 
-                            $fetch_blog = mysqli_query($con, "SELECT * FROM `blog`  WHERE is_deleted = 0 AND `blog_id` = $id ;");
+                                  $blogs = mysqli_query($con, "SELECT 
+                                  e.name AS event_name,  
+                                  b.text
+                              FROM 
+                                  events e
+                              INNER JOIN 
+                                  blog b ON b.event_id = e.event_id
+                              WHERE 
+                                  e.organizer_id = $id
+                              ");
 
-                            foreach ($fetch_blog as $blog) {
 
+                            foreach ($blogs as $blog) {
                                 ?>
                                 <tr>
-
+                                <td>
+                                            <?php echo $blog['event_name']; ?>
+                                            
+                                        </td>
 
                                         <td>
 
                                             <button class="btn btn-primary text-white" onclick="openViewModal('<?php echo $blog['blog_id']; ?>',
-                                                    '<?php echo $blog['name']; ?>',
+                                                    '<?php echo $blog['event_name']; ?>',
                                                     '<?php echo $blog['description']; ?>',
                                                    
 

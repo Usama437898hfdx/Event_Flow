@@ -247,13 +247,17 @@ if (isset($_POST["editEvent"])) {
 
 // Create Blogs 
 if (isset($_POST["create_blog"])) {
-   echo  print_r($blog_id); exit();
 $blog_id = $_POST['blog_id'];
 $id = $_POST['event_id'];
 $text = $_POST['text'];
 
 $insert = mysqli_query($con, "INSERT INTO `blog`(`blog_id`, `event_id`, `text`) VALUES ('$blog_id', '$id','$text')");
-
+if ($insert) {
+    header("location:../Blogs.php");
+    exit();
+} else {
+    echo "Blog not inserted";
+}
 
 }
 
