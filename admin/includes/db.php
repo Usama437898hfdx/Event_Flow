@@ -40,6 +40,7 @@ if (isset($_POST["signup"])) {
 }
 
 
+
 //login
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
@@ -66,6 +67,7 @@ if (isset($_POST['login'])) {
         echo "Error in query execution: " . mysqli_error($con);
     }
 }
+
 
 
 //Create organizer
@@ -98,7 +100,6 @@ if (isset($_POST['create_organizer'])) {
         echo "User not inserted";
     }
 }
-
 //delete organizer
 if (isset($_POST["deleteOrganizer"])) {
     $id = $_POST["id"];
@@ -108,7 +109,6 @@ if (isset($_POST["deleteOrganizer"])) {
         exit;
     }
 }
-
 //edit organizer
 if (isset($_POST["editOrganizer"])) {
     $id = $_POST["id"];
@@ -132,6 +132,7 @@ if (isset($_POST["editOrganizer"])) {
         echo "Error: " . mysqli_error($con); // Display error, if any
     }
 }
+
 
 //edit userprofile
 if (isset($_POST["editProfile"])) {
@@ -165,6 +166,7 @@ if (isset($_POST["editProfile"])) {
         echo "Error: " . mysqli_error($con); // Display error, if any
     }
 }
+
 
 
 //Create new Sub Event
@@ -287,7 +289,6 @@ if (isset($_POST["deleteMainEvent"])) {
 
     }
 }
-
 //Edit Main event
 if (isset($_POST["editMainEvent"])) {
     $id = $_POST['event_id'];
@@ -336,7 +337,6 @@ if (isset($_POST["create_blog"])) {
      echo "Blog not inserted";
      }
 }
-
 //Delete Blogs
 if (isset($_POST["deleteBlog"])) {
      $Blog_id = $_POST["blog_id"];
@@ -398,7 +398,6 @@ if (isset($_POST['create_ticket'])) {
         exit();
     }
 }
-
 //delete ticket
 if (isset($_POST["deleteticket"])) {
 
@@ -411,7 +410,6 @@ if (isset($_POST["deleteticket"])) {
         exit();
     }
 }
-
 //edit ticket
 if (isset($_POST["editticket"])) {
     $ticket_Id = $_POST["ticket_id"];
@@ -434,6 +432,7 @@ if (isset($_POST["editticket"])) {
 }
 
 
+
 //Create ticket type
 if (isset($_POST['create_ticket_type'])) {
 
@@ -449,7 +448,6 @@ if (isset($_POST['create_ticket_type'])) {
         echo "User not inserted";
     }
 }
-
 //delete ticket type
 if (isset($_POST["deleteTicket_type"])) {
 
@@ -460,7 +458,6 @@ if (isset($_POST["deleteTicket_type"])) {
         exit();
     }
 }
-
 //edit ticket type
 if (isset($_POST["edit_ticket_type"])) {
     $ticket_type_id = $_POST["ticket_type_id"];
@@ -479,6 +476,7 @@ if (isset($_POST["edit_ticket_type"])) {
 }
 
 
+
 //create addon
 if (isset($_POST['create_addon'])) {
 
@@ -493,7 +491,6 @@ if (isset($_POST['create_addon'])) {
         echo "User not inserted";
     }
 }
-
 // delete addon
 if (isset($_POST["deleteAddon"])) {
 
@@ -504,7 +501,6 @@ if (isset($_POST["deleteAddon"])) {
         exit();
     }
 }
-
 // edit addon
 if (isset($_POST["edit_addon"])) {
     $addon_id = $_POST["addon_id"];
@@ -520,10 +516,5 @@ if (isset($_POST["edit_addon"])) {
         echo "Error: " . mysqli_error($con); // Display error, if any
     }
 }
-
-
-
-
-
 
 ?>
