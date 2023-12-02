@@ -245,6 +245,7 @@ if (isset($_POST["editEvent"])) {
     }
 }
 
+
 // Create Blogs 
 if (isset($_POST["create_blog"])) {
 $blog_id = $_POST['blog_id'];
@@ -262,6 +263,18 @@ if ($insert) {
 }
 
 
+if (isset($_POST["deleteBlog"])) {
+    $Blog_id = $_POST["blog_id"];
+
+    $delete_blog = mysqli_query($con, "UPDATE `blogs` SET `is_deleted`= 1  WHERE `blog_id` = '$Blog_id'");
+    if ($delete_blog) {
+
+        header("location: ../blogs.php");
+        exit;
+
+
+    }
+}
 
 
 //Delete Main event
