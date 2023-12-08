@@ -60,6 +60,8 @@ include("includes/header.php");
                                   blog b ON b.event_id = e.event_id
                               WHERE 
                                   e.organizer_id = $id
+                                  AND b.is_deleted = 0;
+                                  
                               ");
 
   ?>
@@ -103,13 +105,13 @@ include("includes/header.php");
         <form id="deleteForm" action="includes/db.php" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete Event</h5>
+                    <h5 class="modal-title">Delete Blog</h5>
                     <button type="submit" name="delete" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="container">
                     <div class="modal-body">
-                        <p class="text-center">Are you sure you want to delete this event?</p>
-                        <input type="hidden" id="blog_id" name="blid_id" value="">
+                        <p class="text-center">Are you sure you want to delete this blog?</p>
+                        <input type="hidden" id="blog_id" name="blog_id" value="">
                     </div>
                 </div>
                 <div class="modal-footer">

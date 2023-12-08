@@ -339,16 +339,16 @@ if (isset($_POST["create_blog"])) {
 }
 //Delete Blogs
 if (isset($_POST["deleteBlog"])) {
+
      $Blog_id = $_POST["blog_id"];
  
-     $delete_blog = mysqli_query($con, "UPDATE `blogs` SET `is_deleted`= 1  WHERE `blog_id` = '$Blog_id'");
-     if ($delete_blog) {
+ $delete_blog = mysqli_query($con, "UPDATE `blog` SET `is_deleted`= 1  WHERE `blog_id` = '$Blog_id'");
+  if ($delete_blog) {
  
-         header("location: ../blogs.php");
-         exit;
+ header("location: ../blogs.php");
+ exit;
  
- 
-     } 
+ } 
 }
  
  
