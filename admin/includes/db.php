@@ -4,105 +4,6 @@
 session_start();
 include("config.php");
 
-//login
-if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    $query = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$password'";
-    $result = mysqli_query($con, $query);
-
-    if ($result) {
-
-        if (mysqli_num_rows($result) == 1) {
-            foreach ($result as $user)
-                ;
-            echo $role = $user['role'];
-            $_SESSION['uid'] = $user['id'];
-            $_SESSION[$role] = $user;
-
-            header("location: ../index.php");
-            exit();
-        } else {
-            echo "Invalid credentials. Please check your email and password.";
-        }
-    } else {
-        echo "Error in query execution: " . mysqli_error($con);
-    }
-}
-
-
-//Create organizer
-if (isset($_POST['create_organizer'])) {
-    $name = $_POST['username'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $targetDirectory = "../images/avatar/";
-    $image = $_FILES["image"]["name"];
-    $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
-
-    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-    $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
-
-    if (in_array($imageFileType, $allowedTypes)) {
-        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
-        } else {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    } else {
-        echo "Invalid file type. Please upload only JPG, JPEG, PNG, or GIF files.";
-    }
-
-    $insert = mysqli_query($con, "INSERT INTO `users`(`username`, `email`, `password`,`avatar`,`role`) VALUES ('$name','$email','$password','$image','Organizer')");
-    if ($insert) {
-        header("location:../users.php");
-        exit();
-    } else {
-        echo "User not inserted";
-    }
-}
-
-
-
-//delete organizer
-if (isset($_POST["deleteOrganizer"])) {
-    $id = $_POST["id"];
-    $delete_user = mysqli_query($con, "UPDATE `users` SET `is_deleted`= 1 WHERE `user_id` = '$id'");
-    if ($delete_user) {
-        header("location: ../users.php");
-        exit;
-    }
-}
-
-
-
-//edit organizer
-if (isset($_POST["editOrganizer"])) {
-    $id = $_POST["id"];
-    $username = $_POST["organizerName"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $address = $_POST["address"];
-    $city = $_POST["city"];
-    $state = $_POST["state"];
-    $zip_code = $_POST["zip_code"];
-    $location = $_POST["location"];
-    $phone = $_POST["phone"];
-
-    // Assuming $con is your database connection
-    $edit_user = mysqli_query($con, "UPDATE `users` SET `username`='$username', `email`='$email', `password`='$password', `address`='$address', `city`='$city', `state`='$state', `zip_code`='$zip_code', `location`='$location', `phone`='$phone' WHERE `id`= '$id' ");
-
-    if ($edit_user) {
-        header("location: ../users.php");
-        exit;
-    } else {
-        echo "Error: " . mysqli_error($con); // Display error, if any
-    }
-}
-
-
-
 
 //For sign up page
 if (isset($_POST["signup"])) {
@@ -135,6 +36,134 @@ if (isset($_POST["signup"])) {
     if ($sql) {
         header("location:../login.php");
         exit;
+    }
+}
+
+
+
+//login
+if (isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $query = "SELECT * FROM `users` WHERE `email` = '$email' AND `password` = '$password'";
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+
+        if (mysqli_num_rows($result) == 1) {
+            foreach ($result as $user)
+                ;
+            echo $role = $user['role'];
+            $_SESSION['uid'] = $user['id'];
+            $_SESSION[$role] = $user;
+
+            header("location: ../index.php");
+            exit();
+        } else {
+            echo "Invalid credentials. Please check your email and password.";
+        }
+    } else {
+        echo "Error in query execution: " . mysqli_error($con);
+    }
+}
+
+
+
+//Create organizer
+if (isset($_POST['create_organizer'])) {
+    $name = $_POST['username'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $targetDirectory = "../images/avatar/";
+    $image = $_FILES["image"]["name"];
+    $targetFile = $targetDirectory . basename($_FILES["image"]["name"]);
+
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+
+    if (in_array($imageFileType, $allowedTypes)) {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+            echo "The file " . htmlspecialchars(basename($_FILES["image"]["name"])) . " has been uploaded.";
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+        }
+    } else {
+        echo "Invalid file type. Please upload only JPG, JPEG, PNG, or GIF files.";
+    }
+
+    $insert = mysqli_query($con, "INSERT INTO `users`(`username`, `email`, `password`,`avatar`,`role`) VALUES ('$name','$email','$password','$image','Organizer')");
+    if ($insert) {
+        header("location:../users.php");
+        exit();
+    } else {
+        echo "User not inserted";
+    }
+}
+//delete organizer
+if (isset($_POST["deleteOrganizer"])) {
+    $id = $_POST["id"];
+    $delete_user = mysqli_query($con, "UPDATE `users` SET `is_deleted`= 1 WHERE `user_id` = '$id'");
+    if ($delete_user) {
+        header("location: ../users.php");
+        exit;
+    }
+}
+//edit organizer
+if (isset($_POST["editOrganizer"])) {
+    $id = $_POST["id"];
+    $username = $_POST["organizerName"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $address = $_POST["address"];
+    $city = $_POST["city"];
+    $state = $_POST["state"];
+    $zip_code = $_POST["zip_code"];
+    $location = $_POST["location"];
+    $phone = $_POST["phone"];
+
+    // Assuming $con is your database connection
+    $edit_user = mysqli_query($con, "UPDATE `users` SET `username`='$username', `email`='$email', `password`='$password', `address`='$address', `city`='$city', `state`='$state', `zip_code`='$zip_code', `location`='$location', `phone`='$phone' WHERE `id`= '$id' ");
+
+    if ($edit_user) {
+        header("location: ../users.php");
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($con); // Display error, if any
+    }
+}
+
+
+//edit userprofile
+if (isset($_POST["editProfile"])) {
+    $id = $_POST["id"];
+    $username = $_POST["name"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $address = $_POST["address"];
+    $city = $_POST["city"];
+    $state = $_POST["state"];
+    $zip_code = $_POST["zip_code"];
+    $location = $_POST["location"];
+    $phone = $_POST["phone"];
+    $old_avatar = $_POST["old_avatar"];
+
+    if (!empty($_FILES['new_avatar']['name'])) {
+        $avatar = $_FILES['new_avatar']['name'];
+        $image = '../assets/images/avatar/' . basename($_FILES['new_avatar']['name']);
+        move_uploaded_file($_FILES['new_avatar']['tmp_name'], $image);
+    } else {
+        // Use the old image name if no new image is provided
+        $avatar = $old_avatar;
+    }
+    // Assuming $con is your database connection
+    $edit_user = mysqli_query($con, "UPDATE `users` SET `username`='$username', `email`='$email', `password`='$password', `address`='$address', `city`='$city', `state`='$state', `zip_code`='$zip_code', `location`='$location', `phone`='$phone' , `avatar`='$avatar' WHERE `id`='$id' ");
+
+    if ($edit_user) {
+        header("location: ../profile.php");
+        exit;
+    } else {
+        echo "Error: " . mysqli_error($con); // Display error, if any
     }
 }
 
@@ -245,20 +274,6 @@ if (isset($_POST["editEvent"])) {
     }
 }
 
-// Create Blogs 
-if (isset($_POST["create_blog"])) {
-   echo  print_r($blog_id); exit();
-$blog_id = $_POST['blog_id'];
-$id = $_POST['event_id'];
-$text = $_POST['text'];
-
-$insert = mysqli_query($con, "INSERT INTO `blog`(`blog_id`, `event_id`, `text`) VALUES ('$blog_id', '$id','$text')");
-
-
-}
-
-
-
 
 //Delete Main event
 if (isset($_POST["deleteMainEvent"])) {
@@ -274,7 +289,6 @@ if (isset($_POST["deleteMainEvent"])) {
 
     }
 }
-
 //Edit Main event
 if (isset($_POST["editMainEvent"])) {
     $id = $_POST['event_id'];
@@ -308,6 +322,36 @@ if (isset($_POST["editMainEvent"])) {
 }
 
 
+
+// Create Blogs 
+if (isset($_POST["create_blog"])) {
+    $blog_id = $_POST['blog_id'];
+    $id = $_POST['event_id'];
+    $text = $_POST['text'];
+    
+  $insert = mysqli_query($con, "INSERT INTO `blog`(`blog_id`, `event_id`, `text`) VALUES ('$blog_id', '$id','$text')");
+      if ($insert) {
+      header("location:../Blogs.php");
+      exit();
+      } else {
+     echo "Blog not inserted";
+     }
+}
+//Delete Blogs
+if (isset($_POST["deleteBlog"])) {
+
+     $Blog_id = $_POST["blog_id"];
+ 
+ $delete_blog = mysqli_query($con, "UPDATE `blog` SET `is_deleted`= 1  WHERE `blog_id` = '$Blog_id'");
+  if ($delete_blog) {
+ 
+ header("location: ../blogs.php");
+ exit;
+ 
+ } 
+}
+ 
+ 
 
 // Create Ticket
 if (isset($_POST['create_ticket'])) {
@@ -354,8 +398,6 @@ if (isset($_POST['create_ticket'])) {
         exit();
     }
 }
-
-
 //delete ticket
 if (isset($_POST["deleteticket"])) {
 
@@ -368,10 +410,6 @@ if (isset($_POST["deleteticket"])) {
         exit();
     }
 }
-
-
-
-
 //edit ticket
 if (isset($_POST["editticket"])) {
     $ticket_Id = $_POST["ticket_id"];
@@ -395,41 +433,6 @@ if (isset($_POST["editticket"])) {
 
 
 
-//edit userprofile
-if (isset($_POST["editProfile"])) {
-    $id = $_POST["id"];
-    $username = $_POST["name"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $address = $_POST["address"];
-    $city = $_POST["city"];
-    $state = $_POST["state"];
-    $zip_code = $_POST["zip_code"];
-    $location = $_POST["location"];
-    $phone = $_POST["phone"];
-    $old_avatar = $_POST["old_avatar"];
-
-    if (!empty($_FILES['new_avatar']['name'])) {
-        $avatar = $_FILES['new_avatar']['name'];
-        $image = '../assets/images/avatar/' . basename($_FILES['new_avatar']['name']);
-        move_uploaded_file($_FILES['new_avatar']['tmp_name'], $image);
-    } else {
-        // Use the old image name if no new image is provided
-        $avatar = $old_avatar;
-    }
-    // Assuming $con is your database connection
-    $edit_user = mysqli_query($con, "UPDATE `users` SET `username`='$username', `email`='$email', `password`='$password', `address`='$address', `city`='$city', `state`='$state', `zip_code`='$zip_code', `location`='$location', `phone`='$phone' , `avatar`='$avatar' WHERE `id`='$id' ");
-
-    if ($edit_user) {
-        header("location: ../profile.php");
-        exit;
-    } else {
-        echo "Error: " . mysqli_error($con); // Display error, if any
-    }
-}
-
-
-
 //Create ticket type
 if (isset($_POST['create_ticket_type'])) {
 
@@ -445,10 +448,6 @@ if (isset($_POST['create_ticket_type'])) {
         echo "User not inserted";
     }
 }
-
-
-
-
 //delete ticket type
 if (isset($_POST["deleteTicket_type"])) {
 
@@ -459,9 +458,6 @@ if (isset($_POST["deleteTicket_type"])) {
         exit();
     }
 }
-
-
-
 //edit ticket type
 if (isset($_POST["edit_ticket_type"])) {
     $ticket_type_id = $_POST["ticket_type_id"];
@@ -495,9 +491,16 @@ if (isset($_POST['create_addon'])) {
         echo "User not inserted";
     }
 }
+// delete addon
+if (isset($_POST["deleteAddon"])) {
 
-
-
+    $addon_id = $_POST["addon_id"];
+    $DeleteAddon = mysqli_query($con, "UPDATE `addon` SET `is_deleted`= 1 WHERE `Addon_id` = '$addon_id'");
+    if ($DeleteAddon) {
+        header("location: ../Addons.php");
+        exit();
+    }
+}
 // edit addon
 if (isset($_POST["edit_addon"])) {
     $addon_id = $_POST["addon_id"];
