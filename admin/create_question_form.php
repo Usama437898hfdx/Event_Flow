@@ -9,8 +9,8 @@ include("includes/header.php"); ?>
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void m (0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Addons</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Addons</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Question Form</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Question Form</a></li>
             </ol>
         </div>
     </div>

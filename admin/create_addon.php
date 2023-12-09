@@ -20,7 +20,7 @@ include("includes/header.php"); ?>
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="card-title">Create Question Form</h1>
+                        <h1 class="card-title">Create Addon</h1>
                         <form action="includes/db.php" method="POST" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-md-6">

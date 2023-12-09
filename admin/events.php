@@ -72,11 +72,12 @@ include("includes/header.php");
                                             <?php echo $event['name']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $event['start_date']; ?>
+                                            <?php echo date('d-m-Y', strtotime($event['start_date'])); ?>
                                         </td>
                                         <td>
-                                            <?php echo $event['end_date']; ?>
+                                            <?php echo date('d-m-Y', strtotime($event['end_date'])); ?>
                                         </td>
+
                                         <td>
 
                                             <?php if(isset($_SESSION['Organizer'])){ ?>

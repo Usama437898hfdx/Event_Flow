@@ -33,8 +33,6 @@ include("includes/header.php");
                                         <th>Event Name</th>
                                         <th>Type</th>
                                         <th>Discount</th>
-
-                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,10 +58,10 @@ include("includes/header.php");
     '<?php echo $ticket['ticket_type_id']; ?>',
     '<?php echo $ticket['discount']; ?>');">Edit</button> -->
                                         <td>
-                                             <button class="btn btn-danger"
+                                             <!-- <button class="btn btn-danger"
                                                 onclick="openDeleteModal('<?php echo $ticket['ticket_id']; ?>',
                                                 '<?php echo $ticket['ticket_type_id']; ?>');">
-                                                Delete</button>
+                                                Delete</button> -->
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -77,7 +75,7 @@ include("includes/header.php");
     </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form id="deleteForm" action="includes/db.php" method="POST">
@@ -97,9 +95,9 @@ include("includes/header.php");
             </form>
         </div>
     </div>
-</div>
+</div> -->
 
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<!-- <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <form id="editForm" action="includes/db.php" method="POST">
             <div class="modal-content">
@@ -139,9 +137,9 @@ include("includes/header.php");
                             </div>
         </form>
     </div>
-</div>
-</div>
+</div> -->
 
+<!-- 
 <script>
 function openEditModal(ticket_id, ticket_type_id, discount, addon_id, ) {
 
@@ -156,12 +154,12 @@ function openEditModal(ticket_id, ticket_type_id, discount, addon_id, ) {
 
 
 
-function openDeleteModal(ticket_id, ticket_type_id) {
-    document.getElementById("ticket_id").value = ticket_id;
-    document.getElementById("ticket_type_id").value = ticket_type_id;
-    $("#deleteModal").modal("show");
-}
-</script>
+// function openDeleteModal(ticket_id, ticket_type_id) {
+//     document.getElementById("ticket_id").value = ticket_id;
+//     document.getElementById("ticket_type_id").value = ticket_type_id;
+//     $("#deleteModal").modal("show");
+// }
+</script> -->
 
 
 
