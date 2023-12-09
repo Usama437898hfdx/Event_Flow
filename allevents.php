@@ -16,7 +16,7 @@
                                 <img class="img-fluid mb-4" src="assets/images/events/<?php echo $event['image'] ?>"
                                     alt="post-thumb" style="width: 100%; height: 200px; object-fit: cover;">
                                 <p class="text-uppercase mb-2">event</p>
-                                <h4 class="title-border"><a class="text-dark" href="blog-single.html"><?php echo $event['name']; ?></a></h4>
+                                <h4 class="title-border"><a class="text-dark" href="subevents.php?id=<?php echo $event ['event_id'] ?> "><?php echo $event['name']; ?></a></h4>
                                 <p><?php echo $event['description']; ?></p>
                                 <a href="subevents.php?id=<?php echo $event ['event_id'] ?> " class="btn btn-transparent">View Detail</a>
                             </article>

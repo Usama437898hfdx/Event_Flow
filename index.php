@@ -1,7 +1,13 @@
 <?php
+session_start();
 
-include("header.php"); ?>
+if (!isset($_SESSION['Admin']) && !isset($_SESSION['Organizer']) && !isset($_SESSION['Attendee'])) {
+    header('location:login.php');
+    exit;
+}
 
+include("header.php"); 
+ ?>
 
 <style>
         .buttn-parent {
@@ -24,7 +30,7 @@ include("header.php"); ?>
         <div class="row">
         <?php
 $alignment = 0;
-$fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL");
+$fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL LIMIT 6");
 
 foreach ($fetch_event as $event) {
     $alignment++;
@@ -46,7 +52,7 @@ foreach ($fetch_event as $event) {
                                 <li class="list-inline-item"><i class="ti-calendar mr-2"></i><?php echo $event ['end_date'] ?></li>
                                
                             </ul>
-                            <h4 class="mb-4"><a href="blog.php" class="text-dark"><?php echo $event ['name'] ?></a></h4>
+                            <h4 class="mb-4"><a href="subevents.php?id=<?php echo $event ['event_id'] ?> " class="text-dark"><?php echo $event ['name'] ?></a></h4>
                             <p class="mb-0 post-summary"><?php echo $event ['description'] ?></p>
                             <a class="btn btn-transparent mb-4" href="subevents.php?id=<?php echo $event ['event_id'] ?> ">View</a>
                         </div>

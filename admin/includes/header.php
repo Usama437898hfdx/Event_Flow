@@ -18,29 +18,36 @@
     <link rel="stylesheet" href="assets/plugins/chartist/css/chartist.min.css">
     <link rel="stylesheet" href="assets/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
     <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="assets/plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 
 </head>
-<?php 
+<?php
 include("includes/config.php");
-    $userRoles = ["Admin", "Organizer", "Attendee"];
+$userRoles = ["Admin", "Organizer", "Attendee"];
 
+$sql = null;
+$loggedIn = false;
 
-    foreach ($userRoles as $role) {
-        if (isset($_SESSION[$role])) {
-            $id = $_SESSION[$role]['id'];
-            $sql = mysqli_query($con, "SELECT * FROM `users` WHERE id = $id");
-            break;
-        }
+foreach ($userRoles as $role) {
+    if (isset($_SESSION[$role])) {
+        $loggedIn = true;
+        $id = $_SESSION[$role]['id'];
+        $sql = mysqli_query($con, "SELECT * FROM `users` WHERE id = $id");
+        $userData = mysqli_fetch_assoc($sql);
+
+        break;
     }
-    
-    $userData = mysqli_fetch_assoc($sql);
-    
-    ?>
+}
+
+if (!$loggedIn) {
+    header("location: login.php");
+    exit;
+}
+?>
 
 <body>
 
@@ -71,9 +78,9 @@ include("includes/config.php");
             <div class="brand-logo">
                 <a href="index.php">
                     <b class="logo-abbr"><img src="assets/images/v.png" alt=""> </b>
-                    <span class="brand-title" >
+                    <span class="brand-title">
                         <!-- <img src="assets/images/logo-text.png" alt=""> -->
-                      
+
                         <h2 style="color: white;">Event Flow</h2>
                     </span>
                 </a>
@@ -237,7 +244,8 @@ include("includes/config.php");
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="assets/images/avatar/<?php echo $userData['avatar']?>" height="60" width="60" alt="">
+                                <img src="assets/images/avatar/<?php echo $userData['avatar'] ?>" height="60" width="60"
+                                    alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -274,63 +282,53 @@ include("includes/config.php");
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a></li>
 
-                    <?php if(isset($_SESSION['Admin'])){ ?>
-                    <li><a href="users.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Users</span>
-                        </a></li>
+                    <?php if (isset($_SESSION['Admin'])) { ?>
+                        <li><a href="users.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Users</span>
+                            </a></li>
+                        <li><a href="categories.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Categories</span>
+                            </a></li>
                     <?php } ?>
 
-                    <?php if(!isset($_SESSION['Attendee'])){ ?>
+                    <?php if (!isset($_SESSION['Attendee'])) { ?>
                         <li><a href="main_events.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Main Events</span>
-                        </a></li>
-
-                    <li><a href="events.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Sub Events</span>
-                        </a></li>
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Main Events</span>
+                            </a></li>
+                        <li><a href="events.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Sub Events</span>
+                            </a></li>
                     <?php } ?>
 
-                    <?php if(isset($_SESSION['Organizer'])){ ?>
+                    <?php if (isset($_SESSION['Organizer'])) { ?>
                         <li><a href="Blogs.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Blogs</span>
-                        </a></li>
-
-                    <?php } ?> 
-
-
-                    <?php if(isset($_SESSION['Organizer'])){ ?>
-                    <li><a href="Addons.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Addons</span>
-                        </a></li>
-                    <li><a href="question_form.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Question Form</span>
-                        </a></li>
-                    <li><a href="ticket_types.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets Types</span>
-                        </a></li>
-                    <li><a href="ticket.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets</span>
-                        </a></li>
-                    <?php }?>
-                    <li><a href="orders.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">orders</span>
-                        </a></li>
-
-                    <?php if(!isset($_SESSION['Attendee'])){ ?>
-                    <li><a href="calender.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Calender</span>
-                        </a></li>
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Blogs</span>
+                            </a></li>
+                        <li><a href="Addons.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Addons</span>
+                            </a></li>
+                        <li><a href="question_form.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Question Form</span>
+                            </a></li>
+                        <li><a href="ticket_types.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets Types</span>
+                            </a></li>
+                        <li><a href="ticket.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets</span>
+                            </a></li>
+                        <li><a href="orders.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">orders</span>
+                            </a></li>
                     <?php } ?>
 
-                    <?php if(!isset($_SESSION['Attendee'])){ ?>
-                    <li><a href="index.php" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Analytics</span>
-                        </a></li>
+                    <?php if (!isset($_SESSION['Attendee'])) { ?>
+                        <li><a href="calender.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Calender</span>
+                            </a></li>
+                        <li><a href="index.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Analytics</span>
+                            </a></li>
                     <?php } ?>
-
-                   
-
-
 
                 </ul>
             </div>
