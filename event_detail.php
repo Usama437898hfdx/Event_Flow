@@ -92,7 +92,7 @@ $detail = mysqli_fetch_assoc($fetch_details);
 
 </style>
 
-
+<br><br>
 <section class="section bg-secondary">
     <div class="container">
         <div class="card">
@@ -262,11 +262,10 @@ $detail = mysqli_fetch_assoc($fetch_details);
                         </p>
                     </div>
                     <div class="center-button">
-        <a href="view_blog.php">
+        <a href="view_blog.php?id=<?php echo $detail['event_id'];  ?>">
             <input type="button" class="btn btn-primary" value="View Blog">
         </a>
     </div>
-
                 </div>
 
             </div>
