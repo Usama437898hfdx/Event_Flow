@@ -72,10 +72,17 @@
     </div>
   </div> -->
   <!-- /preloader -->
+  <style> .img-fluid.small-logo {
+    max-width: 220px; /* Set the maximum width as needed */
+    height: auto; /* Maintain aspect ratio */
+  }</style>
+ 
 
 <header class="navigation">
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand" href="index.php"><img class="img-fluid" src="assets/images/logo.png" alt="parsa"></a>
+    <a class="navbar-brand" href="index.php">
+    <img class="img-fluid small-logo" src="assets/images/ab.jpeg" alt="parsa">
+</a></a>
     <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
       aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -101,8 +108,8 @@
       </ul>
       <form class="form-inline position-relative ml-lg-4">
         <input class="form-control px-0 w-100" type="search" placeholder="Search">
-        <!-- <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button> -->
-        <a href="search.html" class="search-icon"><i class="ti-search text-dark"></i></a>
+        <!-- <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+        <a href="search.html" class="search-icon"><i class="ti-search text-dark"></i></a> -->
       </form>
     </div>
   </nav>

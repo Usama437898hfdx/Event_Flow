@@ -10,7 +10,8 @@ $fetch_detail = mysqli_query($con, "SELECT
     COUNT(t.ticket_id) AS available_quantity,
     e.*,
     o.id as organizer_id, 
-    o.username as organizer
+    o.username as organizer,
+    o.email as organizer_email
 FROM
     ticket_type AS tt
 LEFT JOIN
@@ -60,20 +61,45 @@ if (isset($_POST['addcart'])) {
 
 }
 
+?>
+
+<?php
+$event_id = $_GET['id'];
+$fetch_details = mysqli_query($con, "SELECT
+e.*,
+o.id as organizer_id, 
+o.username as organizer,
+o.email as organizer_email
+FROM events AS e 
+JOIN
+    users AS o ON e.organizer_id = o.id
+WHERE
+event_id = $event_id");
+
+$detail = mysqli_fetch_assoc($fetch_details);
+// echo"<pre>";print_r($detail);
 
 ?>
 
-
 <!-- page-title -->
+<style>
+.title-border::before {
+    width: 100%;
+}
+</style>
+
+
 <section class="section bg-secondary">
     <div class="container">
         <div class="card">
             <div class="card-body p-2">
-                <img src="assets\images\events\<?php echo $detail['image'] ?>" class="img-fluid w-100">
+                <img src="assets/images/events/<?php echo $detail['image'] ?>" class="img-fluid w-100"
+                    style="max-width: 100%  ; max-height: 50vh;">
             </div>
         </div>
     </div>
 </section>
+
 <!-- /page-title -->
 
 <!------ Include the above in your HEAD tag ---------->
@@ -115,58 +141,64 @@ if (isset($_POST['addcart'])) {
                                 <?php foreach ($fetch_detail as $detail) {
 
                                     ?>
-                                    <tr>
-                                        <form action="event_detail.php?id=<?php echo $event_id ?>" method="post">
-                                            <td>
-                                                <?php echo date('d/m/Y', strtotime($detail['start_date'])); ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $detail['name']; ?>
-                                                <input type="hidden" name="ticket_type_id" value="<?php echo $detail['ticket_type_id']; ?>">
-                                                <input type="hidden" name="ticket_type" value="<?php echo $detail['ticket_type_name']; ?>">
-                                                <input type="hidden" name="event_id" value="<?php echo $detail['event_id']; ?>">
-                                                <input type="hidden" name="event_name" value="<?php echo $detail['name']; ?>">
-                                                <input type="hidden" name="price" value="<?php echo $detail['price']; ?>">
-                                                <input type="hidden" name="available_quantity" value="<?php echo $detail['available_quantity']; ?>"
-                                                    id="available_quantity">
+                                <tr>
+                                    <form action="event_detail.php?id=<?php echo $event_id ?>" method="post">
+                                        <td>
+                                            <?php echo date('d/m/Y', strtotime($detail['start_date'])); ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $detail['name']; ?>
+                                            <input type="hidden" name="ticket_type_id"
+                                                value="<?php echo $detail['ticket_type_id']; ?>">
+                                            <input type="hidden" name="ticket_type"
+                                                value="<?php echo $detail['ticket_type_name']; ?>">
+                                            <input type="hidden" name="event_id"
+                                                value="<?php echo $detail['event_id']; ?>">
+                                            <input type="hidden" name="event_name"
+                                                value="<?php echo $detail['name']; ?>">
+                                            <input type="hidden" name="price" value="<?php echo $detail['price']; ?>">
+                                            <input type="hidden" name="available_quantity"
+                                                value="<?php echo $detail['available_quantity']; ?>"
+                                                id="available_quantity">
 
 
-                                            </td>
-                                            <td>
-                                                <?php echo $detail['ticket_type_name']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $detail['available_quantity']; ?>
-                                              
-                                            </td>
-                                            <td>
-                                                <?php echo $detail['price']; ?>
-                                            </td>
+                                        </td>
+                                        <td>
+                                            <?php echo $detail['ticket_type_name']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $detail['available_quantity']; ?>
+
+                                        </td>
+                                        <td>
+                                            <?php echo $detail['price']; ?>
+                                        </td>
 
 
 
-                                            <td class="quantity-container">
-                                                <button type="button"
-                                                    onclick="decreaseQuantity(<?php echo $detail['ticket_type_id']; ?>, <?php echo $detail['available_quantity']; ?>)"
-                                                    class="quantity-button">-</button>
+                                        <td class="quantity-container">
+                                            <button type="button"
+                                                onclick="decreaseQuantity(<?php echo $detail['ticket_type_id']; ?>, <?php echo $detail['available_quantity']; ?>)"
+                                                class="quantity-button">-</button>
 
-                                                <input type="number" name="quantity"
-                                                    id="quantity-<?php echo $detail['ticket_type_id']; ?>"
-                                                    class="quantity-input" value="1" min="1">
-                                                <button type="button"
-                                                    onclick="increaseQuantity(<?php echo $detail['ticket_type_id']; ?>, <?php echo $detail['available_quantity']; ?>)"
-                                                    class="quantity-button">+</button>
-                                            </td>
+                                            <input type="number" name="quantity"
+                                                id="quantity-<?php echo $detail['ticket_type_id']; ?>"
+                                                class="quantity-input" value="1" min="1">
+                                            <button type="button"
+                                                onclick="increaseQuantity(<?php echo $detail['ticket_type_id']; ?>, <?php echo $detail['available_quantity']; ?>)"
+                                                class="quantity-button">+</button>
+                                        </td>
 
-                                            <td>
-                                                <input type="submit" name="addcart" class="btn btn-primary" value="Add to cart">
-                                            </td>
+                                        <td>
+                                            <input type="submit" name="addcart" class="btn btn-primary"
+                                                value="Add to cart">
+                                        </td>
 
 
-                                        </form>
-                                    </tr>
-                                    <span id="error-message-<?php echo $detail['ticket_type_id']; ?>"
-                                        style="color: red; display: none;">Not enough available quantity</span>
+                                    </form>
+                                </tr>
+                                <span id="error-message-<?php echo $detail['ticket_type_id']; ?>"
+                                    style="color: red; display: none;">Not enough available quantity</span>
 
                                 <?php } ?>
                             </tbody>
@@ -178,25 +210,55 @@ if (isset($_POST['addcart'])) {
 
 
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="col-sm-4 mb-5">
-                            <article class="text-center">
-                                <h4 class="title-border">
-                                    <?php echo $detail['name'] ?><a class="text-dark" href="blog.php"></a>
-                                </h4>
-                                <p>
-                                    <?php echo $detail['description']; ?>
-                                </p>
-                            </article>
-                        </div>
+                        <h4 class="title-border">
+                            <?php echo $detail['name'] ?><a class="text-dark" href="blog.php"></a>
+                        </h4>
+                        <p>
+                            <?php echo $detail['description']; ?>
+                        </p>
                     </div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-
+                        <h4 class="title-border">
+                            <?php echo $detail['name'] ?><a class="text-dark" href="blog.php"></a>
+                        </h4>
+                        <h5>Start Date & Time </h5>
+                        <p class="date-time">
+                            <?php 
+            $start_date = $detail['start_date'];
+            $formatted_start_date = date('d/m/Y (D)', strtotime($start_date));
+            $start_time = $detail['start_time'];
+            $formatted_start_time = date('h:i a', strtotime($start_time));
+            echo $formatted_start_date . ' at ' . $formatted_start_time;
+        ?>
+                        </p>
+                        <h5>End Date & Time </h5>
+                        <p class="date-time">
+                            <?php 
+            $end_date = $detail['end_date'];
+            $formatted_end_date = date('d/m/Y (D)', strtotime($end_date));
+            $end_time = $detail['end_time'];
+            $formatted_end_time = date('h:i a', strtotime($end_time));
+            echo $formatted_end_date . ' at ' . $formatted_end_time;
+        ?>
+                        </p>
+                        <h5>Location </h5>
+                        <p>
+                            <?php echo $detail['description']; ?>
+                        </p>
                     </div>
                     <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-
+                        <h4 class="title-border">EVENT ORGANIZER </h4>
+                        <h5> Organized By </h5>
+                        <p>
+                            <?php echo $detail['organizer'] ?><a class="text-dark" href="blog.php"></a>
+                        </p>
+                        <h5> Organizer Email </h5>
+                        <p>
+                            <?php echo $detail['organizer_email'] ?><a class="text-dark" href="blog.php"></a>
+                        </p>
                     </div>
                 </div>
-              
+
             </div>
             <div class="col-lg-4">
                 <div class="widget search-box">

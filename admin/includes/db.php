@@ -530,6 +530,12 @@ if (isset($_POST["deleteAddon"])) {
     }
 }
 
+
+
+
+
+
+
 // Add registration question
 if (isset($_POST["add_questions"])) {
 
