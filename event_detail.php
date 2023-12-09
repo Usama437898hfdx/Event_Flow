@@ -86,6 +86,10 @@ $detail = mysqli_fetch_assoc($fetch_details);
 .title-border::before {
     width: 100%;
 }
+.center-button {
+            text-align: center;
+        }
+
 </style>
 
 
@@ -257,56 +261,46 @@ $detail = mysqli_fetch_assoc($fetch_details);
                             <?php echo $detail['organizer_email'] ?><a class="text-dark" href="blog.php"></a>
                         </p>
                     </div>
+                    <div class="center-button">
+        <a href="view_blog.php">
+            <input type="button" class="btn btn-primary" value="View Blog">
+        </a>
+    </div>
+
                 </div>
 
             </div>
             <div class="col-lg-4">
-                <div class="widget search-box">
-                    <i class="ti-search"></i>
-                    <input type="search" id="search-post" class="form-control border-0 pl-5" name="search-post"
-                        placeholder="Search">
-                </div>
                 <div class="widget">
-                    <h6 class="mb-4">LATEST POST</h6>
+                    <h6 class="mb-4">UPCOMING EVENTS</h6>
+                    <?php $fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL LIMIT 4");
+foreach ($fetch_event as $event) {?>
                     <div class="media mb-4">
                         <div class="post-thumb-sm mr-3">
-                            <img class="img-fluid" src="images/masonary-post/post-1.jpg" alt="post-thumb">
+                            <img class="img-fluid" src="assets/images/events/<?php echo $event['image'] ?>"
+                                alt="post-thumb">
                         </div>
                         <div class="media-body">
                             <ul class="list-inline d-flex justify-content-between mb-2">
-                                <li class="list-inline-item">Post By Jhon</li>
-                                <li class="list-inline-item">June 2, 2018</li>
+
+                                <li class="list-inline-item">Date: <?php
+$start_date = $event['start_date'];
+$formatted_date = date('d/m/Y', strtotime($start_date));
+echo $formatted_date;
+?>
+                                </li>
+                                <li class="list-inline-item">Time: <?php
+$time = new DateTime($event['start_time']);
+$formattedTime = $time->format('g:i A');
+echo $formattedTime;
+?>
+                                </li>
                             </ul>
-                            <h6><a class="text-dark" href="blog-single.html">Lorem ipsum dolor sit amet, consectetur</a>
-                            </h6>
+                            <h6><a class="text-dark"
+                                    href=subevents.php?id=<?php echo $event ['event_id'] ?>><?php echo $event['name']; ?></a>
                         </div>
                     </div>
-                    <div class="media mb-4">
-                        <div class="post-thumb-sm mr-3">
-                            <img class="img-fluid" src="images/masonary-post/post-6.jpg" alt="post-thumb">
-                        </div>
-                        <div class="media-body">
-                            <ul class="list-inline d-flex justify-content-between mb-2">
-                                <li class="list-inline-item">Post By Jhon</li>
-                                <li class="list-inline-item">June 2, 2018</li>
-                            </ul>
-                            <h6><a class="text-dark" href="blog-single.html">Lorem ipsum dolor sit amet, consectetur</a>
-                            </h6>
-                        </div>
-                    </div>
-                    <div class="media mb-4">
-                        <div class="post-thumb-sm mr-3">
-                            <img class="img-fluid" src="images/masonary-post/post-3.jpg" alt="post-thumb">
-                        </div>
-                        <div class="media-body">
-                            <ul class="list-inline d-flex justify-content-between mb-2">
-                                <li class="list-inline-item">Post By Jhon</li>
-                                <li class="list-inline-item">June 2, 2018</li>
-                            </ul>
-                            <h6><a class="text-dark" href="blog-single.html">Lorem ipsum dolor sit amet, consectetur</a>
-                            </h6>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
                 <div class="widget">
                     <h6 class="mb-4">CATEGORIES</h6>
