@@ -401,12 +401,11 @@ if (isset($_POST['create_ticket'])) {
 //delete ticket
 if (isset($_POST["deleteticket"])) {
 
-    $ticket_id = $_POST["ticket_id"];
-    $tt_id = $_POST["ticket_type_id"];
+    $tt_id = $_POST["tt_id"];
 
-    $delete_ticket = mysqli_query($con, "UPDATE `ticket` SET `is_deleted`= 1 WHERE `ticket_id` = '$ticket_id'");
+    $delete_ticket = mysqli_query($con, "UPDATE `ticket` SET `is_deleted`= 1 WHERE `ticket_type_id` = '$tt_id'");
     if ($delete_ticket) {
-        header("location: ../tickets.php?tt_id=$tt_id");
+        header("location: ../ticket.php?tt_id=$tt_id");
         exit();
     }
 }
@@ -518,7 +517,6 @@ if (isset($_POST["edit_addon"])) {
 }
 
 
-
 // delete addon
 if (isset($_POST["deleteAddon"])) {
 
@@ -534,6 +532,7 @@ if (isset($_POST["deleteAddon"])) {
 if (isset($_POST["add_questions"])) {
 
     $questionsArray = $_POST["Question"];
+    $question_id = $_POST["question_id"];
     $event_id = $_POST["event_id"];
     
     foreach ($questionsArray as $Question) {
@@ -542,9 +541,12 @@ if (isset($_POST["add_questions"])) {
        
     }
 
-    header("location: ../Registration_Question.php");
+    header("location: ../question_form.php");
     exit();
 }
+
+
+
 
 
 ?>

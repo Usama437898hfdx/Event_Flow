@@ -40,7 +40,7 @@ include("includes/header.php"); ?>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="ticketType">Add On:</label>
+                                        <label for="Addon">AddOn:</label>
                                         <select name="addons[]" class="selectpicker form-control" multiple
                                             data-live-search="true">
                                             <?php $fetch_addon = mysqli_query($con, "SELECT * FROM addon WHERE is_deleted = 0 AND is_active = 1 AND `organizer_id` = $id");

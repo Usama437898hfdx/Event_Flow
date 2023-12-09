@@ -54,13 +54,13 @@ LEFT JOIN
     ticket_type tt ON t.ticket_type_id = tt.ticket_type_id 
 WHERE 
     e.organizer_id = $id
+    AND t.is_deleted = 0  -- Adding condition to filter out deleted tickets
 GROUP BY 
     tt.ticket_type_id, e.name, tt.name
 HAVING 
     Tickets_Count > 0;
 
-
-");
+                                     ");
 
                                     foreach ($tickets as $ticket) { ?>
                                     <tr>
@@ -74,14 +74,19 @@ HAVING
                                         <td>
                                             <?php echo $ticket['Tickets_Count']; ?>
                                         </td>
-
-                                        <td><button class="btn btn-primary text-white" onclick="openEditModal('<?php echo $ticket['ticket_id']; ?>',
+                                        <td>
+                                            <!-- <button class="btn btn-primary text-white" onclick="openEditModal('<?php echo $ticket['ticket_id']; ?>',
     '<?php echo $ticket['tt_id']; ?>',
     '<?php echo $ticket['ticket_type_name']; ?>',
-    '<?php echo $ticket['discount']; ?>');">Edit</button>
+    '<?php echo $ticket['discount']; ?>');">Edit</button> -->
+
 
                                             <a href="tickets.php?tt_id=<?php echo $ticket['tt_id'];?>"
                                                 class="btn btn-primary">View Tickets</a>
+
+                                            <button class="btn btn-danger"
+                                                onclick="openDeleteModal('<?php echo $ticket['tt_id']; ?>');">
+                                                Delete</button>
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -105,7 +110,7 @@ HAVING
                 </div>
                 <div class="modal-body">
                     <p class="text-center">Are you sure you want to delete this ticket?</p>
-                    <input type="hidden" id="ticket_id" name="ticket_id" value="">
+                    <input type="hidden" id="tt_id" name="tt_id" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -116,7 +121,7 @@ HAVING
     </div>
 </div>
 
-<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<!-- <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <form id="editForm" action="includes/db.php" method="POST">
             <div class="modal-content">
@@ -130,19 +135,18 @@ HAVING
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="ticketType">Ticket Type:</label>
-                                <!-- <input type="text" class="form-control" id="ticket_type_name" readonly name="ticket_type_name"
-                                                required> -->
+                              
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="ticketName">Discount:</label>
+                                            <label for="ticket discount">Discount:</label>
                                             <input type="number" class="form-control" id="discount" name="discount"
                                                 required>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="ticketDescription">Addon:</label>
+                                            <label for="Adoon">Addon:</label>
                                             <input type="number" class="form-control" id="addon_id" name="addon_id"
                                                 required>
                                         </div>
@@ -157,25 +161,25 @@ HAVING
                             </div>
         </form>
     </div>
-</div>
-</div>
+</div> -->
+
 
 <script>
-function openEditModal(ticket_id, ticket_type_id, ticket_type_name, discount, addon_id, ) {
+// function openEditModal(ticket_id, ticket_type_id, ticket_type_name, discount, addon_id, ) {
 
-    document.getElementById("edit_ticket_id").value = ticket_id;
-    // document.getElementById(" ticket_type_name").value =  ticket_type_name;
-    document.getElementById("discount").value = discount;
-    document.getElementById("addon_id").value = addon_id;
-
-
-    $("#EditModal").modal("show");
-}
+//     document.getElementById("edit_ticket_id").value = ticket_id;
+//     // document.getElementById(" ticket_type_name").value =  ticket_type_name;
+//     document.getElementById("discount").value = discount;
+//     document.getElementById("addon_id").value = addon_id;
 
 
+//     $("#EditModal").modal("show");
+// }
 
-function openDeleteModal(ticket_id) {
-    document.getElementById("ticket_id").value = ticket_id;
+
+
+function openDeleteModal(tt_id) {
+    document.getElementById("tt_id").value = tt_id;
     $("#deleteModal").modal("show");
 }
 </script>
