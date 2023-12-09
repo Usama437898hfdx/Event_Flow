@@ -122,64 +122,59 @@ if (isset($_GET['remove'])) {
 <section>
   <div class="container mt-5 p-3 rounded cart">
     <div class="row no-gutters">
-    <div class="col-md-8">
-  <div class="product-details mr-2">
-    <div class="d-flex flex-row align-items-center">
-      <i class="fa fa-long-arrow-left"></i>
-      <span class="ml-2">
-        <!-- <a href="index.php" class="text-dark text-decoration-none"> Continue Shopping</a> -->
-      </span>
-    </div>
-    <hr>
-    <h6 class="mb-0">Your Cart</h6>
-
-    <?php if (isset($_SESSION['cart'])) { ?>
-      <div class="d-flex justify-content-between">
-        <span class="text-center">
-          <?php echo 'You have ' . count($_SESSION['cart']) . ' items in your cart'; ?>
-        </span>
-      </div>
-
-    
-      <?php    foreach ($_SESSION['cart'] as $cart_data) { ?>
-        <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
-          <div class="d-flex flex-row">
-            <div class="ml-2">
-              <span class="font-weight-bold d-block">
-                <?php echo $cart_data['name'] ?>
-              </span>
-              <span class="spec">
-                <?php echo $cart_data['ticket_type'] ?>
-              </span>
-            </div>
-          </div>
-          <span class="d-block ml-5 font-weight-bold">$
-            <?php echo $cart_data['price'] ?>
-          </span>
+      <div class="col-md-8">
+        <div class="product-details mr-2">
           <div class="d-flex flex-row align-items-center">
-            <button class="border-0 btn" onclick="updateQuantity(<?php echo $cart_data['ticket_type_id']; ?>, 'decrease')">-</button>
-            <input type="number" readonly name="quantity" class="quantity-input form-control mx-2 text-center" value="<?php echo $cart_data['quantity']; ?>" min="1">
-            <button class="border-0 btn" onclick="updateQuantity(<?php echo $cart_data['ticket_type_id']; ?>, 'increase')">+</button>
-            <span class="d-block ml-5 font-weight-bold">$
-              <?php echo $cart_data['quantity'] * $cart_data['price'] ?>
-            </span>
-            <a class="text-danger ml-3" href="?remove=<?php echo $cart_data['ticket_type_id']; ?>">
-              <i class="fa-solid fa-trash"></i>
-            </a>
+            <i class="fa fa-long-arrow-left"></i><span class="ml-2"><a href="index.php"
+                class="text-dark text-decoration-none"> Continue Shopping</a></span>
           </div>
-        </div>
-      <?php } ?>
-    <?php } else { ?>
-      <div class="d-flex justify-content-between">
-        <span class="text-center">Your cart is empty</span>
+          <hr>
+          <h6 class="mb-0">Your Cart</h6>
+
+          <div class="d-flex justify-content-between">
+            <span class="text-center">
+              <?php echo isset($_SESSION['cart']) ? 'You have ' . count($_SESSION['cart']) . ' items in your cart' : 'Your cart is empty'; ?>
+            </span>
+
+          </div>
+
+          <?php if (isset($_SESSION['cart'])) {
+
+            foreach ($_SESSION['cart'] as $cart_data) { ?>
+              <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+                <div class="d-flex flex-row">
+                  <div class="ml-2">
+                    <span class="font-weight-bold d-block">
+                      <?php echo $cart_data['name'] ?>
+                    </span>
+                    <span class="spec">
+                      <?php echo $cart_data['ticket_type'] ?>
+                    </span>
+                  </div>
+                </div>
+                <span class="d-block ml-5 font-weight-bold">$
+                  <?php echo $cart_data['price'] ?>
+                </span>
+                <div class="d-flex flex-row align-items-center">
+                  <button class="border-0 btn"
+                    onclick="updateQuantity(<?php echo $cart_data['ticket_type_id']; ?>, 'decrease')">-</button>
+                  <input type="number" readonly name="quantity" class="quantity-input form-control mx-2 text-center"
+                    value="<?php echo $cart_data['quantity']; ?>" min="1">
+                  <button class="border-0 btn"
+                    onclick="updateQuantity(<?php echo $cart_data['ticket_type_id']; ?>, 'increase')">+</button>
+                  <span class="d-block ml-5 font-weight-bold">$
+                    <?php echo $cart_data['quantity'] * $cart_data['price'] ?>
+                  </span>
+                  <a class="text-danger ml-3" href="?remove=<?php echo $cart_data['ticket_type_id']; ?>">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                </div>
+              </div>
+            <?php }
+          }
+          ?>
+          </div>
       </div>
-    <?php } 
-  
-    ?>
-  </div>
-</div>
-
-
       <div class="col-md-4">
         <div class="payment-info">
           <div class="d-flex justify-content-between align-items-center"><span>Card details</span><img class="rounded"

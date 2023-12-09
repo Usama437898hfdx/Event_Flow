@@ -36,7 +36,7 @@
                         <div class="col-sm-4 mb-5">
                             <article class="text-center">
                                 <img class="img-fluid mb-4" src="assets/images/events/<?php echo $event['image'] ?>"
-                                     alt="post-thumb" style="width: 100%; height: 200px; object-fit: cover;">
+                                     alt="post-thumb" style=" object-fit: cover;">
                                 <p class="text-uppercase mb-2">NAME</p>
                                 <h4 class="title-border"><a class="text-dark"
                                                             href="event_detail.php"><?php echo $event['name']; ?></a></h4>

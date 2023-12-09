@@ -4,40 +4,16 @@ include("header.php"); ?>
 
 
 <style>
-        /* Add your fancy styling here */
         .buttn-parent {
             display: flex;align-items: center;justify-content: center;
             padding: 10px 20px;
-           
         }
-       
-
 </style>
 
 <!-- hero area -->
 <section class="hero-section">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 align-self-end">
-                <h1 class="mb-0">Welcome</h1>
-                <h2 class="mb-100 title-border-lg">to <i>Jhon Abraham Blog</i></h2>
-                <p class="mb-80 mr-5">I’m a Freelance Interactive Art Director based in France. Focusing across branding
-                    and
-                    identity, digital and
-                    print.</p>
-                <span class="font-secondary text-dark mr-3 mr-sm-5">Follow</span>
-                <ul class="list-inline d-inline-block mb-5">
-                    <li class="list-inline-item mx-3"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
-                    <li class="list-inline-item mx-3"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a>
-                    </li>
-                    <li class="list-inline-item mx-3"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
-                    <li class="list-inline-item mx-3"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
-                </ul>
-            </div>
-            <div class="col-lg-6 text-right">
-                <img class="img-fluid" src="assets/images/banner-img.png" alt="banner-image">
-            </div>
-        </div>
+                <img class="img-fluid" src="assets/images/banners1.jpeg" >
     </div>
 </section>
 <!-- /hero area -->
