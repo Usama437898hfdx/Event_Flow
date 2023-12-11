@@ -36,10 +36,18 @@ include("includes/header.php"); ?>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="image">image:</label>
-                                        <input class="form-control" type="file" id="image" name="image" required>
-                                    </div>
+                                        <label for="image">Category:</label>
+                                        <select name="category_id" class="form-control">
+                                            <option value="">Select Event Category</option>
+                                            <?php $fetch_category = mysqli_query($con, "SELECT * FROM `event_categories` WHERE is_deleted = 0");
+                                            foreach ($fetch_category as $category) { ?>
+                                            <option value="<?php echo $category['category_id']; ?>">
+                                                <?php echo $category['name']; ?>
+                                            </option>
+                                            <?php } ?>
+                                        </select>                                    </div>
                                 </div>
+                               
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="start_date">Start Date:</label>
@@ -52,7 +60,12 @@ include("includes/header.php"); ?>
                                         <input type="date" class="form-control" id="end_date" name="end_date" required>
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="image">image:</label>
+                                        <input class="form-control" type="file" id="image" name="image" required>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
                                     <label for="eventDescription">Description:</label>

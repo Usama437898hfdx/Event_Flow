@@ -170,9 +170,10 @@ if (isset($_POST["editProfile"])) {
 
 
 
-//Create new Sub Event
+//Create new Event
 if (isset($_POST['create_new'])) {
     $parent_id= $_POST['parent_id'];
+    $category_id= $_POST['category_id'];
     $org_id = $_SESSION['uid'];
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -205,7 +206,7 @@ if (isset($_POST['create_new'])) {
 
     if ($_POST['event_type'] == "main") {
 
-        $insert = mysqli_query($con, "INSERT INTO `events`(`event_id`, `name`,`image`,`organizer_id`,`status` ) VALUES ('$id','$name','$image','$org_id',NULL)");
+        $insert = mysqli_query($con, "INSERT INTO `events`(`event_id`, `category_id`,`name`,`image`,`organizer_id`, `description`, `start_date`, `end_date` ) VALUES ('$id','$category_id','$name','$image','$org_id','$description','$start_date','$end_date')");
         if ($insert) {
             header("location:../main_events.php");
             exit();
