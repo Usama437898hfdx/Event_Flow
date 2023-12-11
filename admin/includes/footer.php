@@ -10,7 +10,7 @@
     <!--**********************************
         Main wrapper end
     ***********************************-->
-
+    
     <!--**********************************
         Scripts
     ***********************************-->
@@ -19,6 +19,11 @@
     <script src="assets/js/settings.js"></script>
     <script src="assets/js/gleek.js"></script>
     <script src="assets/js/styleSwitcher.js"></script>
+
+    <!-- calendar-->
+    <script src="assets/plugins/jqueryui/js/jquery-ui.min.js"></script>
+    <script src="assets/plugins/fullcalendar/js/fullcalendar.min.js"></script>
+    <script src="assets/js/plugins-init/fullcalendar-init.js"></script>
 
     <!-- Chartjs -->
     <script src="assets/plugins/chart.js/Chart.bundle.min.js"></script>

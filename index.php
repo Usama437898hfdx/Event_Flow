@@ -1,10 +1,4 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['Admin']) && !isset($_SESSION['Organizer']) && !isset($_SESSION['Attendee'])) {
-    header('location:login.php');
-    exit;
-}
 
 include("header.php"); 
  ?>

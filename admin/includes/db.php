@@ -554,6 +554,32 @@ if (isset($_POST["add_questions"])) {
 
 
 
+//Add event categories
+if (isset($_POST['create_category'])) {
+
+    $category_id = $_POST["category_id"];
+    $name = $_POST['category_name'];
+    
+
+    $insert = mysqli_query($con, "INSERT INTO `event_categories`(`category_id`,`name`) VALUES ('$category_id','$name')");
+    if ($insert) {
+        header("location:../categories.php");
+        exit();
+    } else {
+        echo "category not inserted";
+    }
+}
+// delete event categories
+if (isset($_POST["delete_Category"])) {
+
+    $category_id = $_POST["category_id"];
+    $DeleteAddon = mysqli_query($con, "UPDATE `event_categories` SET `is_deleted`= 1 WHERE `category_id` = '$category_id'");
+    if ($DeleteAddon) {
+        header("location: ../categories.php");
+        exit();
+    }
+}
+
 
 
 ?>
