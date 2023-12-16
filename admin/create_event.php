@@ -149,6 +149,8 @@ document.getElementById('mainEventSelect').addEventListener('change', function()
     document.getElementById('start_date').setAttribute('max', endDate);
     document.getElementById('end_date').setAttribute('max', endDate);
 });
+
+
 </script>
 
 <?php include("includes/footer.php"); ?>

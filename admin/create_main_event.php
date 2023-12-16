@@ -48,14 +48,14 @@ include("includes/header.php"); ?>
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="start_date">Start Date:</label>
                                         <input type="date" class="form-control" id="start_date" name="start_date"
                                             min="<?php echo date('Y-m-d'); ?>" required>
 
-                                            required>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
