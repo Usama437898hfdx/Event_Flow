@@ -36,11 +36,7 @@ include("includes/header.php"); ?>
                                             <option value="">Select Main Event Name</option>
                                             <?php $fetch_parent = mysqli_query($con, "SELECT * FROM `events` WHERE `parent_id` IS  NULL AND `organizer_id` = $id ");
                                             foreach ($fetch_parent as $parent) { ?>
-                                            <option value="<?php echo $parent['event_id']; ?>"
-                                                data-start-date="<?php echo $parent['start_date']; ?>"
-                                                data-end-date="<?php echo $parent['end_date']; ?>">
-                                                <?php echo $parent['name']; ?>
-                                            </option>
+                                           
                                             
                                             <?php } ?>
                                         </select>
