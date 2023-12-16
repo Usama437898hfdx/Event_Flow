@@ -47,21 +47,15 @@ include("includes/header.php"); ?>
                                         </select>
                                     </div>
                                 </div>
-<<<<<<< Updated upstream
 
-=======
                                 
->>>>>>> Stashed changes
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="start_date">Start Date:</label>
                                         <input type="date" class="form-control" id="start_date" name="start_date"
-<<<<<<< Updated upstream
                                             min="<?php echo date('Y-m-d'); ?>" required>
 
-=======
                                             required>
->>>>>>> Stashed changes
                                     </div>
                                 </div>
                                 <div class="col-md-6">
