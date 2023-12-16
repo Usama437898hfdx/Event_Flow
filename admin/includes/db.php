@@ -177,12 +177,14 @@ if (isset($_POST['create_new'])) {
     $org_id = $_SESSION['uid'];
     $name = $_POST['name'];
     $description = $_POST['description'];
+    $status = $_POST['status'];
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
     $location = $_POST['location'];
     $capacity = $_POST['capacity'];
+    
 
     $targetDirectory = "../../assets/images/events/";
     $image = $_FILES["image"]["name"];
@@ -214,7 +216,7 @@ if (isset($_POST['create_new'])) {
             echo "User not inserted";
         }
     } else {
-        $insert = mysqli_query($con, "INSERT INTO `events`(`parent_id`,`event_id`, `name`, `description`, `start_date`, `end_date`, `start_time`, `end_time`, `location`, `capacity`, `image`,`organizer_id`) VALUES ('$parent_id','$id','$name','$description','$start_date','$end_date','$start_time','$end_time','$location','$capacity','$image','$org_id')");
+        $insert = mysqli_query($con, "INSERT INTO `events`(`parent_id`,`event_id`, `name`, `description`, `Status`, `start_date`, `end_date`, `start_time`, `end_time`, `location`, `capacity`, `image`,`organizer_id`) VALUES ('$parent_id','$id','$name','$description','$status','$start_date','$end_date','$start_time','$end_time','$location','$capacity','$image','$org_id')");
         if ($insert) {
             header("location:../events.php");
             exit();
