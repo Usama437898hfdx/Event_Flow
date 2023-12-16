@@ -34,7 +34,7 @@ include("includes/header.php"); ?>
                                         <label for="ticketName">Main Event:</label>
                                         <select name="parent_id" class="form-control">
                                             <option value="">Select Main Event Name</option>
-                                            <?php $fetch_parent = mysqli_query($con, "SELECT * FROM `events` WHERE `parent_id` IS  NULL AND `organizer_id` = $id ");
+                                            <?php $fetch_parent = mysqli_query($con, "SELECT * FROM `events` WHERE `parent_id` IS  NULL AND `organizer_id` = $id AND is_deleted=0 ");
                                             foreach ($fetch_parent as $parent) { ?>
                                             <option value="<?php echo $parent['event_id']; ?>">
                                                 <?php echo $parent['name']; ?>
@@ -56,8 +56,8 @@ include("includes/header.php"); ?>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="start_date">start_date:</label>
-                                        <input class="form-control" type="date" id="start_date" name="start_date"
-                                            required>
+                                        <input class="form-control" type="text" id="start_date" name="start_date "
+                                          placeholder ="Enter Start Date"  required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -73,7 +73,7 @@ include("includes/header.php"); ?>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="end_date">end_date:</label>
-                                        <input class="form-control" type="date" id="end_date" name="end_date" required>
+                                        <input class="form-control" type="text" id="end_date" name="end_date" placeholder ="Enter End Date" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">

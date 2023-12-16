@@ -59,7 +59,7 @@ if (isset($_POST['login'])) {
             $_SESSION[$role] = $user;
 
     
-            header("location: ../index.php");
+            header("location: ../../index.php");
             exit();
         } else {
             echo "Invalid credentials. Please check your email and password.";
@@ -104,7 +104,7 @@ if (isset($_POST['create_organizer'])) {
 //delete organizer
 if (isset($_POST["deleteOrganizer"])) {
     $id = $_POST["id"];
-    $delete_user = mysqli_query($con, "UPDATE `users` SET `is_deleted`= 1 WHERE `user_id` = '$id'");
+    $delete_user = mysqli_query($con, "UPDATE `users` SET `is_deleted`= 1 WHERE `id` = '$id'");
     if ($delete_user) {
         header("location: ../users.php");
         exit;
@@ -173,7 +173,6 @@ if (isset($_POST["editProfile"])) {
 //Create new Event
 if (isset($_POST['create_new'])) {
     $parent_id= $_POST['parent_id'];
-    $category_id= $_POST['category_id'];
     $org_id = $_SESSION['uid'];
     $name = $_POST['name'];
     $description = $_POST['description'];
@@ -183,6 +182,7 @@ if (isset($_POST['create_new'])) {
     $end_time = $_POST['end_time'];
     $location = $_POST['location'];
     $capacity = $_POST['capacity'];
+    $category_id= $_POST['category_id'];
 
     $targetDirectory = "../../assets/images/events/";
     $image = $_FILES["image"]["name"];
@@ -206,7 +206,7 @@ if (isset($_POST['create_new'])) {
 
     if ($_POST['event_type'] == "main") {
 
-        $insert = mysqli_query($con, "INSERT INTO `events`(`event_id`, `category_id`,`name`,`image`,`organizer_id`, `description`, `start_date`, `end_date` ) VALUES ('$id','$category_id','$name','$image','$org_id','$description','$start_date','$end_date')");
+        $insert = mysqli_query($con, "INSERT INTO `events`(`event_id`, `category_id`,`name`,`start_date`,`end_date`,`image`,`description`,`organizer_id`) VALUES ('$id','$category_id','$name','$start_date','$end_date','$image','$description','$org_id')"); 
         if ($insert) {
             header("location:../main_events.php");
             exit();
@@ -224,6 +224,7 @@ if (isset($_POST['create_new'])) {
 
     }
 }
+
 //Delete Sub event
 if (isset($_POST["deleteEvent"])) {
     $id = $_POST["id"];
@@ -376,8 +377,8 @@ if (isset($_POST['create_ticket'])) {
     if ($quantity > 0 && $quantity <= $remaining_capacity) {
         for ($i = 0; $i < $quantity; $i++) {
             // Insert ticket
-            $insert_ticket_query = "INSERT INTO ticket (event_id, ticket_type_id, discount) 
-                                    VALUES ('$event_id', '$ticket_type_id', '$discount')";
+            $insert_ticket_query = "INSERT INTO ticket (event_id, ticket_type_id, discount,Qrcode) 
+                                    VALUES ('$event_id', '$ticket_type_id', '$discount',UUID())";
             $result_ticket = mysqli_query($con, $insert_ticket_query);
 
             if ($result_ticket) {

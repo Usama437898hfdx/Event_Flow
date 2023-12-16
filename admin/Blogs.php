@@ -77,7 +77,7 @@ include("includes/header.php");
                                         <td>
 
 
-                                        <a href="event_detail.php?blog_id="
+                                        <a href="../view_blog.php"
                                                 class="btn btn-primary">View</a>
                                                
 

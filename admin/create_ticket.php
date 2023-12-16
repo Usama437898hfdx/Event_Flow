@@ -33,7 +33,7 @@ include("includes/header.php"); ?>
                                     <div class="form-group">
                                         <label for="ticketType">Ticket Type:</label>
                                         <select class="form-control" id="ticketType" name="ticket_type_id" required>
-                                            <?php $fetch_ticket_types = mysqli_query($con, "SELECT * FROM ticket_type WHERE `event_id` = '" . $_GET['eid'] . "'");
+                                            <?php $fetch_ticket_types = mysqli_query($con, "SELECT * FROM ticket_type WHERE `is_deleted`=0 AND `event_id` = '" . $_GET['eid'] . "'");
                                             foreach ($fetch_ticket_types as $ticket_type) { ?>
                                             <option value="<?php echo $ticket_type['ticket_type_id']; ?>">
                                                 <?php echo $ticket_type['name']; ?>
