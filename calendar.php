@@ -17,6 +17,16 @@ include("header.php");
                 <div class="card-body">
                     <div class="card-title">
                         <h4>Calendar</h4>
+                        <?php
+    $text = "Completed Events";
+    $text1 = "Ongoing Events";
+    $text2 = "Upcoming Events";
+
+    echo "<p><span style='color: red;'>$text</span> <span style='color: green;'>$text1</span>    <span style='color: blue;'>$text2</span></p>";
+?>
+
+
+
                     </div>
                     <div class="row">
                         <div class="col-md-12">
@@ -40,6 +50,7 @@ include("header.php");
                 left: 'prev,next today',
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
+                
             },
             events: [
                 <?php
@@ -86,6 +97,7 @@ include("header.php");
         });
     });
 </script>
+
 
 </body>
 </html>
