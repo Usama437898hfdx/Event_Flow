@@ -7,7 +7,7 @@ include("header.php"); ?>
     <div class="row">
       <div class="col-lg-12">
         <h2 class="mb-4">About EVENT FLOW</h2>
-        <img src="images/eventflow_logo.jpg" alt="Event Flow Logo" class="img-fluid w-100 mb-4">
+        <img src="assets/images/banners1.jpeg" alt="Event Flow Logo" class="img-fluid w-100 mb-4">
         <h3 class="font-weight-light">Welcome to <span class="font-weight-bold">EVENT FLOW</span></h3>
         <p>Welcome to EVENT FLOW, your premier destination for seamless online ticketing and event management. I'm John Doe, and I'm passionate about creating an exceptional user experience that caters to the needs of event organizers and attendees alike. Our platform combines smart technology with elegant design to bring your events to life.</p>
 

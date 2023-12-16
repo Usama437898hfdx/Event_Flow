@@ -60,7 +60,7 @@ include("includes/header.php");
                                 FROM events e
                                 LEFT JOIN events mainEvent ON e.parent_id = mainEvent.event_id
                                 WHERE e.parent_id IS NOT NULL 
-                                AND mainEvent.is_deleted = 0 $condition $condition_user");
+                                AND mainEvent.is_deleted = 0 AND e.is_deleted =0 $condition $condition_user");
                                     foreach ($fetch_event as $event) {
                                         ?>
 
@@ -156,8 +156,8 @@ include("includes/header.php");
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="description">Description:</label>
-                                <textarea class="form-control" name="description" id="edit_description"
-                                    required></textarea>
+                                <textarea class="form-control" name="description" id="edit_description" required></textarea>
+
                             </div>
                         </div>
                     </div>

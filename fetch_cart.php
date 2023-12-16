@@ -1,7 +1,6 @@
 <?php
 session_start();
-foreach ($_SESSION['cart'] as $cart_data) {
-    echo '<div class="d-flex flex-row align-items-center"><i class="fa fa-long-arrow-left"></i><span class="ml-2"><a href="index.php"
+echo '<div class="d-flex flex-row align-items-center"><i class="fa fa-long-arrow-left"></i><span class="ml-2"><a href="index.php"
         class="text-dark text-decoration-none"> Continue Shopping</a></span>';
     echo '</div>';
     echo '<hr>';
@@ -9,6 +8,7 @@ foreach ($_SESSION['cart'] as $cart_data) {
     echo '<div class="d-flex justify-content-between">';
     echo '<span>You have ' . count($_SESSION['cart']) . ' items in your cart</span>';
     echo ' </div>';
+foreach ($_SESSION['cart'] as $cart_data) {
     echo '<div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">';
     echo '<div class="d-flex flex-row">';
     echo ' <div class="ml-2">';

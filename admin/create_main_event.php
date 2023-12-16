@@ -13,7 +13,7 @@ include("includes/header.php"); ?>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Events</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Mian Event</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Main Event</a></li>
             </ol>
         </div>
     </div>
@@ -30,7 +30,7 @@ include("includes/header.php"); ?>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="event_name">Event Name:</label>
-                                        <input type="text" class="form-control" id="eventname" name="name" required>
+                                        <input type="text" class="form-control" id="eventname" name="name" placeholder="Enter Event Name "required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -44,10 +44,18 @@ include("includes/header.php"); ?>
                                                 <?php echo $category['name']; ?>
                                             </option>
                                             <?php } ?>
+
+                                        </select>                                   
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="start_date">Start Date:</label>
+                                        <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Enter Start Date" required>
                                         </select>
                                     </div>
                                 </div>
-
 
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -84,8 +92,6 @@ include("includes/header.php"); ?>
                                 </div>
                                 <input type="hidden" name="event_type" value="main">
                             </div>
-
-
                             <button type="submit" name="create_new" class="btn btn-primary">Create new</button>
                         </form>
                     </div>

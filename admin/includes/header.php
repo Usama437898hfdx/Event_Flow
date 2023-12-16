@@ -26,6 +26,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 </head>
@@ -80,7 +83,7 @@ if (!$loggedIn) {
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.php">
+                <a href="../index.php">
                     <b class="logo-abbr"><img src="assets/images/v.png" alt=""> </b>
                     <span class="brand-title">
                         <!-- <img src="assets/images/logo-text.png" alt=""> -->
@@ -245,6 +248,7 @@ if (!$loggedIn) {
                                 </div>
                             </div>
                         </li> -->
+
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
@@ -255,15 +259,15 @@ if (!$loggedIn) {
                                 <div class="dropdown-content-body">
                                     <ul>
 
-
-
                                         <li>
                                             <a href="profile.php"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <hr class="my-2">
-
+                                        
                                         <li><a href="includes/logout.php"><i class="icon-key"></i>
                                                 <span>Logout</span></a></li>
+                                        <li><a href="../index.php"><i class="icon-hom"></i>
+                                                <span>Home</span></a></li>
                                     </ul>
                                 </div>
                             </div>

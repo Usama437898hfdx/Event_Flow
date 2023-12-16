@@ -140,7 +140,6 @@ if (isset($_GET['remove'])) {
         </span>
       </div>
 
-    
       <?php    foreach ($_SESSION['cart'] as $cart_data) { ?>
         <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
           <div class="d-flex flex-row">
