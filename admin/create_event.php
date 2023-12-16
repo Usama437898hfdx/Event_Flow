@@ -32,13 +32,16 @@ include("includes/header.php"); ?>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="ticketName">Main Event:</label>
-                                        <select name="parent_id" class="form-control">
+                                        <select name="parent_id" class="form-control" id="mainEventSelect">
                                             <option value="">Select Main Event Name</option>
                                             <?php $fetch_parent = mysqli_query($con, "SELECT * FROM `events` WHERE `parent_id` IS  NULL AND `organizer_id` = $id AND is_deleted=0 ");
                                             foreach ($fetch_parent as $parent) { ?>
-                                            <option value="<?php echo $parent['event_id']; ?>">
+                                            <option value="<?php echo $parent['event_id']; ?>"
+                                                data-start-date="<?php echo $parent['start_date']; ?>"
+                                                data-end-date="<?php echo $parent['end_date']; ?>">
                                                 <?php echo $parent['name']; ?>
                                             </option>
+                                            
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -135,6 +138,17 @@ include("includes/header.php"); ?>
         </div>
     </div>
 </div>
+<script>
+document.getElementById('mainEventSelect').addEventListener('change', function() {
+    var selectedOption = this.options[this.selectedIndex];
+    var startDate = selectedOption.getAttribute('data-start-date');
+    var endDate = selectedOption.getAttribute('data-end-date');
 
+    document.getElementById('start_date').setAttribute('min', startDate);
+    document.getElementById('end_date').setAttribute('min', startDate);
+    document.getElementById('start_date').setAttribute('max', endDate);
+    document.getElementById('end_date').setAttribute('max', endDate);
+});
+</script>
 
 <?php include("includes/footer.php"); ?>

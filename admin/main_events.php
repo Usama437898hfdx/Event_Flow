@@ -75,16 +75,13 @@ include("includes/header.php");
 
 
                                             <button class="btn btn-primary text-white" onclick="openEditModal(
-                                                    '<?php echo $event['event_id']; ?>',
-                                                    '<?php echo $event['name']; ?>',
-                                                    '<?php echo $event['start_date']; ?>',
-                                                    '<?php echo $event['image']; ?>',
-                                                    '<?php echo $event['description']; ?>',
-                                                    '<?php echo $event['end_date']; ?>'
-                                                    
-                                                
-                                                    );">Edit</button>
-
+    '<?php echo $event['event_id']; ?>',
+    '<?php echo $event['name']; ?>',
+    '<?php echo $event['description']; ?>',
+    '<?php echo $event['start_date']; ?>',
+    '<?php echo $event['end_date']; ?>',
+    '<?php echo $event['image']; ?>'
+);">Edit</button>
 
 
                                             <button class="btn btn-danger"
@@ -137,13 +134,13 @@ include("includes/header.php");
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="eventname">Start Date:</label>
-                                <input type="date" class="form-control" id="edit_start_date" name="start_date" required>
+                                <input type="date" class="form-control" id="edit_start_date" name="start_date"  min="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="eventname">End Date:</label>
-                                <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
+                                <input type="date" class="form-control" id="edit_end_date" name="end_date"  min="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -200,21 +197,17 @@ include("includes/header.php");
 
 
 
-
-
 <script>
-function openEditModal(id, name, start_date, image, description, end_date) {
+function openEditModal(id, name, description, start_date, end_date, image) {
 
     document.getElementById("edit_event_id").value = id;
     document.getElementById("edit_eventname").value = name;
+    document.getElementById("edit_description").value = description;
     document.getElementById("edit_start_date").value = start_date;
-
-
+    document.getElementById("edit_end_date").value = end_date;
     document.getElementById("edit_old_image").src = '../assets/images/events/' + image;
     $("#EditEventModal").modal("show");
 
-    document.getElementById("edit_description").value = description;
-    document.getElementById("edit_end_date").value = end_date;
 
 }
 
