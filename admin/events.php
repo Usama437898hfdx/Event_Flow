@@ -370,18 +370,18 @@ include("includes/header.php");
 
 
 <script>
-function openEditModal(id, name, description, start_date, end_date, start_time, end_time, location, capacity, image) {
-    document.getElementById("edit_event_id").value = id;
+function openEditModal(id, name, description, start_date, end_date, start_time, end_time, location, capacity,
+    image) {    document.getElementById("edit_event_id").value = id;
     document.getElementById("edit_eventname").value = name;
     document.getElementById("edit_description").value = description;
+    document.getElementById("edit_start_date").value = start_date;
+    document.getElementById("edit_end_date").value = end_date;
     document.getElementById("edit_start_time").value = start_time;
     document.getElementById("edit_end_time").value = end_time;
     document.getElementById("edit_location").value = location;
     document.getElementById("edit_capacity").value = capacity;
     document.getElementById("edit_old_image").src = '../assets/images/events/' + image;
-    document.getElementById("edit_start_date").value = start_date;
-    document.getElementById("edit_end_date").value = end_date;
-
+   
     $("#EditEventModal").modal("show");
 }
 
