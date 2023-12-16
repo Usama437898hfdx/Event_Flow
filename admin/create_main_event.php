@@ -48,14 +48,6 @@ include("includes/header.php"); ?>
                                         </select>                                   
                                     </div>
                                 </div>
-                            
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="start_date">Start Date:</label>
-                                        <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Enter Start Date" required>
-                                        </select>
-                                    </div>
-                                </div>
 
                                 <div class="col-md-6">
                                     <div class="form-group">
