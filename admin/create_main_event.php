@@ -5,7 +5,6 @@ if ( !isset($_SESSION['Organizer']) ) {
 }
 include("includes/config.php");
 include("includes/header.php"); ?>
-
 <!-- Content body start -->
 <div class="content-body">
     <!-- Breadcrumbs -->
@@ -27,7 +26,7 @@ include("includes/header.php"); ?>
                         <h1 class="card-title">Create Main Event</h1>
                         <form action="includes/db.php" method="POST" enctype="multipart/form-data">
                             <div class="row">
-                                
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="event_name">Event Name:</label>
@@ -45,19 +44,23 @@ include("includes/header.php"); ?>
                                                 <?php echo $category['name']; ?>
                                             </option>
                                             <?php } ?>
-                                        </select>                                    </div>
+                                        </select>
+                                    </div>
                                 </div>
-                               
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="start_date">Start Date:</label>
-                                        <input type="date" class="form-control" id="start_date" name="start_date" required>
+                                        <input type="date" class="form-control" id="start_date" name="start_date"
+                                            min="<?php echo date('Y-m-d'); ?>" required>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="end_date">End Date:</label>
-                                        <input type="date" class="form-control" id="end_date" name="end_date" required>
+                                        <input type="date" class="form-control" id="end_date" name="end_date"
+                                            min="<?php echo date('Y-m-d'); ?>" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -68,15 +71,15 @@ include("includes/header.php"); ?>
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                    <label for="eventDescription">Description:</label>
+                                        <label for="eventDescription">Description:</label>
                                         <textarea class="form-control" cols="" rows="6" id="description"
                                             name="description" required></textarea>
                                     </div>
                                 </div>
                                 <input type="hidden" name="event_type" value="main">
                             </div>
-                           
-                           
+
+
                             <button type="submit" name="create_new" class="btn btn-primary">Create new</button>
                         </form>
                     </div>

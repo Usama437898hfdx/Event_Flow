@@ -62,8 +62,8 @@ include("includes/header.php");
                                 WHERE e.parent_id IS NOT NULL 
                                 AND mainEvent.is_deleted = 0 $condition $condition_user");
                                     foreach ($fetch_event as $event) {
-
                                         ?>
+
                                     <tr>
                                         <td>
                                             <?php echo $event['parent_name']; ?>
@@ -113,7 +113,6 @@ include("includes/header.php");
                                                     '<?php echo $event['location']; ?>',
                                                     '<?php echo $event['capacity']; ?>',
                                                     '<?php echo $event['image']; ?>'
-                                                    
 
                                                     );">Edit</button>
 
@@ -371,22 +370,21 @@ include("includes/header.php");
 
 
 <script>
-function openEditModal(id, name, description, start_date, end_date, start_time, end_time, location, capacity,
-    image) {
-
+function openEditModal(id, name, description, start_date, end_date, start_time, end_time, location, capacity, image) {
     document.getElementById("edit_event_id").value = id;
     document.getElementById("edit_eventname").value = name;
     document.getElementById("edit_description").value = description;
-    document.getElementById("edit_start_date").value = start_date;
-    document.getElementById("edit_end_date").value = end_date;
     document.getElementById("edit_start_time").value = start_time;
     document.getElementById("edit_end_time").value = end_time;
     document.getElementById("edit_location").value = location;
     document.getElementById("edit_capacity").value = capacity;
     document.getElementById("edit_old_image").src = '../assets/images/events/' + image;
-    $("#EditEventModal").modal("show");
+    document.getElementById("edit_start_date").value = start_date;
+    document.getElementById("edit_end_date").value = end_date;
 
+    $("#EditEventModal").modal("show");
 }
+
 
 function openDeleteModal(id) {
     document.getElementById("delete_event_id").value = id;

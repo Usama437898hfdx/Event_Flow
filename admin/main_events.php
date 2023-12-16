@@ -137,13 +137,13 @@ include("includes/header.php");
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="eventname">Start Date:</label>
-                                <input type="date" class="form-control" id="edit_start_date" name="start_date" required>
+                                <input type="date" class="form-control" id="edit_start_date" name="start_date"  min="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="eventname">End Date:</label>
-                                <input type="date" class="form-control" id="edit_end_date" name="end_date" required>
+                                <input type="date" class="form-control" id="edit_end_date" name="end_date"  min="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                         </div>
                         <div class="col-md-6">
