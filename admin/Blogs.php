@@ -52,6 +52,7 @@ include("includes/header.php");
 
                                   $blogs = mysqli_query($con, "SELECT 
                                   e.name AS event_name, 
+                                  e.event_id as id,
                                   b.blog_id as blog_id, 
                                   b.text
                               FROM 
@@ -77,7 +78,7 @@ include("includes/header.php");
                                         <td>
 
 
-                                        <a href="../view_blog.php"
+                                        <a href="../view_blog.php?id=<?php echo $blog['id']; ?>"
                                                 class="btn btn-primary">View</a>
                                                
 

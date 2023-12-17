@@ -25,8 +25,6 @@ include("header.php");
     echo "<p><span style='color: red;'>$text</span> <span style='color: green;'>$text1</span>    <span style='color: blue;'>$text2</span></p>";
 ?>
 
-
-
                     </div>
                     <div class="row">
                         <div class="col-md-12">
