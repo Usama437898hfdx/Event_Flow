@@ -272,7 +272,8 @@ $detail = mysqli_fetch_assoc($fetch_details);
             <div class="col-lg-4">
                 <div class="widget">
                     <h6 class="mb-4">UPCOMING EVENTS</h6>
-                    <?php $fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL LIMIT 4");
+                    <?php     $currentDate = date("Y-m-d");
+                     $fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL AND start_date > '$currentDate' LIMIT 4");
 foreach ($fetch_event as $event) {?>
                     <div class="media mb-4">
                         <div class="post-thumb-sm mr-3">

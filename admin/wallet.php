@@ -28,7 +28,7 @@ include("includes/header.php");
                         <div class="d-flex justify-content-between">
 
                             <h1>Your Wallet</h1>
-                            <div id="balance">Balance: $<?php echo isset($_SESSION['user_wallet']) ? number_format($_SESSION['user_wallet'], 2) : '0.00'; ?></div>
+                            <div id="balance">Balance: PKR <?php echo isset($_SESSION['amount']) ? number_format($_SESSION['amount'], 2) : '0.00'; ?></div>
 
                             <a href="topup.php" class="btn btn-primary">Top Up</a>
                         </div>

@@ -289,6 +289,9 @@ if (!$loggedIn) {
                     <li><a href="index.php" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a></li>
+                        <li><a href="wallet.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Wallet</span>
+                            </a></li>
 
                     <?php if (isset($_SESSION['Admin'])) { ?>
                         <li><a href="users.php" aria-expanded="false">

@@ -23,6 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Execute the query
     $result = mysqli_query($con, $sql);
 
+
+    $sql = "update users set amount = amount+$topUpAmount where id = $id;";
+
+    $result = mysqli_query($con, $sql);
+
     // Check for query success
     if ($result) {
         echo "Top-up successful!";
