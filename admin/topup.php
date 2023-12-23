@@ -170,14 +170,6 @@ label.radio input:checked+span {
                 onclick="submitTopUp()">
                 <span>Top Up<i class="fa fa-long-arrow-right ml-1"></i></span>
             </button>
-            <hr class="line">
-            <label>Top-Up Amount</label>
-            <input type="number" id="topupAmount" class="form-control" placeholder="Enter the top-up amount">
-
-            <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
-                onclick="submitTopUp()">
-                <span>Top Up<i class="fa fa-long-arrow-right ml-1"></i></span>
-            </button>
         </div>
     </div>
 

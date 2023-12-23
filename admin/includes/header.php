@@ -266,7 +266,7 @@ if (!$loggedIn) {
                                         
                                         <li><a href="includes/logout.php"><i class="icon-key"></i>
                                                 <span>Logout</span></a></li>
-                                        <li><a href="../index.php"><i class="icon-hom"></i>
+                                        <li><a href="../index.php"><i class="icon-home"></i>
                                                 <span>Home</span></a></li>
                                     </ul>
                                 </div>

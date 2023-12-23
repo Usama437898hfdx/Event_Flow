@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die('Error: ' . mysqli_error($con));
         }
 
-        $sql = "UPDATE ticket SET is_booked = $fromUserId WHERE event_id = $event_id and ticket_type_id = $tt and is_booked = 0 order by ticket_id limit $tqty";
+        $sql = "UPDATE ticket SET is_booked = $fromUserId WHERE event_id = $event_id and ticket_type_id = $tt and is_booked = 0 and is_deleted = 0 and is_active =1 order by ticket_id limit $tqty";
         $result = mysqli_query($con, $sql);
     
         // Check for errors

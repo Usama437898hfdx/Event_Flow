@@ -50,7 +50,7 @@ if (isset($_GET["id"])) {
                                     </h4>
                                     <p><?php echo $event['description']; ?></p>
                                     <a href="event_detail.php?id=<?php echo $event['event_id']; ?>"
-                                     class="btn btn-transparent">View Detail</a>
+                                     class="btn btn-transparent"> BUY NOW </a>
                                 </article>
                             </div>
                             <?php

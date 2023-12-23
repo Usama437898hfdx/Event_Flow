@@ -133,15 +133,6 @@ label.radio input:checked+span {
                 <img class="rounded" src="https://i.imgur.com/WU501C8.jpg" width="30">
             </div>
             <span class="type d-block mt-3 mb-1">Card type</span>
-            <label class="radio">
-                <input type="radio" name="card" value="payment" checked>
-                <span><img width="30" src="https://img.icons8.com/color/48/000000/mastercard.png" /></span>
-            </label>
-
-            <label class="radio">
-                <input type="radio" name="card" value="payment">
-                <span><img width="30" src="https://img.icons8.com/officel/48/000000/visa.png" /></span>
-            </label>
 
             <label class="radio">
                 <input type="radio" name="card" value="paypal" onclick="openPayPalModal()">
@@ -149,7 +140,7 @@ label.radio input:checked+span {
             </label>
             <div>
             <label>Withdraw Amount</label></div>
-            <input type="number" id="WithdrawAmount" class="form-control" placeholder="Enter the top-up amount">
+            <input type="number" id="WithdrawAmount" class="form-control" placeholder="Enter Withdraw amount">
 
             <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
                 onclick="submitWithdraw()">

@@ -198,7 +198,6 @@ if (isset($_GET['remove'])) {
         <hr class="line">
         <label>Check-Out Amount</label>
             <input type="number" id="CheckOutAmount" value="<?php echo $total;?>" class="form-control" placeholder="Total" readonly>
-
             <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
                 onclick="submitCheckOut()">
                 <span>Check Out <i class="fa fa-long-arrow-right ml-1"></i></span>
@@ -225,7 +224,7 @@ if (isset($_GET['remove'])) {
             // Handle the response from the server (e.g., update UI)
           // console.log(response);
             // Redirect to wallet.php
-            window.location.href = 'cart.php';
+            window.location.href = 'thanks.php';
         },
         error: function(error) {
             console.error(error);
