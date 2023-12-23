@@ -294,7 +294,7 @@ if (!$loggedIn) {
                             </a></li>
 
                             <?php if (isset($_SESSION['Attendee'])) { ?>
-                        <li><a href="users.php" aria-expanded="false">
+                        <li><a href="my_ticket.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">My tickets</span>
                             </a></li>
                     <?php } ?>
