@@ -5,16 +5,18 @@ include("admin/includes/config.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $CheckOutAmount = $_POST['amount'];
 
+    $fetch_event = mysqli_query($con, "SELECT `amount` FROM `users` WHERE `id` = ".$_SESSION['uid']);
+    $events = mysqli_fetch_assoc($fetch_event);
+    $id = $_SESSION['uid'];
+
     // Validate the amount (you might want to add more validation)
     if (!is_numeric($CheckOutAmount) || $CheckOutAmount <= 0) {
         die("Invalid amount");
     }
 
-    // Update the user's wallet amount in the session
-    if (isset($_SESSION['user_wallet'])) {
-        $_SESSION['user_wallet'] -= $CheckOutAmount;
-    } else {
-        $_SESSION['user_wallet'] = $CheckOutAmount;
+    // Check if the user has sufficient funds
+    if ($events['amount'] < $CheckOutAmount) {
+        die("Insufficient funds");
     }
 
     // Get the user ID from the session
@@ -24,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($_SESSION['cart'] as $carts) {
         
         $t = $carts['quantity'] * $carts['price'];
-        $tt= $carts['ticket_type_id'];
+        $tt = $carts['ticket_type_id'];
         $oid = $carts['oid'];
         $event_id = $carts['event_id'];
         $tqty = $carts['quantity'];
@@ -39,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die('Error: ' . mysqli_error($con));
         }
 
-        // Update the user's wallet amount
+        // Update the user's wallet amount (deduct the amount)
         $sql = "UPDATE users SET amount = amount - $t WHERE id = $fromUserId";
         $result = mysqli_query($con, $sql);
 
@@ -48,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die('Error: ' . mysqli_error($con));
         }
 
-        // Update the organizer's wallet amount
+        // Update the organizer's wallet amount (add the amount)
         $sql = "UPDATE users SET amount = amount + $t WHERE id = $oid";
         $result = mysqli_query($con, $sql);
 
@@ -57,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die('Error: ' . mysqli_error($con));
         }
 
+        // Update the ticket status as booked
         $sql = "UPDATE ticket SET is_booked = $fromUserId WHERE event_id = $event_id and ticket_type_id = $tt and is_booked = 0 and is_deleted = 0 and is_active =1 order by ticket_id limit $tqty";
         $result = mysqli_query($con, $sql);
     
@@ -66,14 +69,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Check for query success
-       
     }
 
-        unset($_SESSION['cart']);
-        //echo "<script>window.location.href='cart.php';</script>";
+    // Update the user's wallet amount in the session after successful transaction
+    $_SESSION['user_wallet'] -= $CheckOutAmount;
+
+    // Clear the cart after successful transaction
+    unset($_SESSION['cart']);
+
+    // Close database connection
+    mysqli_close($con);
+
     echo "Check-Out successful!";
 }
-
-// Close database connection
-mysqli_close($con);
 ?>

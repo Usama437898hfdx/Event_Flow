@@ -194,7 +194,12 @@ if (isset($_GET['remove'])) {
             <span>Wallet</span>
             <img class="rounded" src="https://i.imgur.com/WU501C8.jpg" width="30">
         </div>
-        <span class="type d-block mt-3 mb-1">Card type</span>
+        <span class="type d-block mt-3 mb-1"></span>
+        <?php 
+                                $fetch_event = mysqli_query($con, "SELECT `amount` FROM `users` WHERE `id` = ".$_SESSION['uid']);
+                                $events = mysqli_fetch_assoc($fetch_event);
+                            ?>
+            <div id="balance">Wallet Balance: PKR <?php echo isset($events['amount']) ? number_format($events['amount'], 2) : '0.00'; ?></div>
         <hr class="line">
         <label>Check-Out Amount</label>
             <input type="number" id="CheckOutAmount" value="<?php echo $total;?>" class="form-control" placeholder="Total" readonly>
