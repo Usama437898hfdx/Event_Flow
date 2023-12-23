@@ -43,7 +43,8 @@ include("includes/header.php");
 
 
 
-                                    <?php $tickets = mysqli_query($con, "SELECT t.ticket_id, e.name AS event_name, tt.name AS ticket_type_name, t.Qrcode, t.discount, t.ticket_type_id FROM ticket t JOIN events e ON t.event_id = e.event_id JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id WHERE t.is_deleted = 0 AND t.ticket_type_id  = '".$_GET['tt_id']."'");
+                                    <?php
+                                    $tickets = mysqli_query($con, "SELECT t.ticket_id, e.name AS event_name, tt.name AS ticket_type_name, t.Qrcode, t.discount, t.ticket_type_id FROM ticket t JOIN events e ON t.event_id = e.event_id JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id WHERE t.is_deleted = 0 AND t.ticket_type_id  = '".$_GET['tt_id']."'");
 
                                     foreach ($tickets as $ticket) { ?>
                                     <tr>
@@ -62,7 +63,7 @@ include("includes/header.php");
     '<?php echo $ticket['ticket_type_id']; ?>',
     '<?php echo $ticket['discount']; ?>');">Edit</button> -->
                                         <td>
-                                             <!-- <button class="btn btn-danger"
+                                            <!-- <button class="btn btn-danger"
                                                 onclick="openDeleteModal('<?php echo $ticket['ticket_id']; ?>',
                                                 '<?php echo $ticket['ticket_type_id']; ?>');">
                                                 Delete</button> -->
