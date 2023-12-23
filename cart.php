@@ -8,6 +8,8 @@ if (isset($_GET['remove'])) {
   echo "<script>window.location.href='cart.php';</script>";
   exit();
 }
+// print_r($_SESSION['cart']);
+
 ?>
 
 <p class="space"></p>
@@ -140,7 +142,11 @@ if (isset($_GET['remove'])) {
         </span>
       </div>
 
-      <?php    foreach ($_SESSION['cart'] as $cart_data) { ?>
+      <?php    
+      $total = 0;
+      foreach ($_SESSION['cart'] as $cart_data) { 
+        
+        ?>
         <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
           <div class="d-flex flex-row">
             <div class="ml-2">
@@ -160,7 +166,10 @@ if (isset($_GET['remove'])) {
             <input type="number" readonly name="quantity" class="quantity-input form-control mx-2 text-center" value="<?php echo $cart_data['quantity']; ?>" min="1">
             <button class="border-0 btn" onclick="updateQuantity(<?php echo $cart_data['ticket_type_id']; ?>, 'increase')">+</button>
             <span class="d-block ml-5 font-weight-bold">$
-              <?php echo $cart_data['quantity'] * $cart_data['price'] ?>
+              <?php $t = $cart_data['quantity'] * $cart_data['price']; 
+              echo $t;
+              $total = $total+$t;
+              ?>
             </span>
             <a class="text-danger ml-3" href="?remove=<?php echo $cart_data['ticket_type_id']; ?>">
               <i class="fa-solid fa-trash"></i>
@@ -187,10 +196,48 @@ if (isset($_GET['remove'])) {
         </div>
         <span class="type d-block mt-3 mb-1">Card type</span>
         <hr class="line">
+        <label>Check-Out Amount</label>
+            <input type="number" id="CheckOutAmount" value="<?php echo $total;?>" class="form-control" placeholder="Total" readonly>
+
+            <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
+                onclick="submitCheckOut()">
+                <span>Check Out <i class="fa fa-long-arrow-right ml-1"></i></span>
+            </button>
     </div>
     </div>
   </div>
 </section>
+
+<script>
+   function submitCheckOut() {
+    var CheckOutAmount = document.getElementById('CheckOutAmount').value;
+
+    // Perform validation if needed
+
+    // Use AJAX to send the top-up amount to the server-side script
+    $.ajax({
+        type: 'POST',
+        url: 'checkout_process.php',
+        data: {
+            amount: CheckOutAmount
+        },
+        success: function(response) {
+            // Handle the response from the server (e.g., update UI)
+          // console.log(response);
+            // Redirect to wallet.php
+            window.location.href = 'cart.php';
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    });
+}
+
+    </script>
+
+
+
+
 <style>
   * {
     margin: 0;
@@ -468,7 +515,9 @@ if (isset($_GET['remove'])) {
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-  function updateQuantity(ticketTypeId, action) {
+  function /* The above code is likely defining a function or method called "updateQuantity" in the PHP
+  programming language. */
+  updateQuantity(ticketTypeId, action) {
     $.ajax({
       url: 'update_cart.php',
       type: 'POST',
@@ -485,6 +534,9 @@ if (isset($_GET['remove'])) {
             success: function (newCartHTML) {
               // Replace the existing cart content with the new one
               $('.product-details').html(newCartHTML);
+              let t = $('#tamt').val();
+              $('#CheckOutAmount').val(t)
+
             },
             error: function (error) {
               console.error('Error fetching cart data:', error);

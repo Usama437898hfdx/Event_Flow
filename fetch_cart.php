@@ -8,6 +8,7 @@ echo '<div class="d-flex flex-row align-items-center"><i class="fa fa-long-arrow
     echo '<div class="d-flex justify-content-between">';
     echo '<span>You have ' . count($_SESSION['cart']) . ' items in your cart</span>';
     echo ' </div>';
+    $total = 0;
 foreach ($_SESSION['cart'] as $cart_data) {
     echo '<div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">';
     echo '<div class="d-flex flex-row">';
@@ -25,7 +26,10 @@ foreach ($_SESSION['cart'] as $cart_data) {
     echo '<a class="text-danger ml-3" href="?remove=' . $cart_data['ticket_type_id'] . '"><i class="fa-solid fa-trash"></i></a>';
     echo '</div>';
     echo '</div>';
+    $total += ($cart_data['quantity'] * $cart_data['price']);
+    
 }
+echo '<input type="hidden" id="tamt" value="'.$total.'" />';
 $newCartHTML = ob_get_clean();
 echo $newCartHTML;
 ?>

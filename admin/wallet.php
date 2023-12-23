@@ -28,9 +28,14 @@ include("includes/header.php");
                         <div class="d-flex justify-content-between">
 
                             <h1>Your Wallet</h1>
-                            <div id="balance">Balance: PKR <?php echo isset($_SESSION['amount']) ? number_format($_SESSION['amount'], 2) : '0.00'; ?></div>
+                            <?php 
+                                $fetch_event = mysqli_query($con, "SELECT `amount` FROM `users` WHERE `id` = ".$_SESSION['uid']);
+                                $events = mysqli_fetch_assoc($fetch_event);
+                            ?>
+                            <div id="balance">Balance: PKR <?php echo isset($events['amount']) ? number_format($events['amount'], 2) : '0.00'; ?></div>
 
                             <a href="topup.php" class="btn btn-primary">Top Up</a>
+                            <a href="withdraw.php" class="btn btn-primary">Withdraw</a>
                         </div>
                     </div>
                 </div>

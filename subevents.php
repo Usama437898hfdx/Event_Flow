@@ -46,8 +46,7 @@ if (isset($_GET["id"])) {
                                       src="assets/images/events/<?php echo $event['image'] ?>"
                                       alt="post-thumb" style="object-fit: cover;">
                                     <p class="text-uppercase mb-2">NAME</p>
-                                    <h4 class="title-border"><a class="text-dark"
-                                                                href="event_detail.php"><?php echo $event['name']; ?></a>
+                                    <h4 class="title-border"><a class="text-dark"><?php echo $event['name']; ?></a>
                                     </h4>
                                     <p><?php echo $event['description']; ?></p>
                                     <a href="event_detail.php?id=<?php echo $event['event_id']; ?>"

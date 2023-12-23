@@ -145,21 +145,6 @@
         Category
     </a>
     <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-        <?php
-        // Assume $con is your MySQLi connection
-        $categoriesQuery = mysqli_query($con, "SELECT * FROM event_categories WHERE is_deleted = 0 AND is_active = 1");
-
-        // Check if the query was successful
-        if ($categoriesQuery) {
-            // Fetch all rows as an associative array
-            $categories = mysqli_fetch_all($categoriesQuery, MYSQLI_ASSOC);
-
-            // Loop through the array using foreach
-            foreach ($categories as $category) {
-                echo '<a class="dropdown-item" href="#" data-category-id="' . $category['category_id'] . '">' . $category['name'] . '</a>';
-            }
-        }
-        ?>
     </div>
 </li>
 

@@ -293,6 +293,12 @@ if (!$loggedIn) {
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Wallet</span>
                             </a></li>
 
+                            <?php if (isset($_SESSION['Attendee'])) { ?>
+                        <li><a href="users.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">My tickets</span>
+                            </a></li>
+                    <?php } ?>
+
                     <?php if (isset($_SESSION['Admin'])) { ?>
                         <li><a href="users.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Users</span>

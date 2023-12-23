@@ -27,8 +27,7 @@ GROUP BY
 ");
 // session_destroy();
 if (isset($_POST['addcart'])) {
-
-
+    $oid = $_POST['oid'];
     $tt_id = $_POST['ticket_type_id'];
     $ticket_type = $_POST['ticket_type'];
     $event_id = $_POST['event_id'];
@@ -50,6 +49,7 @@ if (isset($_POST['addcart'])) {
             'ticket_type_id' => $tt_id,
             'ticket_type' => $ticket_type,
             'event_id' => $event_id,
+            'oid' => $oid,
             'price' => $price,
             'available_quantity' => $available_quantity,
             'quantity' => $quantity,
@@ -152,6 +152,8 @@ $detail = mysqli_fetch_assoc($fetch_details);
                                         </td>
                                         <td>
                                             <?php echo $detail['name']; ?>
+                                            <input type="hidden" name="oid"
+                                                value="<?php echo $detail['organizer_id']; ?>">
                                             <input type="hidden" name="ticket_type_id"
                                                 value="<?php echo $detail['ticket_type_id']; ?>">
                                             <input type="hidden" name="ticket_type"

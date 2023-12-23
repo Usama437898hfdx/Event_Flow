@@ -147,54 +147,32 @@ label.radio input:checked+span {
                 <input type="radio" name="card" value="paypal" onclick="openPayPalModal()">
                 <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png" /></span>
             </label>
-
             <div>
-                <label class="credit-card-label">Name on card</label><input type="text"
-                    class="form-control credit-inputs" placeholder="Name" required>
-            </div>
-            <div>
-                <label class="credit-card-label">Card number</label><input type="text"
-                    class="form-control credit-inputs" placeholder="0000 0000 0000 0000" required >
-            </div>
-            <div class="row">
-                <div class="col-md-6"><label class="credit-card-label">Date</label><input type="date"
-                        class="form-control credit-inputs" placeholder="12/24" required></div>
-                <div class="col-md-6"><label class="credit-card-label">CVV</label><input type="number"
-                        class="form-control credit-inputs" placeholder="342"required></div>
-            </div> 
-            <hr class="line">
-            <label>Top-Up Amount</label>
-            <input type="number" id="topupAmount" class="form-control" placeholder="Enter the top-up amount">
+            <label>Withdraw Amount</label></div>
+            <input type="number" id="WithdrawAmount" class="form-control" placeholder="Enter the top-up amount">
 
             <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
-                onclick="submitTopUp()">
-                <span>Top Up<i class="fa fa-long-arrow-right ml-1"></i></span>
-            </button>
-            <hr class="line">
-            <label>Top-Up Amount</label>
-            <input type="number" id="topupAmount" class="form-control" placeholder="Enter the top-up amount">
-
-            <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
-                onclick="submitTopUp()">
-                <span>Top Up<i class="fa fa-long-arrow-right ml-1"></i></span>
+                onclick="submitWithdraw()">
+                <span>Withdraw<i class="fa fa-long-arrow-right ml-1"></i></span>
             </button>
         </div>
     </div>
 
     <script>
-   function submitTopUp() {
-    var topUpAmount = document.getElementById('topupAmount').value;
+        function submitWithdraw() {
+    var WithdrawAmount = document.getElementById('WithdrawAmount').value;
 
     // Perform validation if needed
 
     // Use AJAX to send the top-up amount to the server-side script
     $.ajax({
         type: 'POST',
-        url: 'topup_process.php',
+        url: 'withdraw_process.php',
         data: {
-            amount: topUpAmount
+            amount: WithdrawAmount
         },
         success: function(response) {
+            // alert('Withdrawal successful!,Amount Transferred in your Paypal Account');
             // Handle the response from the server (e.g., update UI)
 
             // Redirect to wallet.php
@@ -206,8 +184,9 @@ label.radio input:checked+span {
     });
 }
 
-
     </script>
 
     <?php include("includes/footer.php"); ?>
 </div>
+
+    
