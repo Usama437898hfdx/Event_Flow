@@ -138,9 +138,14 @@ label.radio input:checked+span {
                 <input type="radio" name="card" value="paypal" onclick="openPayPalModal()">
                 <span><img width="30" src="https://img.icons8.com/officel/48/000000/paypal.png" /></span>
             </label>
-            <div>
-            <label>Withdraw Amount</label></div>
-            <input type="number" id="WithdrawAmount" class="form-control" placeholder="Enter Withdraw amount">
+            <?php 
+                                $fetch_event = mysqli_query($con, "SELECT `amount` FROM `users` WHERE `id` = ".$_SESSION['uid']);
+                                $events = mysqli_fetch_assoc($fetch_event);
+                            ?>
+            <div id="balance">Wallet Balance: PKR <?php echo isset($events['amount']) ? number_format($events['amount'], 2) : '0.00'; ?></div>
+
+            <div><label>Withdraw Amount</label></div>
+            <input type="number" id="WithdrawAmount" class="form-control" placeholder="Enter Withdraw amount" >
 
             <button class="btn btn-primary btn-block d-flex justify-content-between mt-3" type="button"
                 onclick="submitWithdraw()">
