@@ -86,10 +86,10 @@ $detail = mysqli_fetch_assoc($fetch_details);
 .title-border::before {
     width: 100%;
 }
-.center-button {
-            text-align: center;
-        }
 
+.center-button {
+    text-align: center;
+}
 </style>
 
 <br><br>
@@ -177,9 +177,8 @@ $detail = mysqli_fetch_assoc($fetch_details);
 
                                         </td>
                                         <td>
-                                            <?php echo $detail['price']; ?>
+                                            <?php echo $detail['price'] ; ?>
                                         </td>
-
 
 
                                         <td class="quantity-container">
@@ -263,11 +262,29 @@ $detail = mysqli_fetch_assoc($fetch_details);
                             <?php echo $detail['organizer_email'] ?><a class="text-dark" href="blog.php"></a>
                         </p>
                     </div>
+                    <?php
+// Assuming $_GET['event_id'] contains the event ID you want to check
+$event_id = $detail['event_id'];
+$id = $_SESSION['uid'];
+
+// Check if the user has bought a ticket for the specified event
+$check_ticket_query = mysqli_query($con, "SELECT t.ticket_id FROM ticket t WHERE t.is_deleted = 0 AND t.is_booked = $id AND t.event_id = $event_id");
+
+if (mysqli_num_rows($check_ticket_query) > 0) {
+    // User has bought a ticket for the event
+    ?>
                     <div class="center-button">
-        <a href="view_blog.php?id=<?php echo $detail['event_id'];  ?>">
-            <input type="button" class="btn btn-primary" value="View Blog">
-        </a>
-    </div>
+                        <a href="view_blog.php?id=<?php echo $event_id; ?>">
+                            <input type="button" class="btn btn-primary" value="View Blog">
+                        </a>
+                    </div>
+                    <?php
+} else {
+    // User has not bought a ticket for the event
+    echo "You haven't bought a ticket for this event.";
+}
+?>
+
                 </div>
 
             </div>
