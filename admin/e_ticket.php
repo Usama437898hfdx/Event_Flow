@@ -1,10 +1,27 @@
+<?php session_start();
+include("includes/config.php");?>
 <!DOCTYPE html>
 <html lang="en">
+
+<?php $tickets = mysqli_query($con, "
+SELECT t.ticket_id, e.*,users.username as named , tt.name AS ticket_type_name,tt.price, t.Qrcode, t.discount, t.ticket_type_id 
+FROM ticket t JOIN events e ON t.event_id = e.event_id 
+JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id 
+JOIN users ON t.is_booked = users.id
+WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  = ".$_GET['tt_id'].";");
+
+ $ticket = mysqli_fetch_assoc($tickets); 
+ 
+//  print_r($ticket);
+ 
+ ?>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event Ticket</title>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+
     <style>
     @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
     @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
@@ -41,13 +58,17 @@
 
     .image {
         height: 250px;
-        width: 250px;
-        background-image: url("https://media.pitchfork.com/photos/60db53e71dfc7ddc9f5086f9/1:1/w_1656,h_1656,c_limit/Olivia-Rodrigo-Sour-Prom.jpg");
-        background-size: cover;
+        width: 400px;
+        background-image: url("../assets/images/events/<?php echo $ticket['image']?>");
+        overflow: hidden;
+        background-size: 100% 100%;
+        /* background-size: cover; */
         background-position: center;
         background-repeat: no-repeat;
         opacity: 0.85;
         margin: 0;
+        max-width:100%;
+        max-height:100%;
         /* Add this line to remove default margin */
     }
 
@@ -168,11 +189,11 @@
     }
 
     .right .admit-one {
-        color: darkgray;
+        color:#d83565;
     }
 
     .right .admit-one span:nth-child(2) {
-        color: gray;
+        color:#d83565 ;
     }
 
     .right .right-info-container {
@@ -202,6 +223,7 @@
     </style>
 </head>
 
+
 <body>
     <div class="ticket">
         <!-- Your existing HTML content goes here -->
@@ -210,60 +232,92 @@
 
         <div class="left">
             <div class="image">
-                <p class="admit-one">
-                    <span>ADMIT ONE</span>
-                    <span>ADMIT ONE</span>
-                    <span>ADMIT ONE</span>
-                </p>
+                
+                <!-- <img src="../assets/images/events/<?php echo $ticket['image']?>"> -->
+
+                <!-- <p class="admit-one">
+                    <span>EVENT FLOW</span>
+                    <span>EVENT FLOW</span>
+                    <span>EVENT FLOW</span>
+                </p> -->
                 <div class="ticket-number">
                     <p>
-                        #20030220
+                        #<?php echo  $ticket['ticket_id']; ?>
                     </p>
                 </div>
             </div>
             <div class="ticket-info">
+                <?php
+    // Assuming $ticket['start_date'] contains the start date of the event
+    $startDate = strtotime($ticket['start_date']);
+    
+    // Format the date components
+    $day = date('l', $startDate); // Day of the week (e.g., Tuesday)
+    $monthDate = date('F jS', $startDate); // Month and date (e.g., June 29th)
+    $year = date('Y', $startDate); // Year (e.g., 2021)
+    ?>
                 <p class="date">
-                    <span>TUESDAY</span>
-                    <span class="june-29">JUNE 29TH</span>
-                    <span>2021</span>
+                    <span><?php echo $day; ?></span>
+                    <span class="june-29"><?php echo $monthDate; ?></span>
+                    <span><?php echo $year; ?></span>
                 </p>
-                <div class="show-name">
-                    <h1>SOUR Prom</h1>
-                    <h2>Olivia Rodrigo</h2>
+                <div class="event-name">
+                    <h1><?php echo $ticket['name']?></h1>
+                    <h2><?php echo $ticket['named']?></h2>
                 </div>
                 <div class="time">
-                    <p>8:00 PM <span>TO</span> 11:00 PM</p>
-                    <p>DOORS <span>@</span> 7:00 PM</p>
+                    <?php
+    // Assuming $ticket['start_time'] and $ticket['end_time'] contain the time values
+    $startTime = date('g:i A', strtotime($ticket['start_time'])); // Format start time (e.g., 8:00 PM)
+    $endTime = date('g:i A', strtotime($ticket['end_time'])); // Format end time (e.g., 11:00 PM)
+    ?>
+                    <p><?php echo $startTime; ?> <span>TO</span> <?php echo $endTime; ?></p>
                 </div>
-                <p class="location"><span>East High School</span>
-                    <span class="separator"><i class="far fa-smile"></i></span><span>Salt Lake City, Utah</span>
+
+                <p class="location">
+                    <span><?php echo $ticket['location']; ?></span>
+                    <span class="separator"><i class="far fa-smile"></i></span>
                 </p>
+
             </div>
         </div>
         <div class="right">
-            <p class="admit-one">
+        <p class="admit-one">
+                    <span>EF</span>
+                    <span>EVENT FLOW</span>
+                    <span>EF</span>
+                </p>
+            <!-- <p class="admit-one">
                 <span>ADMIT ONE</span>
                 <span>ADMIT ONE</span>
                 <span>ADMIT ONE</span>
-            </p>
+            </p> -->
             <div class="right-info-container">
                 <div class="show-name">
-                    <h1>SOUR Prom</h1>
+                    <h1><?php echo $ticket['name'] ?></h1>
                 </div>
                 <div class="time">
-                    <p>8:00 PM <span>TO</span> 11:00 PM</p>
-                    <p>DOORS <span>@</span> 7:00 PM</p>
+                    <?php
+    // Assuming $ticket['start_time'] and $ticket['end_time'] contain the time values
+    $startTime = date('g:i A', strtotime($ticket['start_time'])); // Format start time (e.g., 8:00 PM)
+    $endTime = date('g:i A', strtotime($ticket['end_time'])); // Format end time (e.g., 11:00 PM)
+    ?>
+                    <p><?php echo $startTime; ?> <span>TO</span> <?php echo $endTime; ?></p>
                 </div>
-                <div class="barcode">
-                    <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb"
-                        alt="QR code">
+                <div class="barcode" id="qrcode">
+                <script type="text/javascript">
+new QRCode(document.getElementById("qrcode"), "<?php echo $ticket['Qrcode']; ?>");
+</script>
+                    
+               
                 </div>
                 <p class="ticket-number">
-                    #20030220
+                    #<?php echo $ticket['ticket_id']; ?>
                 </p>
             </div>
         </div>
     </div>
 </body>
+
 
 </html>

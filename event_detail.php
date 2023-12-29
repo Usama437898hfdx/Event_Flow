@@ -1,5 +1,7 @@
 <?php 
 session_start();
+
+
 include("header.php");
 $event_id = $_GET['id'];
 
@@ -179,7 +181,7 @@ $detail = mysqli_fetch_assoc($fetch_details);
                                         <td>
                                             <?php echo $detail['price'] ; ?>
                                         </td>
-
+                                        <?php  if (isset($_SESSION['Attendee'])) { ?>
 
                                         <td class="quantity-container">
                                             <button type="button"
@@ -198,7 +200,7 @@ $detail = mysqli_fetch_assoc($fetch_details);
                                             <input type="submit" name="addcart" class="btn btn-primary"
                                                 value="Add to cart">
                                         </td>
-
+                                        <?php } ?>
 
                                     </form>
                                 </tr>
@@ -262,7 +264,7 @@ $detail = mysqli_fetch_assoc($fetch_details);
                             <?php echo $detail['organizer_email'] ?><a class="text-dark" href="blog.php"></a>
                         </p>
                     </div>
-                    <?php
+                        <?php
 // Assuming $_GET['event_id'] contains the event ID you want to check
 $event_id = $detail['event_id'];
 $id = $_SESSION['uid'];
@@ -282,14 +284,45 @@ if (mysqli_num_rows($check_ticket_query) > 0) {
 } else {
     // User has not bought a ticket for the event
     echo "You haven't bought a ticket for this event.";
-}
-?>
-
-                </div>
-
+} ?>
+  </div>
             </div>
+
+             
             <div class="col-lg-4">
                 <div class="widget">
+                    <h6 class="mb-4">ONGOING EVENTS</h6>
+                    <?php     $currentDate = date("Y-m-d");
+                     $fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL AND start_date = '$currentDate' LIMIT 4");
+foreach ($fetch_event as $event) {?>
+                    <div class="media mb-4">
+                        <div class="post-thumb-sm mr-3">
+                            <img class="img-fluid" src="assets/images/events/<?php echo $event['image'] ?>"
+                                alt="post-thumb">
+                        </div>
+                        <div class="media-body">
+                            <ul class="list-inline d-flex justify-content-between mb-2">
+
+                                <li class="list-inline-item">Date: <?php
+$start_date = $event['start_date'];
+$formatted_date = date('d/m/Y', strtotime($start_date));
+echo $formatted_date;
+?>
+                                </li>
+                                <li class="list-inline-item">Time: <?php
+$time = new DateTime($event['start_time']);
+$formattedTime = $time->format('g:i A');
+echo $formattedTime;
+?>
+                                </li>
+                            </ul>
+                            <h6><a class="text-dark"
+                                    href=subevents.php?id=<?php echo $event ['event_id'] ?>><?php echo $event['name']; ?></a>
+                        </div>
+                    </div>
+                    <?php } ?>
+            
+
                     <h6 class="mb-4">UPCOMING EVENTS</h6>
                     <?php     $currentDate = date("Y-m-d");
                      $fetch_event = mysqli_query($con, "SELECT * FROM events WHERE is_deleted = 0 AND is_active = 1 AND parent_id IS NULL AND start_date > '$currentDate' LIMIT 4");
@@ -320,20 +353,10 @@ echo $formattedTime;
                         </div>
                     </div>
                     <?php } ?>
-                </div>
-                <div class="widget">
-                    <h6 class="mb-4">CATEGORIES</h6>
-                    <ul class="list-inline tag-list">
-                        <li class="list-inline-item m-1"><a href="blog-single.html">ui ux</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">developmetns</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">travel</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">article</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">travel</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">ui ux</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">article</a></li>
-                        <li class="list-inline-item m-1"><a href="blog-single.html">developmetns</a></li>
-                    </ul>
-                </div>
+            
+
+
+
             </div>
         </div>
     </div>

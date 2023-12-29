@@ -92,6 +92,26 @@
 
 <!-- Main Script -->
 <script src="assets/js/script.js"></script>
+<script>
+        function adjustPadding() {
+            const body = document.body;
+            const main = document.querySelector('main');
+            const windowWidth = window.innerWidth;
+
+            // Adjust padding based on window width
+            if (windowWidth >= 600) {
+                main.style.padding = '40px';
+            } else {
+                main.style.padding = '20px';
+            }
+        }
+
+        // Initial adjustment on page load
+        adjustPadding();
+
+        // Adjust padding when the window is resized
+        window.addEventListener('resize', adjustPadding);
+    </script>
 
 </body>
 

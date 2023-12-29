@@ -199,7 +199,8 @@ if (isset($_GET['remove'])) {
                                 $fetch_event = mysqli_query($con, "SELECT `amount` FROM `users` WHERE `id` = ".$_SESSION['uid']);
                                 $events = mysqli_fetch_assoc($fetch_event);
                             ?>
-            <div id="balance">Wallet Balance: PKR <?php echo isset($events['amount']) ? number_format($events['amount'], 2) : '0.00'; ?></div>
+            <div>Wallet Balance: PKR <?php echo isset($events['amount']) ? number_format($events['amount'], 2) : '0.00'; ?></div>
+            <input type="hidden" id="balance" value="<?php echo isset($events['amount']) ? $events['amount'] : '0'; ?>"/>
         <hr class="line">
         <label>Check-Out Amount</label>
             <input type="number" id="CheckOutAmount" value="<?php echo $total;?>" class="form-control" placeholder="Total" readonly>
@@ -215,11 +216,19 @@ if (isset($_GET['remove'])) {
 <script>
    function submitCheckOut() {
     var CheckOutAmount = document.getElementById('CheckOutAmount').value;
+    var BalanceAmount = document.getElementById('balance').value;
+
+
+    //console.log(CheckOutAmount, BalanceAmount);
+
+    CheckOutAmount =parseInt(CheckOutAmount);
+    BalanceAmount = parseInt(BalanceAmount);
 
     // Perform validation if needed
 
-    // Use AJAX to send the top-up amount to the server-side script
-    $.ajax({
+    if(CheckOutAmount <= BalanceAmount){
+      // Use AJAX to send the top-up amount to the server-side script
+      $.ajax({
         type: 'POST',
         url: 'checkout_process.php',
         data: {
@@ -235,6 +244,14 @@ if (isset($_GET['remove'])) {
             console.error(error);
         }
     });
+
+    }
+    else{
+
+      alert('Your balance is not enough for this transaction.');
+
+    }
+    
 }
 
     </script>

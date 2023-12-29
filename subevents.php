@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (!isset($_SESSION['Attendee']) && !isset($_SESSION['Organizer']) && !isset($_SESSION['Admin'])  ) {
   // Redirect to the sign-in page if not signed in
   header("Location: admin/login.php");

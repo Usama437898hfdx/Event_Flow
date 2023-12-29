@@ -63,6 +63,10 @@ foreach ($mytickets as $myticket) { ?>
                                         <td>
                                             <button class="btn btn-primary text-white" onclick=" ">Refund</button>
                                             <!-- <button class="btn btn-danger" onclick=" ">Refund</button> -->
+                                        
+                                        
+                                            <button class="btn btn-primary text-white" onclick="viewTicket(<?php echo $myticket['ticket_id']; ?>)">View Ticket</button>
+                                            <!-- <button class="btn btn-danger" onclick=" ">Refund</button> -->
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -76,18 +80,11 @@ foreach ($mytickets as $myticket) { ?>
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
 <script>
-
+    function viewTicket(ticketId) {
+        // Redirect to the view ticket page with the reference ID
+        window.location.href = 'e_ticket.php?tt_id=' + ticketId;
+    }
 </script>
 
 <?php include("includes/footer.php"); ?>

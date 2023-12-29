@@ -1,3 +1,4 @@
+<!-- <?php session_start(); ?> -->
 <!DOCTYPE html>
 <?php include("admin/includes/config.php");?>
 <html lang="en">
@@ -104,6 +105,8 @@
         <li class="nav-item">
           <a class="nav-link text-uppercase text-dark" href="allevents.php">Events</a>
         </li>
+      <?php if (!isset($_SESSION['Attendee']) && !isset($_SESSION['Organizer']) && !isset($_SESSION['Admin'])) { ?>
+
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Login
@@ -112,21 +115,52 @@
           <a class="dropdown-item" href="admin/login.php">SignIn</a>
           <a class="dropdown-item" href="admin/signup.php">SignUp</a>
         </div>
+        <?php } ?>
+
+        <?php if (isset($_SESSION['Attendee'])) { ?>
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="category.php">Categories</a>
+        </li>
+        <?php } ?>
+
       </li>
+      <?php if (isset($_SESSION['Attendee'])) { ?>
         <li class="nav-item">
           <a class="nav-link text-uppercase text-dark" href="cart.php">Cart</a>
         </li>
+        <?php } ?>
+           <?php if (isset($_SESSION['Attendee'])) { ?>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           User
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+       
           <a class="dropdown-item" href="admin/index.php">Dashboard</a>
           <a class="dropdown-item" href="admin/profile.php">User Profile</a>
           <a class="dropdown-item" href="calendar.php">Event Calendar</a>
           <a class="dropdown-item" href="admin/includes/logout.php">Logout</a>
         </div>
       </li>
+      <?php } ?>
+
+      <?php if (isset($_SESSION['Organizer'])) { ?>
+        <li class="nav-item">
+          <a class="nav-link text-uppercase text-dark" href="myevents.php">My Events</a>
+        </li>
+        <?php } ?>
+
+          <?php if (isset($_SESSION['Organizer'])) { ?>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="admin/index.php">Dashboard</a>
+          <a class="dropdown-item" href="admin/includes/logout.php">Logout</a>
+        </div>
+      </li>
+      <?php } ?>
       <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categories
@@ -140,13 +174,8 @@
 
       <!--  -->
       <!-- Display categories in a dropdown -->
-      <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Category
-    </a>
-    <div class="dropdown-menu" aria-labelledby="categoryDropdown">
-    </div>
-</li>
+
+
 
 
 
