@@ -144,13 +144,15 @@
       </li>
       <?php } ?>
 
+
+
       <?php if (isset($_SESSION['Organizer'])) { ?>
         <li class="nav-item">
           <a class="nav-link text-uppercase text-dark" href="myevents.php">My Events</a>
         </li>
         <?php } ?>
 
-          <?php if (isset($_SESSION['Organizer'])) { ?>
+          <?php if (isset($_SESSION['Organizer']) && isset($_SESSION['Admin']) ) { ?>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           User

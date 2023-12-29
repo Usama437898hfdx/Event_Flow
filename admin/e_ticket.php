@@ -317,6 +317,7 @@ new QRCode(document.getElementById("qrcode"), "<?php echo $ticket['Qrcode']; ?>"
             </div>
         </div>
     </div>
+    <a href="index.php" target="_blank">Go Back</a>
 </body>
 
 
