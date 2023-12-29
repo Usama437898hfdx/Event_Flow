@@ -149,10 +149,17 @@
       <?php if (isset($_SESSION['Organizer'])) { ?>
         <li class="nav-item">
           <a class="nav-link text-uppercase text-dark" href="myevents.php">My Events</a>
+          <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          User
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="admin/index.php">Dashboard</a>
+          <a class="dropdown-item" href="admin/includes/logout.php">Logout</a>
+        </div>
         </li>
         <?php } ?>
 
-          <?php if (isset($_SESSION['Organizer']) && isset($_SESSION['Admin']) ) { ?>
+          <?php if (isset($_SESSION['Admin']) ) { ?>
         <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle text-uppercase text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           User
