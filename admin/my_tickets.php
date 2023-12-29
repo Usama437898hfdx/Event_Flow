@@ -83,7 +83,7 @@ foreach ($mytickets as $myticket) { ?>
 <script>
     function viewTicket(ticketId) {
         // Redirect to the view ticket page with the reference ID
-        window.location.href = 'e_ticket.php?tt_id=' + ticketId;
+        window.open('e_ticket.php?tt_id=' + ticketId, '_blank');
     }
 </script>
 

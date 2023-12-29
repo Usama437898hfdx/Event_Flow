@@ -259,6 +259,71 @@ if (isset($_GET['remove'])) {
 
 
 
+
+
+<hr>
+    <!-- <h6 class="mb-0">Your Cart</h6> -->
+
+    <?php if (isset($_SESSION['cart'])) { ?>
+      <div class="d-flex justify-content-between">
+        <span class="text-center">
+        
+        </span>
+      </div>
+
+      <?php    
+      $total = 0;
+      foreach ($_SESSION['cart'] as $cart_data) { 
+        
+        ?>
+        <div class="d-flex justify-content-between align-items-center mt-3 p-2 items rounded">
+          <div class="d-flex flex-row">
+            <div class="ml-2">
+              <span class="font-weight-bold d-block">
+                <?php echo $cart_data['name'] ?>
+              </span>
+              <span class="spec">
+                <?php echo $cart_data['ticket_type'] ?>
+              </span>
+            </div>
+          </div>
+          <span class="d-block ml-5 font-weight-bold">$
+            <?php echo $cart_data['price'] ?>
+          </span>
+          <div class="d-flex flex-row align-items-center">
+            <input type="number" readonly name="quantity" class="quantity-input form-control mx-2 text-center" value="<?php echo $cart_data['quantity']; ?>" min="1">
+            <span class="d-block ml-5 font-weight-bold">$
+              <?php $t = $cart_data['quantity'] * $cart_data['price']; 
+              echo $t;
+              $total = $total+$t;
+              ?>
+            </span>
+            <!-- <a class="text-danger ml-3" href="?remove=<?php echo $cart_data['ticket_type_id']; ?>">
+              <i class="fa-solid fa-trash"></i>
+            </a> -->
+          </div>
+        </div>
+      <?php } ?>
+    <?php } else { ?>
+      <!-- <div class="d-flex justify-content-between">
+        <span class="text-center">Your cart is empty</span>
+      </div> -->
+    <?php } 
+  
+    ?>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <style>
   * {
     margin: 0;
