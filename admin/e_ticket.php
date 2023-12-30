@@ -134,7 +134,7 @@ WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  =
 
     .date .june-29 {
         color: #d83565;
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .show-name {
@@ -275,8 +275,14 @@ WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  =
                 </div>
 
                 <p class="location">
-                    <span><?php echo $ticket['location']; ?></span>
+                <span>RS:<?php echo $ticket['price']; ?></span>
+                    <span><?php echo $ticket['ticket_type_name']; ?></span>
+               
+
                     <span class="separator"><i class="far fa-smile"></i></span>
+                </p>
+                <p class="location">
+                <span><?php echo $ticket['location']; ?></span>
                 </p>
 
             </div>
@@ -317,7 +323,7 @@ new QRCode(document.getElementById("qrcode"), "<?php echo $ticket['Qrcode']; ?>"
             </div>
         </div>
     </div>
-    <a href="index.php" target="_blank">Go Back</a>
+    <a class="center" href="index.php" target="_blank">Go Back</a>
 </body>
 
 
