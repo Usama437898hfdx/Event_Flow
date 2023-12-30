@@ -70,6 +70,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Check for query success
     }
+    
+    $emailbody = "";
+    if (isset($_SESSION['cart'])) {
+    
+        $emailbody .= '
+          <div class="d-flex justify-content-between">
+            <p>Dear <strong>' . $_SESSION['username'] . '!</strong> Thanks for your purchase.</p>
+            <center>
+              <h2>Your Tickets Information</h2>
+            </center>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+            <tr style="border-bottom: 1px solid #ddd;">
+              <th style="padding: 10px; text-align: left;">Event</th>
+              <th style="padding: 10px; text-align: left;">Ticket Type</th>
+              <th style="padding: 10px; text-align: left;">Unit Price</th>
+              <th style="padding: 10px; text-align: left;">Quantity</th>
+              <th style="padding: 10px; text-align: left;">Total</th>
+            </tr>';
+    
+        $total = 0;
+        foreach ($_SESSION['cart'] as $cart_data) {
+    
+            $emailbody .= '
+            <tr style="border-bottom: 1px solid #ddd;">
+              <td style="padding: 10px;">' . $cart_data['name'] . '</td>
+              <td style="padding: 10px;">' . $cart_data['ticket_type'] . '</td>
+              <td style="padding: 10px;">$' . $cart_data['price'] . '</td>
+              <td style="padding: 10px;">' . $cart_data['quantity'] . '</td>
+              <td style="padding: 10px;">$' . ($cart_data['quantity'] * $cart_data['price']) . '</td>
+            </tr>';
+            $total += $cart_data['quantity'] * $cart_data['price'];
+        }
+    
+        $emailbody .= '
+          <tr>
+            <td colspan="4" style="text-align: right; padding: 10px;"><strong>Total:</strong></td>
+            <td style="padding: 10px;">$' . $total . '</td>
+          </tr>
+          </table>';
+
+          $emailbody .= '
+          <div style="text-align: center; margin-top: 20px;">
+              <a href="localhost/event_flow/admin/my_ticket.php?tt_id=' . $myticket['tt_id'] . '" style="padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">View Tickets</a>
+          </div>';
+      
+        $recemail = $_SESSION['email'];
+        include('gmail-email/index.php');
+        
+    }
+    
+
+
 
     // Update the user's wallet amount in the session after successful transaction
     $_SESSION['user_wallet'] -= $CheckOutAmount;

@@ -58,6 +58,9 @@ if (isset($_POST['login'])) {
             $_SESSION['uid'] = $user['id'];
             $_SESSION[$role] = $user;
             $_SESSION['amount'] = $user['id'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['username'] = $user['name'];
+            
             
             header("location: ../../index.php");
             exit();
