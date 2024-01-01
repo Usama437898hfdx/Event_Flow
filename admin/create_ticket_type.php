@@ -58,6 +58,21 @@ include("includes/header.php"); ?>
                                     </div>
                                 </div>
 
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="image">Ticket Template</label>
+                                <select name="temp_id" id="temp_id" class="form-control">
+                                            <option value="">Select Ticket Template</option>
+                                            <?php $fetch_temp = mysqli_query($con, "SELECT * FROM `template` ");
+                                            foreach ($fetch_temp as $temp) { ?>
+                                            <option value="<?php echo $temp['temp_id']; ?>">
+                                                <?php echo $temp['temp_id']; ?>
+                                            </option>
+                                            <?php } ?>
+                                        </select>  
+                                        </div>
+                                </div>
+
                             </div>
 
 

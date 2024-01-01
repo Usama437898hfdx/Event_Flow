@@ -1,10 +1,11 @@
-<?php session_start();
+<?php
+session_start();
 
-if (!isset($_SESSION['Attendee']) ) {
+if (!isset($_SESSION['Attendee'])) {
     header('location:login.php');
     exit;
-
 }
+
 include("includes/config.php");
 include("includes/header.php");
 
@@ -40,15 +41,15 @@ include("includes/header.php");
                                         <th>Event name</th>
                                         <th>tickettype</th>
                                         <th>Price</th>
-                                    
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $mytickets = mysqli_query($con, "SELECT t.ticket_id, e.*, tt.name AS ticket_type_name, tt.price, t.Qrcode, t.discount, t.ticket_type_id FROM ticket t JOIN events e ON t.event_id = e.event_id JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id WHERE t.is_deleted = 0 AND t.is_booked = $_SESSION[uid] AND t.ticket_type_id  = '".$_GET['tt_id']."'");
+                                <?php
+                                $uid = $_SESSION['uid']; // Sanitize this input to prevent SQL injection
+                                $mytickets = mysqli_query($con, "SELECT t.ticket_id, e.*, tt.name  AS ticket_type_name, tt.temp_id as temp_id,tt.price, t.Qrcode, t.discount, t.ticket_type_id FROM ticket t JOIN events e ON t.event_id = e.event_id JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id WHERE t.is_deleted = 0 AND t.is_booked = '$uid' AND t.ticket_type_id  = '".$_GET['tt_id']."'");
 
-foreach ($mytickets as $myticket) { ?>
-
+                                foreach ($mytickets as $myticket) { ?>
                                     <tr>
                                         <td>
                                             <?php echo $myticket['name']; ?>
@@ -59,17 +60,12 @@ foreach ($mytickets as $myticket) { ?>
                                         <td>
                                             <?php echo $myticket['price']; ?>
                                         </td>
-                                       
                                         <td>
-                                            <button class="btn btn-primary text-white" onclick=" ">Refund</button>
-                                            <!-- <button class="btn btn-danger" onclick=" ">Refund</button> -->
-                                        
-                                        
-                                            <button class="btn btn-primary text-white" onclick="viewTicket(<?php echo $myticket['ticket_id']; ?>)">View Ticket</button>
-                                            <!-- <button class="btn btn-danger" onclick=" ">Refund</button> -->
+                                          <button class="btn btn-primary text-white" onclick="viewTicket(<?php echo $myticket['ticket_id']; ?>, <?php echo $myticket['temp_id']; ?>)">View Ticket</button>
+
                                         </td>
                                     </tr>
-                                    <?php } ?>
+                                <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -81,10 +77,26 @@ foreach ($mytickets as $myticket) { ?>
 </div>
 
 <script>
-    function viewTicket(ticketId) {
-        // Redirect to the view ticket page with the reference ID
-        window.open('e_ticket.php?tt_id=' + ticketId, '_blank');
+    function viewTicket(ticketId, tempId) {
+        if (tempId === 1) {
+            // Redirect to the view ticket page with the reference ID for tempId = 1
+            window.open('e_ticket.php?tt_id=' + ticketId, '_blank');
+        } else if (tempId === 2) {
+            // Redirect to the view ticket page with the reference ID for tempId = 2
+            window.open('e_ticket2.php?tt_id=' + ticketId, '_blank');
+        }  else if (tempId === 3) {
+            // Redirect to the view ticket page with the reference ID for tempId = 3
+            window.open('e_ticket3.php?tt_id=' + ticketId, '_blank');
+        }   else if (tempId === 4) {
+            // Redirect to the view ticket page with the reference ID for tempId = 4
+            window.open('e_ticket4.php?tt_id=' + ticketId, '_blank');
+        } 
+        else {
+            // Handle other cases if needed
+            console.error('Invalid tempId:', tempId);
+        }
     }
 </script>
+
 
 <?php include("includes/footer.php"); ?>

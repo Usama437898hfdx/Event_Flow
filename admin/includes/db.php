@@ -445,8 +445,9 @@ if (isset($_POST['create_ticket_type'])) {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $event_id = $_POST["event_id"];
+    $temp = $_POST["temp_id"];
 
-    $insert = mysqli_query($con, "INSERT INTO `ticket_type`(`name`, `price`,`event_id`) VALUES ('$name','$price','$event_id')");
+    $insert = mysqli_query($con, "INSERT INTO `ticket_type`(`name`, `price`,`event_id`,`temp_id`) VALUES ('$name','$price','$event_id','$temp')");
     if ($insert) {
         header("location:../ticket_types.php");
         exit();
@@ -454,6 +455,7 @@ if (isset($_POST['create_ticket_type'])) {
         echo "User not inserted";
     }
 }
+
 //delete ticket type
 if (isset($_POST["deleteTicket_type"])) {
 

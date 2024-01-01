@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $emailbody .= '
           <tr>
             <td colspan="4" style="text-align: right; padding: 10px;"><strong>Total:</strong></td>
-            <td style="padding: 10px;">$' . $total . '</td>
+            <td style="padding: 10px;">PKR' . $total . '</td>
           </tr>
           </table>';
 
