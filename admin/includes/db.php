@@ -104,6 +104,7 @@ if (isset($_POST['create_organizer'])) {
         echo "User not inserted";
     }
 }
+
 //delete organizer
 if (isset($_POST["deleteOrganizer"])) {
     $id = $_POST["id"];
@@ -113,6 +114,7 @@ if (isset($_POST["deleteOrganizer"])) {
         exit;
     }
 }
+
 //edit organizer
 if (isset($_POST["editOrganizer"])) {
     $id = $_POST["id"];
@@ -242,6 +244,7 @@ if (isset($_POST["deleteEvent"])) {
 
     }
 }
+
 //Edit Sub event
 if (isset($_POST["editEvent"])) {
     $id = $_POST['event_id'];
@@ -296,6 +299,7 @@ if (isset($_POST["deleteMainEvent"])) {
 
     }
 }
+
 //Edit Main event
 if (isset($_POST["editMainEvent"])) {
     $id = $_POST['event_id'];
@@ -526,33 +530,38 @@ if (isset($_POST["edit_addon"])) {
 }
 
 
-// delete addon
-if (isset($_POST["deleteAddon"])) {
 
-    $addon_id = $_POST["addon_id"];
-    $DeleteAddon = mysqli_query($con, "UPDATE `addon` SET `is_deleted`= 1 WHERE `Addon_id` = '$addon_id'");
-    if ($DeleteAddon) {
-        header("location: ../Addons.php");
+
+
+if (isset($_POST["add_form"])) {
+
+    $form_id = $_POST["form_id"];
+    $event_id = $_POST["event_id"];
+    
+    $Organizer = $_SESSION['Organizer']['id'];
+        $insertform =  mysqli_query($con,"INSERT INTO `registration_form` (`form_id`,`event_id`,`organizer_id`) VALUES ('$form_id','$event_id',$Organizer)");
+       
+    
+    if ($insertform) {
+        header("location:../question_formc.php");
         exit();
+    } else {
+        echo "form not inserted";
     }
 }
-
-
-
-
 
 
 
 // Add registration question
 if (isset($_POST["add_questions"])) {
 
-    $questionsArray = $_POST["Question"];
     $question_id = $_POST["question_id"];
-    $event_id = $_POST["event_id"];
+    $questionsArray = $_POST["Question"];
     
+ 
     foreach ($questionsArray as $Question) {
         $Question = mysqli_real_escape_string($con, $Question);
-        $insertRegistration =  mysqli_query($con,"INSERT INTO `registrationquestions` (`Question`,`event_id`) VALUES ('$Question','$event_id')");
+        $insertRegistration =  mysqli_query($con,"INSERT INTO `registrationquestions` (`question_id`,`Question`) VALUES ('$question_id','$Question')");
        
     }
 
