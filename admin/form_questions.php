@@ -17,6 +17,7 @@ include("includes/header.php");
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Question Form</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Form Questions</a></li>
             </ol>
         </div>
     </div>
@@ -28,9 +29,10 @@ include("includes/header.php");
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <h1 class="card-title">Question Forms</h1>
+                            <h1 class="card-title">Form Questions</h1>
 
-                            <button class="btn btn-primary text-white" onclick="openCreateModal();">Create Form</button>
+                            <a href="create_question_form.php?fid=<?php echo $questions['form_id']; ?>"
+                                style="margin-bottom:12px !important;" class="btn btn-primary">Create new</a>
                         </div>
                         <!-- Display Created Tickets -->
 
@@ -39,33 +41,41 @@ include("includes/header.php");
                                 <thead>
                                     <tr>
                                         <th>Event Name</th>
+                                        <th>Question</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
         
-        $fetch_form = mysqli_query($con,"SELECT f.*,e.name As eventname
-        FROM registration_form f 
-        LEFT JOIN events e ON f.event_id = e.event_id
+        $fetch_questions = mysqli_query($con,"SELECT q.*,e.parent_id,e.name As eventname,f.form_id
+        FROM events e
+        LEFT JOIN registration_form f ON f.event_id = e.event_id
+        LEFT JOIN registrationquestions q  ON q.form_id = f.form_id
         WHERE 
-    e.organizer_id = $id
+    e.organizer_id = $id AND e.parent_id IS NOT NULL
         " );
 
-        foreach($fetch_form as $form){  
+        foreach($fetch_questions as $questions){  
             
           ?>
 
                                     <tr>
                                         <td>
-                                            <?php echo $form["eventname"]?>
+                                            <?php echo $questions["eventname"]?>
                                         </td>
                                         <td>
-                                            <a href="form_questions.php?fid=<?php echo $form['form_id']; ?>"
-                                                class="btn btn-primary">View Questions</a>
+                                            <?php echo $questions["Question"]?>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-danger"
+                                                onclick="openDeleteModal('<?php echo $event['question_id']; ?>');">Delete</button>
                                         </td>
                                     </tr>
                                     <?php } ?>
+
+
+
                                 </tbody>
                             </table>
                         </div>
@@ -76,57 +86,55 @@ include("includes/header.php");
     </div>
 </div>
 
-<div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <form id="createForm" action="includes/db.php" method="POST">
+
+
+
+
+
+<div class="modal fade" id="DeleteEventModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog ">
+        <form id="deleteForm" action="includes/db.php" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Create Form</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h5 class="modal-title">Delete Event</h5>
+                    <button type="submit" name="delete" class="close" data-dismiss="modal"><span>×</span></button>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="eventname">Event:</label>
-                        <input class="form-control" type="hidden" name="event_id" id="event_id" required>
-                        <input class="form-control" type="hidden" name="form_id" id="form_id" required>
-                        <select name="event_id" class="form-control">
-                            <?php $fetch_event = mysqli_query($con, "SELECT * FROM `events` WHERE `parent_id` IS NOT NULL AND `is_deleted` = 0 AND `is_active` = 1 AND `organizer_id` = '" . $_SESSION['Organizer']['id'] . "'");
-                                            foreach ($fetch_event as $event) {
+                <div class="container">
+                    <div class="modal-body">
+                        <p class="text-center">Are you sure you want to delete this event?</p>
+                        <input type="hidden" id="delete_addon_id" name="addon_id" value="">
 
-                                                ?>
-                            <option value="<?php echo $event['event_id']; ?>">
-                                <?php echo $event['name']; ?>
-                            </option>
-                            <?php } ?>
-                        </select>
                     </div>
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="add_form" class="btn btn-primary">Submit</button>
-
+                    <button type="submit" name="deleteAddon" class="btn btn-danger">Delete</button>
                 </div>
+
             </div>
-
-
-
         </form>
     </div>
 </div>
 
 
+
+
+
 <script>
-function openCreateModal(form_id, event_id) {
-    document.getElementById("form_id").value = form_id;
-    document.getElementById("event_id").value = event_id;
+function openEditModal(id, name, price) {
+    document.getElementById("edit_addon_id").value = id;
+    document.getElementById("edit_name").value = name;
+    document.getElementById("edit_price").value = price;
 
 
+    $("#EditEventModal").modal("show");
 
+}
 
-    $("#CreateModal").modal("show");
+function openDeleteModal(id) {
+    document.getElementById("delete_addon_id").value = id;
+    $("#DeleteEventModal").modal("show");
 }
 </script>
-
 
 <?php include("includes/footer.php"); ?>
