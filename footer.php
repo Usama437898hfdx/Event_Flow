@@ -74,24 +74,24 @@
 
 
 <!-- jQuery -->
-<script src="assets/plugins/jQuery/jquery.min.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/jQuery/jquery.min.js"></script>
 <!-- Bootstrap JS -->
-<script src="assets/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/bootstrap/bootstrap.min.js"></script>
 <!-- slick slider -->
-<script src="assets/plugins/slick/slick.min.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/slick/slick.min.js"></script>
 <!-- masonry -->
-<script src="assets/plugins/masonry/masonry.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/masonry/masonry.js"></script>
 <!-- instafeed -->
-<script src="assets/plugins/instafeed/instafeed.min.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/instafeed/instafeed.min.js"></script>
 <!-- smooth scroll -->
-<script src="assets/plugins/smooth-scroll/smooth-scroll.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/smooth-scroll/smooth-scroll.js"></script>
 <!-- headroom -->
-<script src="assets/plugins/headroom/headroom.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/headroom/headroom.js"></script>
 <!-- reading time -->
-<script src="assets/plugins/reading-time/readingTime.min.js"></script>
+<script src="<?php echo $basepath; ?>assets/plugins/reading-time/readingTime.min.js"></script>
 
 <!-- Main Script -->
-<script src="assets/js/script.js"></script>
+<script src="<?php echo $basepath; ?>assets/js/script.js"></script>
 <script>
         function adjustPadding() {
             const body = document.body;

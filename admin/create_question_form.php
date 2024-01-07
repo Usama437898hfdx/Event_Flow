@@ -42,6 +42,7 @@ include("includes/header.php"); ?>
                                 <label for="question1">Question 1 :</label>
                                 <input class="form-control" placeholder="Enter Full Name" readonly
                                     value="Enter your Full Name" type="text" name="Question[]">
+                                <input class="form-control" type="hidden" name="form_id" id="form_id" required>
                             </div>
                         </div>
                     </div>

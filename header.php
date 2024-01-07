@@ -1,4 +1,6 @@
-<!-- <?php session_start(); ?> -->
+<?php session_start();
+$basepath="http://localhost/Event_Flow/";
+?> 
 <!DOCTYPE html>
 <?php include("admin/includes/config.php");?>
 <html lang="en">
@@ -21,16 +23,16 @@
 
     <!-- ** Plugins Needed for the Project ** -->
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="assets/plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo $basepath; ?>assets/plugins/bootstrap/bootstrap.min.css">
     <!-- slick slider -->
-    <link rel="stylesheet" href="assets/plugins/slick/slick.css">
+    <link rel="stylesheet" href="<?php echo $basepath; ?>assets/plugins/slick/slick.css">
     <!-- themefy-icon -->
-    <link rel="stylesheet" href="assets/plugins/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="<?php echo $basepath; ?>assets/plugins/themify-icons/themify-icons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Main Stylesheet -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo $basepath; ?>assets/css/style.css" rel="stylesheet">
 
     <style>
     .quantity-container {
@@ -91,7 +93,7 @@
     <header class="navigation">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="index.php">
-                <img class="img-fluid small-logo" src="assets/images/ab.jpeg" alt="parsa">
+                <img class="img-fluid small-logo" src="<?php echo $basepath; ?>assets/images/ab.jpeg" alt="parsa">
             </a></a>
             <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navogation"
                 aria-controls="navogation" aria-expanded="false" aria-label="Toggle navigation">
