@@ -18,7 +18,7 @@ include("../header.php");
         <?php
            
                 $sessid = 1;
-                $userid = 999;
+                $userid = $_SESSION['uid'];
 
                 require "2-reserve-lib.php";
                 $seats = $_RSV->get($sessid);
