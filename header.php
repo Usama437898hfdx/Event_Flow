@@ -147,6 +147,8 @@ $basepath="http://localhost/Event_Flow/";
                             <a class="dropdown-item" href="admin/index.php">Dashboard</a>
                             <a class="dropdown-item" href="admin/profile.php">User Profile</a>
                             <a class="dropdown-item" href="calendar.php">Event Calendar</a>
+                            <a class="dropdown-item" href="admin/wallet.php">Wallet</a>
+                            <a class="dropdown-item" href="admin/my_ticket.php">My Tickets</a>
                             <a class="dropdown-item" href="admin/includes/logout.php">Logout</a>
                         </div>
                     </li>
