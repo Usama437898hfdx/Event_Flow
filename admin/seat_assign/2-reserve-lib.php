@@ -30,7 +30,7 @@ class Reserve {
   // (D) GET SEATS FOR GIVEN SESSION
   function get ($sessid) {
     $this->query(
-      "SELECT sa.`seat_name`,sa.`seat_id`, r.`user_id` FROM `seats` sa
+      "SELECT sa.`seat_name`,sa.`seat_id`, r.`ticket_id` FROM `seats` sa
        LEFT JOIN `sessions` se USING (`room_id`)
        LEFT JOIN `reservations` r USING(`seat_name`)
        WHERE se.`session_id`=?
@@ -42,7 +42,7 @@ class Reserve {
 
   // (E) SAVE RESERVATION
   function save ($sessid, $userid, $seats) {
-    $sql = "INSERT INTO `reservations` (`session_id`, `seat_name`, `user_id`) VALUES ";
+    $sql = "INSERT INTO `reservations` (`session_id`, `seat_name`, `ticket_id`) VALUES ";
     $data = [];
     foreach ($seats as $seat) {
       $sql .= "(?,?,?),";

@@ -28,20 +28,23 @@ include("includes/header.php"); ?>
                         <h1 class="card-title">Create New Sub Event</h1>
                         <form action="includes/db.php" method="POST" enctype="multipart/form-data">
                             <input type="hidden" name="event_type" value="sub">
+                            <input type="hidden" name="category_id" value="0">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="ticketName">Main Event:</label>
                                         <select name="parent_id" class="form-control" id="mainEventSelect">
                                             <option value="">Select Main Event Name</option>
-                                            <?php $fetch_parent = mysqli_query($con, "SELECT * FROM `events` WHERE `parent_id` IS  NULL AND `organizer_id` = $id AND is_deleted=0 ");
+                                            <?php $fetch_parent = mysqli_query($con, "SELECT * FROM `events`  WHERE `parent_id` IS  NULL AND `organizer_id` = $id AND is_deleted=0 ");
                                             foreach ($fetch_parent as $parent) { ?>
-                                             <option value="<?php echo $parent['event_id']; ?>"
+                                            <option value="<?php echo $parent['event_id']; ?>" title="<?php echo $parent['category_id']; ?>"
                                                 data-start-date="<?php echo $parent['start_date']; ?>"
                                                 data-end-date="<?php echo $parent['end_date']; ?>">
+
                                                 <?php echo $parent['name']; ?>
+
                                             </option>
-                                            
+
                                             <?php } ?>
                                         </select>
                                     </div>
@@ -51,6 +54,7 @@ include("includes/header.php"); ?>
                                         <label for="ticketName">Event Name:</label>
                                         <input type="text" class="form-control" id="eventname"
                                             placeholder="Your Event Name" name="name" required>
+
                                     </div>
                                 </div>
 
@@ -93,6 +97,12 @@ include("includes/header.php"); ?>
                                         <input class="form-control" type="text" id="location" name="location" required>
                                     </div>
                                 </div>
+
+                                <?php $sql = mysqli_query($con,"(SELECT category_id FROM events)");
+                                $req = mysqli_fetch_assoc($sql);
+                                $category_id= $req['category_id'];
+
+                                ?>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="capacity">capacity:</label>
@@ -100,7 +110,19 @@ include("includes/header.php"); ?>
                                             required>
                                     </div>
                                 </div>
+                                
                             </div>
+
+
+
+
+
+
+
+
+
+
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -143,14 +165,24 @@ document.getElementById('mainEventSelect').addEventListener('change', function()
     var selectedOption = this.options[this.selectedIndex];
     var startDate = selectedOption.getAttribute('data-start-date');
     var endDate = selectedOption.getAttribute('data-end-date');
+    var categoryId = selectedOption.getAttribute('title');
+
+
+    if(categoryId == 7){
+        document.getElementById('capacity').setAttribute('value', 96);
+        document.getElementById('capacity').setAttribute('readonly', "readonly");
+    }
+    else{
+        document.getElementById('capacity').setAttribute('value','');
+        document.getElementById('capacity').removeAttribute('readonly');
+    }
 
     document.getElementById('start_date').setAttribute('min', startDate);
     document.getElementById('end_date').setAttribute('min', startDate);
     document.getElementById('start_date').setAttribute('max', endDate);
     document.getElementById('end_date').setAttribute('max', endDate);
+    // document.getElementById('category_id').value = categoryId;
 });
-
-
 </script>
 
 <?php include("includes/footer.php"); ?>

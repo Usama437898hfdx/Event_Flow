@@ -1,12 +1,11 @@
 <?php
-session_start();
-
+include("header.php");
 if (!isset($_SESSION['Attendee']) && !isset($_SESSION['Organizer']) && !isset($_SESSION['Admin'])  ) {
   // Redirect to the sign-in page if not signed in
   header("Location: admin/login.php");
   exit();
 }
-include("header.php");
+
 
 
 if (isset($_GET["id"])) {

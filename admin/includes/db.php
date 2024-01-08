@@ -220,7 +220,10 @@ if (isset($_POST['create_new'])) {
             echo "User not inserted";
         }
     } else {
-        $insert = mysqli_query($con, "INSERT INTO `events`(`parent_id`,`event_id`, `name`, `description`, `Status`, `start_date`, `end_date`, `start_time`, `end_time`, `location`, `capacity`, `image`,`organizer_id`) VALUES ('$parent_id','$id','$name','$description','$status','$start_date','$end_date','$start_time','$end_time','$location','$capacity','$image','$org_id')");
+        $q = mysqli_query($con,"(select category_id from events where event_id = $parent_id)");
+        $req = mysqli_fetch_assoc($q);
+        $cat = $req['category_id'];
+        $insert = mysqli_query($con, "INSERT INTO `events`(`parent_id`,`category_id`,`event_id`, `name`, `description`, `Status`, `start_date`, `end_date`, `start_time`, `end_time`, `location`, `capacity`, `image`,`organizer_id`) VALUES ('$parent_id',$cat,'$id','$name','$description','$status','$start_date','$end_date','$start_time','$end_time','$location','$capacity','$image','$org_id')");
         if ($insert) {
             header("location:../events.php");
             exit();
@@ -581,6 +584,7 @@ if (isset($_POST['create_category'])) {
     $insert = mysqli_query($con, "INSERT INTO `event_categories`(`category_id`,`name`) VALUES ('$category_id','$name')");
     if ($insert) {
         header("location:../categories.php");
+
         exit();
     } else {
         echo "category not inserted";

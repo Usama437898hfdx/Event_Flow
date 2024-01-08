@@ -20,7 +20,7 @@
   /* margin-bottom: 10px; */
 
   /* background: #a4bcff; */
-  background-image: url('../admin/assets/images/seat/available.png');
+  background-image: url('../assets/images/seat/available.png');
   background-size: 100% 100%;
 }
 #layout .seat {
@@ -28,11 +28,11 @@
 }
 .taken {
 
-  background-image: url('../admin/assets/images/seat/selected.png');
+  background-image: url('../assets/images/seat/selected.png');
   background-size: 100% 100%;}
 .selected {
 
-  background-image: url('../admin/assets/images/seat/booked.png');
+  background-image: url('../assets/images/seat/booked.png');
   background-size: 100% 100%;
 }
 

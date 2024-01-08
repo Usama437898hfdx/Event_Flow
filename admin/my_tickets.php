@@ -90,6 +90,9 @@ include("includes/header.php");
         }   else if (tempId === 4) {
             // Redirect to the view ticket page with the reference ID for tempId = 4
             window.open('e_ticket4.php?tt_id=' + ticketId, '_blank');
+        }  else if (tempId === 5) {
+            // Redirect to the view ticket page with the reference ID for tempId = 4
+            window.open('e_ticket5.php?tt_id=' + ticketId, '_blank');
         } 
         else {
             // Handle other cases if needed

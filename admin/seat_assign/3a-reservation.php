@@ -1,5 +1,5 @@
 <?php
-include("../header.php");
+include("../../header.php");
 ?>
 
 <script src="3b-reservation.js"></script>
@@ -16,19 +16,18 @@ include("../header.php");
         </div>
 
         <?php
-           
+        
                 $sessid = 1;
-                $userid = 999;
+                $userid = $_GET['tid'];
 
-                
-                require "2-reserve-lib copy.php";
+                require "2-reserve-lib.php";
                 $seats = $_RSV->get($sessid);
                 ?>
 
         <!-- (C) DRAW SEATS LAYOUT -->
         <div id="layout"><?php
                                     foreach ($seats as $s) {
-                                        $taken = is_numeric($s["user_id"]);
+                                        $taken = is_numeric($s["ticket_id"]);
                                         printf(
                                             "<div class='seat%s'%s>%s</div>",
                                             $taken ? " taken" : "",
@@ -48,11 +47,12 @@ include("../header.php");
             </div>
             </br>
 
-            <form id="ninja" method="post" action="4-save copy.php">
+            <form id="ninja" method="post" action="4-save.php">
                 <input type="hidden" name="sessid" value="<?= $sessid ?>">
                 <input type="hidden" name="userid" value="<?= $userid ?>">
             </form>
-            <button id="go" onclick="reserve.save()">Reserve Seats</button>
+           
+            <button id="go" onclick="reserve.save(<?php echo $_GET['c'];?>)">Reserve Seats</button> 
         </div>
 
     </div>
@@ -64,4 +64,4 @@ include("../header.php");
 </html>
 <?php
 
-include("../footer.php"); ?>
+include("../../footer.php"); ?>

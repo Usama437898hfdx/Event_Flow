@@ -1,6 +1,4 @@
 <?php 
-session_start();
-
 
 include("header.php");
 $event_id = $_GET['id'];

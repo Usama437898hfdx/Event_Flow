@@ -49,6 +49,7 @@ include("includes/header.php");
                                    
                              $fetch_mytickets = mysqli_query($con, "SELECT  
                              e.*,
+                             cat.category_id AS cid,
                              t.Qrcode,
                              t.is_booked,
                              tt.price AS ticket_price,
@@ -56,6 +57,7 @@ include("includes/header.php");
                              tt.name AS ticket_type_name,
                              t.ticket_type_id AS tt_id,
                              COUNT(t.is_booked IS NOT NULL) AS Mytickets_Count
+                        
                          FROM 
                          
                              events e
@@ -63,6 +65,8 @@ include("includes/header.php");
                              ticket t ON t.event_id = e.event_id
                          LEFT JOIN 
                              ticket_type tt ON t.ticket_type_id = tt.ticket_type_id 
+                        LEFT JOIN 
+                             event_categories cat ON cat.category_id = e.category_id
                          WHERE 
                              t.is_deleted = 0 
                             AND t.is_booked = $id
@@ -90,8 +94,24 @@ include("includes/header.php");
                                             <?php echo $myticket['Mytickets_Count']; ?>
                                         </td>
                                         <td>
-                                        <a href="my_tickets.php?tt_id=<?php echo $myticket['tt_id'];?>"
+                                            <a href="my_tickets.php?tt_id=<?php echo $myticket['tt_id'];?>"
                                                 class="btn btn-primary">View mytickets</a>
+                                                <?php 
+if ($myticket['cid'] == 7) { 
+    $t = mysqli_query($con, "(select COUNT(ticket_id) AS count from reservations where ticket_id = $myticket[ticket_id])");
+    $req = mysqli_fetch_assoc($t);
+    $count = $req['count'];
+
+    // Check if the user can still reserve more seats
+    if ($count < $myticket['Mytickets_Count']) {
+        ?>
+        <a href="seat_assign/3a-reservation.php?tid=<?php echo $myticket['ticket_id']; ?>&c=<?php echo $myticket['Mytickets_Count']; ?>"
+            class="btn btn-primary">Seat</a>
+        <?php
+    }
+}
+?>
+
                                             <!-- <button class="btn btn-danger" onclick=" ">Refund</button> -->
                                         </td>
                                     </tr>

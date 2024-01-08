@@ -4,4 +4,9 @@ require "2-reserve-lib.php";
 
 // (B) SAVE
 $_RSV->save($_POST["sessid"], $_POST["userid"], $_POST["seats"]);
-echo "SAVED";
+if ($_RSV) {
+    header("location:../my_ticket.php");
+    exit();
+} else {
+    echo "Seat is not reserved";
+}
