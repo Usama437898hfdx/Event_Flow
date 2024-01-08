@@ -318,6 +318,9 @@ if (!$loggedIn) {
                     <?php } ?>
 
                     <?php if (isset($_SESSION['Organizer'])) { ?>
+                        <li><a href="template.php" aria-expanded="false">
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Ticket Templates</span>
+                            </a></li>
                         <li><a href="Blogs.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Blogs</span>
                             </a></li>

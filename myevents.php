@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
 
 include("header.php"); ?>
 <h3> UPCOMING EVENTS </h3>
