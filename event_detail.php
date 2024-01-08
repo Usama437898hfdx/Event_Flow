@@ -307,12 +307,12 @@ $formatted_date = date('d/m/Y', strtotime($start_date));
 echo $formatted_date;
 ?>
                                 </li>
-                                <li class="list-inline-item">Time: <?php
+                                <!-- <li class="list-inline-item">Time: <?php
 $time = new DateTime($event['start_time']);
 $formattedTime = $time->format('g:i A');
 echo $formattedTime;
 ?>
-                                </li>
+                                </li> -->
                             </ul>
                             <h6><a class="text-dark"
                                     href=subevents.php?id=<?php echo $event ['event_id'] ?>><?php echo $event['name']; ?></a>
@@ -339,12 +339,12 @@ $formatted_date = date('d/m/Y', strtotime($start_date));
 echo $formatted_date;
 ?>
                                 </li>
-                                <li class="list-inline-item">Time: <?php
+                                <!-- <li class="list-inline-item">Time: <?php
 $time = new DateTime($event['start_time']);
 $formattedTime = $time->format('g:i A');
 echo $formattedTime;
 ?>
-                                </li>
+                                </li> -->
                             </ul>
                             <h6><a class="text-dark"
                                     href=subevents.php?id=<?php echo $event ['event_id'] ?>><?php echo $event['name']; ?></a>
