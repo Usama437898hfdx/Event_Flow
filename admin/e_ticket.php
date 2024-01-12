@@ -312,10 +312,8 @@ WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  =
                 </div>
                 <div class="barcode" id="qrcode">
                 <script type="text/javascript">
-new QRCode(document.getElementById("qrcode"), "<?php echo $ticket['Qrcode']; ?>");
+new QRCode(document.getElementById("qrcode"), "<?php echo $ticket['name'].$ticket['named'].$ticket['Qrcode']; ?>");
 </script>
-                    
-               
                 </div>
                 <p class="ticket-number">
                     #<?php echo $ticket['ticket_id']; ?>

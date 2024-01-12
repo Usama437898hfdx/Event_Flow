@@ -19,7 +19,9 @@ include("../header.php");
 <body>
 
 <!-- Your header content goes here -->
-
+<br></br>
+<br></br>
+<br></br>
 <div class="container">
     <img class="img-fluid" src="../assets/images/re.png" >
 </div>
@@ -27,5 +29,9 @@ include("../header.php");
 <div class="container">
  
 </div>
+
+<br></br>
+<br></br>
+<br></br>
 
 <?php include("../footer.php"); ?>

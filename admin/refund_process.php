@@ -19,14 +19,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $OId = $o['organizer_id'];
 
 
-
-    // $mytickets = mysqli_query($con, "SELECT t.ticket_id, e.*, tt.name  AS ticket_type_name, 
-    // tt.temp_id as temp_id,tt.price, t.Qrcode, t.discount, t.ticket_type_id 
-    // FROM ticket t JOIN events e ON t.event_id = e.event_id JOIN ticket_type tt 
-    // ON t.ticket_type_id = tt.ticket_type_id
-    // WHERE t.is_deleted = 0 AND t.is_booked = '$uid' 
-    // AND t.ticket_type_id  = '".$_GET['tt_id']."'");
-
     // Insert a record into the wallet table for the refund
     $insertWalletQuery = "INSERT INTO wallet (`from_user_id`, `to_user_id`, `amount`)
                           VALUES ('$fromUserId', '$OId', '$refundAmount')";
