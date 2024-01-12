@@ -70,13 +70,27 @@ include("includes/header.php");
                                             <button class="btn btn-primary text-white"
                                                 onclick="viewTicket(<?php echo $myticket['ticket_id']; ?>, <?php echo $myticket['temp_id']; ?>)">View
                                                 Ticket</button>
-                                            <?php if($myticket['temp_id'] == 5){
+                                                <?php
+if ($myticket['temp_id'] == 5) {
+    // Some other logic for temp_id 5
+} else {
+    $startTimestamp = strtotime($myticket['start_date']);
+    $currentTimestamp = time();
+    $timeDifference = $startTimestamp - $currentTimestamp;
+    
+    // Check if there are 36 hours or less left
+    if ($timeDifference <= 36 * 3600) { // 36 hours in seconds
+        // Do not show the button
+    } else {
+        // Show the "Refund" button
+        ?>
+        <button class="btn btn-danger text-white"
+            onclick="refundticket(<?php echo $myticket['ticket_id']; ?>,<?php echo $myticket['price']; ?>)">Refund</button>
+        <?php
+    }
+}
+?>
 
-                                          }
-                                          else{?>
-                                            <button class="btn btn-danger text-white"
-                                                onclick="refundticket(<?php echo $myticket['ticket_id']; ?>,<?php echo $myticket['price']; ?>)">Refund</button>
-                                            <?php   } ?>
                                         </td>
                                     </tr>
                                     <?php } ?>
