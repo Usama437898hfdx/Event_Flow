@@ -10,8 +10,6 @@ JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id
 JOIN users ON t.is_booked = users.id
 JOIN reservations  r ON r.ticket_id = t.ticket_id
 WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  = ".$_GET['tt_id'].";");
-
- $ticket = mysqli_fetch_assoc($tickets); 
 ?>
 <link rel="stylesheet" type="text/css" href="print-styles.css" media="print">
 
@@ -185,6 +183,10 @@ WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  =
 </style>
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
+<?php
+foreach($tickets as $ticket){
+?>
+
 <div class="cardWrap">
   <div class="card cardLeft">
     <h1>EVENT FLOW<span></span></h1>
@@ -225,3 +227,6 @@ WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  =
     </div>
   </div>
 </div>
+<?php 
+}
+?>

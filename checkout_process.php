@@ -97,9 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <tr style="border-bottom: 1px solid #ddd;">
               <td style="padding: 10px;">' . $cart_data['name'] . '</td>
               <td style="padding: 10px;">' . $cart_data['ticket_type'] . '</td>
-              <td style="padding: 10px;">$' . $cart_data['price'] . '</td>
+              <td style="padding: 10px;">PKR' . $cart_data['price'] . '</td>
               <td style="padding: 10px;">' . $cart_data['quantity'] . '</td>
-              <td style="padding: 10px;">$' . ($cart_data['quantity'] * $cart_data['price']) . '</td>
+              <td style="padding: 10px;">PKR' . ($cart_data['quantity'] * $cart_data['price']) . '</td>
             </tr>';
             $total += $cart_data['quantity'] * $cart_data['price'];
         }
