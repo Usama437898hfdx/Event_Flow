@@ -184,6 +184,7 @@ WHERE t.is_deleted = 0 AND t.is_booked = ".$_SESSION['uid']." AND t.ticket_id  =
 <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 <?php
+$i=1;
 foreach($tickets as $ticket){
 ?>
 
@@ -218,9 +219,9 @@ foreach($tickets as $ticket){
     <div class="number">
       <span><strong><?php echo $ticket['name']; ?></strong></span>
     </div>
-    <div class="barcode" id="qrcode"></div>
+    <div class="barcode" id="qrcode<?php echo $i;?>"></div>
     <script type="text/javascript">
-      new QRCode(document.getElementById("qrcode"), "<?php echo $ticket['Qrcode']; ?>");
+      new QRCode(document.getElementById("qrcode<?php echo $i++;?>"), "<?php echo $ticket['rsn'].$ticket['name'].$ticket['Qrcode']; ?>");
     </script>
     <div>
       <span class="tic" >Ticket#<?php echo $ticket['rsn']; ?></span>
