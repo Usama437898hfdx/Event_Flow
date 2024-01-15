@@ -39,9 +39,10 @@ include("includes/header.php");
                                     <tr>
                                         <th>Event name</th>
                                         <th>ticket type</th>
-                                        <th>Price</th>
+                                        <th>Ticket Quantity</th>
                                         <th>Ticket Sold</th>
-                                     
+                                        <th>Ticket Sold Price</th>
+                                        <th>Ticket Left</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,9 +63,7 @@ include("includes/header.php");
                              tt.name AS ticket_type_name,
                              t.ticket_type_id AS tt_id,
                              COUNT(t.is_booked IS NOT NULL) AS Mytickets_Count
-                        
                          FROM 
-                         
                              events e
                          LEFT JOIN 
                              ticket t ON t.event_id = e.event_id
@@ -79,9 +78,9 @@ include("includes/header.php");
                              e.event_id, tt.ticket_type_id, e.name, tt.name, t.is_booked = $OId
                          HAVING 
                          Mytickets_Count > 0
-                         LIMIT 0, 25;
-                         " );
-                         
+                         LIMIT 0, 25;" );
+
+
                                     foreach ($fetch_mytickets as $myticket) {
                                         ?>
 
@@ -93,12 +92,18 @@ include("includes/header.php");
                                             <?php echo $myticket['ticket_type_name']; ?>
                                         </td>
                                         <td>
-                                            <?php echo $myticket['ticket_price'] *  $myticket['Mytickets_Count']; ?>
+                                            <?php echo $myticket['capacity']; ?>
                                         </td>
                                         <td>
                                             <?php echo $myticket['Mytickets_Count']; ?>
                                         </td>
-                                       
+                                        <td>
+                                            <?php echo $myticket['ticket_price'] * $myticket['Mytickets_Count']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $myticket['capacity']-$myticket['Mytickets_Count'] ; ?>
+                                        </td>
+
                                     </tr>
                                     <?php } ?>
                                 </tbody>
