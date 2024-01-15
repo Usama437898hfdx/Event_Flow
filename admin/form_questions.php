@@ -31,7 +31,7 @@ include("includes/header.php");
                         <div class="d-flex justify-content-between">
                             <h1 class="card-title">Form Questions</h1>
 
-                            <a href="create_question_form.php?fid=<?php echo $questions['form_id']; ?>"
+                            <a href="create_question_form.php?"
                                 style="margin-bottom:12px !important;" class="btn btn-primary">Create new</a>
                         </div>
                         <!-- Display Created Tickets -->
@@ -48,12 +48,12 @@ include("includes/header.php");
                                 <tbody>
                                     <?php
         
-        $fetch_questions = mysqli_query($con,"SELECT q.*,e.parent_id,e.name As eventname,f.form_id
+        $fetch_questions = mysqli_query($con,"SELECT q.*, e.parent_id ,e.name As eventname, f.form_id
         FROM events e
         LEFT JOIN registration_form f ON f.event_id = e.event_id
         LEFT JOIN registrationquestions q  ON q.form_id = f.form_id
         WHERE 
-    e.organizer_id = $id AND e.parent_id IS NOT NULL
+    e.organizer_id = $id AND e.parent_id IS NOT NULL AND f.form_id  = '".$_GET['form_id']."'
         " );
 
         foreach($fetch_questions as $questions){  
@@ -69,7 +69,7 @@ include("includes/header.php");
                                         </td>
                                         <td>
                                             <button class="btn btn-danger"
-                                                onclick="openDeleteModal('<?php echo $event['question_id']; ?>');">Delete</button>
+                                                onclick="openDeleteModal('<?php echo $question['question_id']; ?>');">Delete</button>
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -91,7 +91,7 @@ include("includes/header.php");
 
 
 
-<div class="modal fade" id="DeleteEventModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
+<div class="modal fade" id="DeleteQuestionModal" tabindex="-1" role="dialog" style="display: none;" aria-hidden="true">
     <div class="modal-dialog ">
         <form id="deleteForm" action="includes/db.php" method="POST">
             <div class="modal-content">
@@ -102,13 +102,13 @@ include("includes/header.php");
                 <div class="container">
                     <div class="modal-body">
                         <p class="text-center">Are you sure you want to delete this event?</p>
-                        <input type="hidden" id="delete_addon_id" name="addon_id" value="">
+                        <input type="hidden" id="delete_question_id" name="question_id" value="">
 
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="deleteAddon" class="btn btn-danger">Delete</button>
+                    <button type="submit" name="deleteQuestion" class="btn btn-danger">Delete</button>
                 </div>
 
             </div>
@@ -121,19 +121,10 @@ include("includes/header.php");
 
 
 <script>
-function openEditModal(id, name, price) {
-    document.getElementById("edit_addon_id").value = id;
-    document.getElementById("edit_name").value = name;
-    document.getElementById("edit_price").value = price;
 
-
-    $("#EditEventModal").modal("show");
-
-}
-
-function openDeleteModal(id) {
-    document.getElementById("delete_addon_id").value = id;
-    $("#DeleteEventModal").modal("show");
+function openDeleteModal(question_id) {
+    document.getElementById("delete_question_id").value = question_id;
+    $("#DeleteQuestionModal").modal("show");
 }
 </script>
 
