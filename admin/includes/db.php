@@ -535,7 +535,7 @@ if (isset($_POST["edit_addon"])) {
 
 
 
-
+// create question form
 if (isset($_POST["add_form"])) {
 
     $form_id = $_POST["form_id"];
@@ -546,7 +546,7 @@ if (isset($_POST["add_form"])) {
        
     
     if ($insertform) {
-        header("location:../question_formc.php");
+        header("location:../question_form.php");
         exit();
     } else {
         echo "form not inserted";
