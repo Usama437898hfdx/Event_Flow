@@ -342,9 +342,6 @@ if (!$loggedIn) {
                     <?php } ?>
 
                     <?php if (!isset($_SESSION['Attendee'])) { ?>
-                        <li><a href="calender.php" aria-expanded="false">
-                                <i class="icon-badge menu-icon"></i><span class="nav-text">Calender</span>
-                            </a></li>
                         <li><a href="index.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Analytics</span>
                             </a></li>
