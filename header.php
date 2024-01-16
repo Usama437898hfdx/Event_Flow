@@ -111,6 +111,11 @@ $basepath="http://localhost/Event_Flow/";
                     <li class="nav-item">
                         <a class="nav-link text-uppercase text-dark" href="allevents.php">Events</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase text-dark" href="policies.php">Policies</a>
+                    </li>
+
+
                     <?php if (!isset($_SESSION['Attendee']) && !isset($_SESSION['Organizer']) && !isset($_SESSION['Admin'])) { ?>
 
                     <li class="nav-item dropdown">

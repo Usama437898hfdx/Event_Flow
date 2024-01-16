@@ -73,21 +73,28 @@ include("includes/header.php");
                                                 <?php
 if ($myticket['temp_id'] == 5) {
     // Some other logic for temp_id 5
-} else {
-    $startTimestamp = strtotime($myticket['start_date']);
-    $currentTimestamp = time();
-    $timeDifference = $startTimestamp - $currentTimestamp;
-    
-    // Check if there are 36 hours or less left
-    if ($timeDifference <= 36 * 3600) { // 36 hours in seconds
-        // Do not show the button
+}  else {
+
+$startTimestamp = strtotime($myticket['start_date']);
+$currentTimestamp = time();
+$timeDifference = $startTimestamp - $currentTimestamp;
+
+    // Calculate refund amount based on time difference
+    if ($timeDifference > 36 * 3600) {
+        // Fully refund if more than 36 hours left
+        $refundPercentage = 100;
+    } elseif ($timeDifference > 30 * 3600) {
+        // 50% refund if between 30 and 36 hours left
+        $refundPercentage = 70;
     } else {
-        // Show the "Refund" button
-        ?>
-        <button class="btn btn-danger text-white"
-            onclick="refundticket(<?php echo $myticket['ticket_id']; ?>,<?php echo $myticket['price']; ?>)">Refund</button>
-        <?php
+        // 70% refund if between 22 and 30 hours left
+        $refundPercentage = 50;
     }
+
+    $refundAmount = $myticket['price'] * ($refundPercentage / 100);
+    ?>
+    <button class="btn btn-danger text-white" onclick="refundConfirmation(<?php echo $myticket['ticket_id']; ?>, <?php echo $refundAmount; ?>)">Refund</button>
+    <?php
 }
 ?>
 
@@ -131,26 +138,29 @@ function viewTicket(ticketId, tempId) {
 //     window.open('refund.php?tt_id=' + ticketId );
 // }
 
-function refundticket(ticketId, refundAmount) {
-
-
-    $.ajax({
-        type: 'POST',
-        url: 'refund_process.php',
-        data: {
-            amount: refundAmount,
-            ticket_id: ticketId // Include the ticket_id in the data sent to the server
-        },
-        success: function(response) {
-            // Handle the response from the server (e.g., update UI)
-            // console.log(response);
-            // Redirect to refund.php
-            window.location.href = 'refund.php';
-        },
-        error: function(error) {
-            console.error(error);
-        }
-    });
+function refundConfirmation(ticketId, refundAmount) {
+    // Show alert for confirmation
+    var isConfirmed = confirm("Are you sure you want to refund?");
+    
+    if (isConfirmed) {
+        // User confirmed, proceed with refund
+        $.ajax({
+            type: 'POST',
+            url: 'refund_process.php',
+            data: {
+                amount: refundAmount,
+                ticket_id: ticketId
+            },
+            success: function(response) {
+                // Handle the response from the server (e.g., update UI)
+                // Redirect to refund.php or handle as needed
+                window.location.reload(); // Reload the page for simplicity
+            },
+            error: function(error) {
+                console.error(error);
+            }
+        });
+    }
 }
 </script>
 
