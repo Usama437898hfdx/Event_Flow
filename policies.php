@@ -16,8 +16,9 @@
         <p>2.2 The refund amount is subject to the following conditions:</p>
         <ul>
           <li>If the refund request is made more than 36 hours before the event, a full refund will be issued.</li>
-          <li>If the refund request is made between 30 and 36 hours before the event, a 70% refund will be issued.</li>
-          <li>If the refund request is made between 22 and 30 hours before the event, a 50% refund will be issued.</li>
+          <li>If the refund request is made between 30 and 36 hours before the event, a 80% refund will be issued.</li>
+          <li>If the refund request is made between 22 and 30 hours before the event, a 60% refund will be issued.</li>
+          <li>If the refund request is made between 12 and 22 hours before the event, a 40% refund will be issued.</li>
         </ul>
         <p></p>
 

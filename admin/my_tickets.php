@@ -73,28 +73,40 @@ include("includes/header.php");
                                                 <?php
 if ($myticket['temp_id'] == 5) {
     // Some other logic for temp_id 5
-}  else {
+} else {
+    $startDateTime = $myticket['start_date'] . ' ' . $myticket['start_time'];
+    $startTimestamp = strtotime($startDateTime);
+    $currentTimestamp = time();
+    $timeDifference = $startTimestamp - $currentTimestamp;
 
-$startTimestamp = strtotime($myticket['start_date']);
-$currentTimestamp = time();
-$timeDifference = $startTimestamp - $currentTimestamp;
 
+    if ($timeDifference > 12 * 3600) {
     // Calculate refund amount based on time difference
     if ($timeDifference > 36 * 3600) {
         // Fully refund if more than 36 hours left
         $refundPercentage = 100;
     } elseif ($timeDifference > 30 * 3600) {
-        // 50% refund if between 30 and 36 hours left
-        $refundPercentage = 70;
+        // 80% refund if between 30 and 36 hours left
+        $refundPercentage = 80;
+    } elseif ($timeDifference > 22 * 3600) {
+        // 60% refund if between 22 and 30 hours left
+        $refundPercentage = 60;
     } else {
-        // 70% refund if between 22 and 30 hours left
-        $refundPercentage = 50;
+        // 40% refund if less than 22 hours left
+        $refundPercentage = 40;
     }
 
     $refundAmount = $myticket['price'] * ($refundPercentage / 100);
-    ?>
-    <button class="btn btn-danger text-white" onclick="refundConfirmation(<?php echo $myticket['ticket_id']; ?>, <?php echo $refundAmount; ?>)">Refund</button>
-    <?php
+
+    // Basic error check for refundAmount
+    if ($refundAmount > 0) {
+        ?>
+        <button class="btn btn-danger text-white" onclick="refundConfirmation(<?php echo $myticket['ticket_id']; ?>, <?php echo $refundAmount; ?>)">Refund</button>
+        <?php
+    } else {
+        echo "Error: Refund amount is zero or negative.";
+    }
+}
 }
 ?>
 
@@ -138,10 +150,21 @@ function viewTicket(ticketId, tempId) {
 //     window.open('refund.php?tt_id=' + ticketId );
 // }
 
-function refundConfirmation(ticketId, refundAmount) {
-    // Show alert for confirmation
-    var isConfirmed = confirm("Are you sure you want to refund?");
-    
+
+
+function refundConfirmation(ticketId, refundAmount ) {
+    // Show alert with refund conditions and details for confirmation
+    var confirmationMessage = "Are you sure you want to refund?\n\n" +
+        "Refund amount: PKR " + refundAmount.toFixed(2) + "\n\n" +
+        "Refund amount is subject to the following conditions:\n" +
+        "  - If the refund request is made more than 36 hours before the event, a full refund will be issued.\n" +
+        "  - If the refund request is made between 30 and 36 hours before the event, an 80% refund will be issued.\n" +
+        "  - If the refund request is made between 22 and 30 hours before the event, a 60% refund will be issued.\n" +
+        "  - If the refund request is made between 12 and 22 hours before the event, a 40% refund will be issued.\n\n" +
+        " For more details, view our Policies Page ";
+
+    var isConfirmed = confirm(confirmationMessage);
+
     if (isConfirmed) {
         // User confirmed, proceed with refund
         $.ajax({
@@ -162,6 +185,7 @@ function refundConfirmation(ticketId, refundAmount) {
         });
     }
 }
+
 </script>
 
 
