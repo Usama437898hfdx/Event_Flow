@@ -11,9 +11,8 @@
         <p>1.1 Tickets are eligible for a refund only if the refund request is made within a specified time frame before the event date.</p>
         <p>1.2 Refund requests can only be initiated by the user who purchased the ticket.</p>
 
-        <p><strong>2. Refund Processing Time</strong></p>
-        <p>2.1 Refund requests will be processed within 6 hours from the time the request is made.</p>
-        <p>2.2 The refund amount is subject to the following conditions:</p>
+        <p><strong>2. Refund Processing </strong></p>
+        <p>2.1 The refund amount is subject to the following conditions:</p>
         <ul>
           <li>If the refund request is made more than 36 hours before the event, a full refund will be issued.</li>
           <li>If the refund request is made between 30 and 36 hours before the event, a 80% refund will be issued.</li>
