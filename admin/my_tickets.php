@@ -160,7 +160,9 @@ function refundConfirmation(ticketId, refundAmount ) {
         "  - If the refund request is made more than 36 hours before the event, a full refund will be issued.\n" +
         "  - If the refund request is made between 30 and 36 hours before the event, an 80% refund will be issued.\n" +
         "  - If the refund request is made between 22 and 30 hours before the event, a 60% refund will be issued.\n" +
-        "  - If the refund request is made between 12 and 22 hours before the event, a 40% refund will be issued.\n\n" +
+        "  - If the refund request is made between 12 and 22 hours before the event, a 40% refund will be issued.\n" +
+        "  - No refund request will be  made between 0 and 12 hours before the event, refund button will be vanished.\n\n" +
+
         " For more details, view our Policies Page ";
 
     var isConfirmed = confirm(confirmationMessage);
