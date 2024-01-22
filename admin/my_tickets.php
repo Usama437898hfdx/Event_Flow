@@ -9,6 +9,7 @@ if (!isset($_SESSION['Attendee'])) {
 include("includes/config.php");
 include("includes/header.php");
 
+
 ?>
 
 <!-- Content body start -->
@@ -41,6 +42,7 @@ include("includes/header.php");
                                         <th>Event name</th>
                                         <th>tickettype</th>
                                         <th>Price</th>
+                                        <th>Event Start Time left</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -50,12 +52,17 @@ include("includes/header.php");
                                 $mytickets = mysqli_query($con, "SELECT t.ticket_id, e.*, tt.name  AS ticket_type_name, tt.temp_id as temp_id,tt.price, t.Qrcode, t.discount, t.ticket_type_id FROM ticket t JOIN events e ON t.event_id = e.event_id JOIN ticket_type tt ON t.ticket_type_id = tt.ticket_type_id WHERE t.is_deleted = 0 AND t.is_booked = '$uid' AND t.ticket_type_id  = '".$_GET['tt_id']."'");
                                 $cinema = 0;
                                 $i = 1;
+                          
+
+
                                 foreach ($mytickets as $myticket) { 
                                     if($i == 1){
                                         $i++;
                                         $cinema = $myticket['temp_id'] == 5 ? $myticket['ticket_id'] : 0;
                                     }
+                                  
                                     ?>
+
                                     <tr>
                                         <td>
                                             <?php echo $myticket['name']; ?>
@@ -67,10 +74,23 @@ include("includes/header.php");
                                             <?php echo $myticket['price']; ?>
                                         </td>
                                         <td>
+
+                                            <?php    
+                                            $startDateTime = $myticket['start_date'] . ' ' . $myticket['start_time'];
+                                            $startTimestamp = strtotime($startDateTime);
+                                            $currentTimestamp = time();
+                                            $timeDifferences = $startTimestamp - $currentTimestamp;
+                                            // Calculate hours and minutes
+                                            $hours = floor($timeDifferences / 3600);
+                                            $minutes = floor(($timeDifferences % 3600) / 60);
+                                            echo "$hours hours & $minutes minutes";?>
+
+                                        </td>
+                                        <td>
                                             <button class="btn btn-primary text-white"
                                                 onclick="viewTicket(<?php echo $myticket['ticket_id']; ?>, <?php echo $myticket['temp_id']; ?>)">View
                                                 Ticket</button>
-                                                <?php
+                                            <?php
 if ($myticket['temp_id'] == 5) {
     // Some other logic for temp_id 5
 } else {
@@ -101,8 +121,9 @@ if ($myticket['temp_id'] == 5) {
     // Basic error check for refundAmount
     if ($refundAmount > 0) {
         ?>
-        <button class="btn btn-danger text-white" onclick="refundConfirmation(<?php echo $myticket['ticket_id']; ?>, <?php echo $refundAmount; ?>)">Refund</button>
-        <?php
+                                            <button class="btn btn-danger text-white"
+                                                onclick="refundConfirmation(<?php echo $myticket['ticket_id']; ?>, <?php echo $refundAmount; ?>)">Refund</button>
+                                            <?php
     } else {
         echo "Error: Refund amount is zero or negative.";
     }
@@ -152,7 +173,7 @@ function viewTicket(ticketId, tempId) {
 
 
 
-function refundConfirmation(ticketId, refundAmount ) {
+function refundConfirmation(ticketId, refundAmount) {
     // Show alert with refund conditions and details for confirmation
     var confirmationMessage = "Are you sure you want to refund?\n\n" +
         "Refund amount: PKR " + refundAmount.toFixed(2) + "\n\n" +
@@ -187,7 +208,6 @@ function refundConfirmation(ticketId, refundAmount ) {
         });
     }
 }
-
 </script>
 
 
