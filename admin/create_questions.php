@@ -14,8 +14,8 @@ include("includes/header.php"); ?>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void m (0)">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Question Form</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Form Questions</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Question Form</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">View Questions</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Create Questions</a></li>
             </ol>
         </div>
     </div>
@@ -24,7 +24,8 @@ include("includes/header.php"); ?>
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h1 class="card-title">Create Question Form</h1>
+                    <h1 class="card-title">Create Questions</h1>
+                   
                     <div>
                         <button type="button" name="create_addon" onclick="addQuestion()" class="btn btn-primary">Create
                             new</button>
@@ -40,9 +41,8 @@ include("includes/header.php"); ?>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="question1">Question 1 :</label>
-                                <input class="form-control" placeholder="Enter Full Name" readonly
-                                    value="Enter your Full Name" type="text" name="Question[]">
-                                <input class="form-control" type="hidden" name="form_id" id="form_id" required>
+                                <input class="form-control" placeholder="Enter Question" type="text" name="Question[]">
+                                <input class="form-control" type="hidden" name="form_id" id="form_id" value="<?php echo $_GET['fid'];?>" required>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ include("includes/header.php"); ?>
                                 <div class="form-group">
                                     <label for="question">Question ${number}</label>
                                     <div class="input-group">
-                                        <input class="form-control" type="text" name="Question[]" placeholder="Enter Question ${number}">
+                                        <input class="form-control" type="text" name="Question[]" placeholder="Enter Question">
                                         <button type="button" class="btn btn-danger ml-2" onclick="removeQuestion(this)">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
