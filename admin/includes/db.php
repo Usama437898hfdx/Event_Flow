@@ -559,12 +559,13 @@ if (isset($_POST["add_form"])) {
 if (isset($_POST["add_questions"])) {
 
     $question_id = $_POST["question_id"];
+    $form_id = $_POST["form_id"];
     $questionsArray = $_POST["Question"];
     
  
     foreach ($questionsArray as $Question) {
         $Question = mysqli_real_escape_string($con, $Question);
-        $insertRegistration =  mysqli_query($con,"INSERT INTO `registrationquestions` (`question_id`,`Question`) VALUES ('$question_id','$Question')");
+        $insertRegistration =  mysqli_query($con,"INSERT INTO `registrationquestions` (`question_id`,`form_id`,`Question`) VALUES ('$question_id','$form_id','$Question')");
        
     }
 
@@ -572,7 +573,16 @@ if (isset($_POST["add_questions"])) {
     exit();
 }
 
+// delete registration question
+if (isset($_POST["delete_question"])) {
 
+    $question_id = $_POST["question_id"];
+    $Deletequestion = mysqli_query($con, "UPDATE `registrationquestions` SET `is_deleted`= 1 WHERE `question_id` = '$question_id'");
+    if ($Deletequestion) {
+        header("location: ../view_questions.php");
+        exit();
+    }
+}
 
 //Add event categories
 if (isset($_POST['create_category'])) {

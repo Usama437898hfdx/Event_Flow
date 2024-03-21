@@ -61,8 +61,10 @@ include("includes/header.php");
                                             <?php echo $form["eventname"]?>
                                         </td>
                                         <td>
-                                            <a href="form_questions.php?fid=<?php echo $form['form_id']; ?>"
+                                            <a href="view_questions.php?fid=<?php echo $form['form_id']; ?>"
                                                 class="btn btn-primary">View Questions</a>
+                                            <a href="create_questions.php?fid=<?php echo $form['form_id']; ?>"
+                                                class="btn btn-primary">Create Question</a>
                                         </td>
                                     </tr>
                                     <?php } ?>
