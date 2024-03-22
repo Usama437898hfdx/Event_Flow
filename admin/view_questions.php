@@ -19,7 +19,7 @@ include("includes/header.php");
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Question Form</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">View Questions</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Form Questions</a></li>
             </ol>
         </div>
     </div>
@@ -41,7 +41,7 @@ include("includes/header.php");
                                     <tr>
                                         <th>Event Name</th>
                                         <th>Question</th>
-                                        <th>Action</th>
+                                        <!-- <th>Action</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,7 +51,7 @@ include("includes/header.php");
                                     JOIN registration_form f ON f.event_id = e.event_id
                                     JOIN registrationquestions q ON q.form_id = f.form_id
                                     WHERE 
-                                    e.organizer_id= '$id' AND e.parent_id IS NOT NULL AND f.form_id  = $_GET[fid] AND q.is_deleted = 0");
+                                    e.organizer_id= '$id' AND e.parent_id IS NOT NULL AND f.form_id  = $_GET[fid] ");
 
                                     foreach ($fetch_questions as $question) {
                                     ?>
@@ -62,10 +62,10 @@ include("includes/header.php");
                                         <td>
                                             <?php echo $question["Question"] ?>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <button class="btn btn-danger"
                                                 onclick="openDeleteModal(<?php echo $question['question_id']; ?>);">Delete</button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     <?php } ?>
                                 </tbody>
@@ -83,8 +83,8 @@ include("includes/header.php");
         <form id="deleteForm" action="includes/db.php" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete Question</h5>
-                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                    <h5 class="modal-title">Delete Event</h5>
+                    <button type="submit" name="delete" data-dismiss="modal"><span>×</span></button>
                 </div>
                 <div class="container">
                     <div class="modal-body">
@@ -94,7 +94,7 @@ include("includes/header.php");
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" name="delete_question" class="btn btn-danger">Delete</button>
+                    <button type="submit" name="deleteQuestion" class="btn btn-danger">Delete</button>
                 </div>
             </div>
         </form>
@@ -103,7 +103,7 @@ include("includes/header.php");
 
 <script>
 function openDeleteModal(question_id) {
-    document.getElementById("question_id").value = question_id;
+    document.getElementById("delete_question_id").value = question_id;
     $("#DeleteQuestionModal").modal("show");
 }
 </script>
