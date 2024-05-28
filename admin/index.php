@@ -10,12 +10,17 @@ include("includes/header.php"); ?>
         <!--**********************************
             Content body start
         ***********************************-->
+   
+                   
+              
+        <?php if (isset($_SESSION['Admin'])) { ?>
         <div class="content-body">
 
             <div class="container-fluid mt-3">
                 <div class="row">
                     <div class="col-lg-3 col-sm-6">
                         <div class="card gradient-1">
+                       
                             <div class="card-body">
                                 <h3 class="card-title text-white">Total Attendee</h3>
                                 <div class="d-inline-block">
@@ -68,8 +73,125 @@ include("includes/header.php"); ?>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
 
-                <div class="row">
+
+               
+    <div class="content-body">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if (isset($_SESSION['Organizer'])) { ?>
+    <title>MY EVENTS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .event-container {
+            /* margin-top: 30px; */
+            /* width: 100%; */
+            /* max-width: 100%; */
+            /* padding: 0 15px; */
+            /* margin-left: 8px !important;
+            margin-right: -8px !important; */
+        }
+        .event-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            margin: 15px;
+            flex: 1 1 calc(33.333% - 30px);
+            box-sizing: border-box;
+        }
+        .event-card:hover {
+            transform: scale(1.05);
+        }
+        .event-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .event-card .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .event-card .card-title a {
+            color: #333;
+            text-decoration: none;
+        }
+        .event-card .card-title a:hover {
+            text-decoration: underline;
+        }
+        .event-card .btn {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        .event-card .btn:hover {
+            background-color: #0056b3;
+        }
+        .events-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<bod>
+
+<div class="event-container">
+    <h3 class="text-center">MY EVENTS</h3>
+    <div class="events-wrapper">
+        <?php
+        $id = $_SESSION['uid'];
+
+        if (isset($_SESSION['Organizer'])) {
+            $condition = "AND `organizer_id` = $id ";
+        } else {
+            $condition = "";
+        }
+
+        $currentDate = date("Y-m-d");
+        $fetch_event = mysqli_query($con, "SELECT * FROM `events` WHERE is_deleted = 0 AND is_active = 1 AND `parent_id` IS NULL $condition");
+        foreach ($fetch_event as $event) {
+        ?>
+            <div class="event-card">
+                <img src="../assets/images/events/<?php echo $event['image']; ?>" alt="Event Image">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="../subevents.php?id=<?php echo $event['event_id']; ?>"><?php echo $event['name']; ?></a></h5>
+                    <p class="card-text"><?php echo $event['description']; ?></p>
+                    <a href="../subevents.php?id=<?php echo $event['event_id']; ?>" class="btn">View Detail</a>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
+    </div>
+    <?php } ?>
+</div>
+
+    </div>
+ 
+
+
+
+
+
+
+                <!-- <div class="row">
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-12">
@@ -191,7 +313,7 @@ include("includes/header.php"); ?>
                                     <img src="./images/users/8.jpg" class="rounded-circle" alt="">
                                     <h5 class="mt-3 mb-1">Ana Liem</h5>
                                     <p class="m-0">Senior Manager</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> 
                                 </div>
                             </div>
                         </div>
@@ -203,7 +325,7 @@ include("includes/header.php"); ?>
                                     <img src="./images/users/5.jpg" class="rounded-circle" alt="">
                                     <h5 class="mt-3 mb-1">John Abraham</h5>
                                     <p class="m-0">Store Manager</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> 
                                 </div>
                             </div>
                         </div>
@@ -215,7 +337,7 @@ include("includes/header.php"); ?>
                                     <img src="./images/users/7.jpg" class="rounded-circle" alt="">
                                     <h5 class="mt-3 mb-1">John Doe</h5>
                                     <p class="m-0">Sales Man</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> 
                                 </div>
                             </div>
                         </div>
@@ -227,7 +349,7 @@ include("includes/header.php"); ?>
                                     <img src="./images/users/1.jpg" class="rounded-circle" alt="">
                                     <h5 class="mt-3 mb-1">Mehedi Titas</h5>
                                     <p class="m-0">Online Marketer</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
+                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> 
                                 </div>
                             </div>
                         </div>
@@ -561,7 +683,7 @@ include("includes/header.php"); ?>
                             </div>
                         </div>
                     </div>
-            </div>
+            </div> -->
             <!-- #/ container -->
         </div>
         <!--**********************************

@@ -248,7 +248,7 @@ $detail = mysqli_fetch_assoc($fetch_details);
                         </p>
                         <h5>Location </h5>
                         <p>
-                            <?php echo $detail['description']; ?>
+                            <?php echo $detail['location']; ?>
                         </p>
                     </div>
                     <div class="tab-pane fade" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">

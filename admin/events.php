@@ -89,7 +89,8 @@ include("includes/header.php");
                                             <?php } ?>
 
 
-                                            <button class="btn btn-primary text-white" onclick="openViewModal('<?php echo $event['event_id']; ?>',
+                                            <button class="btn btn-primary text-white" onclick="openViewModal(
+                                                    '<?php echo $event['event_id']; ?>',
                                                     '<?php echo $event['name']; ?>',
                                                     '<?php echo $event['description']; ?>',
                                                     '<?php echo $event['start_date']; ?>',

@@ -52,6 +52,8 @@ include("includes/header.php");
     $qq = mysqli_query($con, $org) or die("Error getting organizer id");
     $o = mysqli_fetch_assoc($qq);
     $OId = $o['organizer_id'];
+    $uid = $_SESSION['uid'];
+
 
                              $fetch_mytickets = mysqli_query($con, "SELECT  
                              e.*,
@@ -69,16 +71,18 @@ include("includes/header.php");
                              ticket t ON t.event_id = e.event_id
                          LEFT JOIN 
                              ticket_type tt ON t.ticket_type_id = tt.ticket_type_id 
-                        LEFT JOIN 
+                         LEFT JOIN 
                              event_categories cat ON cat.category_id = e.category_id
                          WHERE 
                              t.is_deleted = 0 
-                            AND t.is_booked 
+                             AND t.is_booked 
+                             AND e.organizer_id = $uid-- Added condition for specific organizer
                          GROUP BY 
-                             e.event_id, tt.ticket_type_id, e.name, tt.name, t.is_booked = $OId
+                             e.event_id, tt.ticket_type_id, e.name, tt.name, t.is_booked
                          HAVING 
-                         Mytickets_Count > 0
-                         LIMIT 0, 25;" );
+                             Mytickets_Count > 0
+                         LIMIT 0, 25;
+                         " );
 
 
                                     foreach ($fetch_mytickets as $myticket) {

@@ -324,12 +324,12 @@ if (!$loggedIn) {
                         <li><a href="Blogs.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Blogs</span>
                             </a></li>
-                        <li><a href="Addons.php" aria-expanded="false">
+                        <!-- <li><a href="Addons.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Addons</span>
-                            </a></li>
-                        <li><a href="question_form.php" aria-expanded="false">
+                            </a></li> -->
+                        <!-- <li><a href="question_form.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Question Form</span>
-                            </a></li>
+                            </a></li> -->
                         <li><a href="ticket_types.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets Types</span>
                             </a></li>
@@ -337,14 +337,14 @@ if (!$loggedIn) {
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Tickets</span>
                             </a></li>
                         <li><a href="orders.php" aria-expanded="false">
-                                <i class="icon-badge menu-icon"></i><span class="nav-text">orders</span>
+                                <i class="icon-badge menu-icon"></i><span class="nav-text">Orders</span>
                             </a></li>
                     <?php } ?>
 
                     <?php if (!isset($_SESSION['Attendee'])) { ?>
-                        <li><a href="index.php" aria-expanded="false">
+                        <!-- <li><a href="index.php" aria-expanded="false">
                                 <i class="icon-badge menu-icon"></i><span class="nav-text">Analytics</span>
-                            </a></li>
+                            </a></li> -->
                     <?php } ?>
 
                 </ul>
